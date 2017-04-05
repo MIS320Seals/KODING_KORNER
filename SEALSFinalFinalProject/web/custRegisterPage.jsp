@@ -15,11 +15,12 @@
     
     <body>
         
-        <div class = "heading">
+        <div class = "hdr">
             <h1>Welcome new customer</h1>
             <h3>Please fill out the following information to join the Crimson Video family</h3>
-        </div>
-        <form action="custRegister">
+        </div
+        <div class = "frmRegDiv">
+        <form class = "frmReg" action="custRegister">
             <table border="0">
                 <tbody>
                     <!--not something the user should have to enter themselves-->
