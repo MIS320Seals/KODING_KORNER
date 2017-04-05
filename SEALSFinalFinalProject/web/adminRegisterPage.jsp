@@ -14,7 +14,8 @@
     <body>
         <h1>Welcome new administrator</h1>
         <h3>Please fill out the following information in order to access your administrative privileges</h3>
-        <form action="adminRegister">
+        <form method="POST" action='AdminController' name="frmAddAdmin">
+
             <table border="0">
                 <tbody>
                     <tr>

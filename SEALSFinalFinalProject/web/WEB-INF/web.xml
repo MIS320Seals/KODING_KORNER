@@ -8,4 +8,14 @@
     <welcome-file-list>
         <welcome-file>loginPage.jsp</welcome-file>
     </welcome-file-list>
+    <servlet>
+        <description></description>
+        <display-name>AdminController</display-name>
+        <servlet-name>AdminController</servlet-name>
+        <servlet-class>com.SEALS.admin.AdminController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/AdminController</url-pattern>
+    </servlet-mapping>
 </web-app>

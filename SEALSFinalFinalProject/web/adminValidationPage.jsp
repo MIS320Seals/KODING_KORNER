@@ -3,7 +3,7 @@
     Created on : Apr 2, 2017, 9:25:40 PM
     Author     : ering
 --%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@
     <body>
         <h1>Hello potential administrator</h1>
         <h3>Please type in your administration passkey to continue to registration.</h3>
-        <form action="validateAdmin">
+        <form action='AdminController?action=validate&passKey=<c:out value="passKey" />' name="frmValidateKey">
             <table border="0">
                 <tbody>
                     <tr>

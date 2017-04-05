@@ -8,6 +8,7 @@ package com.SEALS.film;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,9 +19,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ering
  */
-@WebServlet(urlPatterns = {"/FilmController"})
+//@WebServlet(urlPatterns = {"/FilmController"})
 public class FilmController extends HttpServlet {
-
+  private static final long serialVersionUID = 1L;
+    private static String MYMOVIES = "/myMovies.jsp";
+  //  private static String RESPONSE = "/response.jsp";
+    private FilmDAO dao = new FilmDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -59,6 +63,32 @@ public class FilmController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        /*String forward="";
+     
+        String action = request.getParameter("action");
+
+        
+        //based off which action is sent, either delete, update or list all products
+        if (action.equalsIgnoreCase("delete")){
+            int filmId = Integer.parseInt(request.getParameter("film_id"));
+            dao.deleteFilm(filmId);
+            forward = MYMOVIES;
+                    request.setAttribute("filmBeans", dao.getAllFilms());
+
+        } 
+        } else if (action.equalsIgnoreCase("list")){
+            forward = MYMOVIES;
+            request.setAttribute("filmBeans", dao.getAllFilms());
+        } else {
+            forward = MYMOVIES;
+        }
+
+         
+        //fowards it to the specific page
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+        
+        view.forward(request, response);*/
+      
         processRequest(request, response);
     }
 
