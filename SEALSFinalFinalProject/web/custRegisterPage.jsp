@@ -10,10 +10,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>New Customer</title>
+        <link rel="stylesheet" type="text/css" href="CSS/CSS.css">
     </head>
+    
     <body>
-        <h1>Welcome new customer</h1>
-        <h3>Please fill out the following information to join the Crimson Video family</h3>
+        
+        <div class = "heading">
+            <h1>Welcome new customer</h1>
+            <h3>Please fill out the following information to join the Crimson Video family</h3>
+        </div>
         <form action="custRegister">
             <table border="0">
                 <tbody>
