@@ -1,11 +1,15 @@
+package com.SEALS.admin;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import com.SEALS.admin.Admin;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,9 +20,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ering
  */
-@WebServlet(urlPatterns = {"/AdminController"})
+//@WebServlet(urlPatterns = {"/AdminController"})
 public class AdminController extends HttpServlet {
 
+      private static final long serialVersionUID = 1L;
+    private static String REQUEST = "/request.jsp";
+    private static String RESPONSE = "/response.jsp";
+  //  private AdminDAO dao = new AdminDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -57,6 +65,37 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         String forward="";
+     
+       // String action = request.getParameter("action");
+       // String passKey = request.getParameter("passKey");
+
+        /*
+        //based off which action is sent, either delete, update or list all products
+        if (action.equalsIgnoreCase("delete")){
+            int adminId = Integer.parseInt(request.getParameter("staff_id"));
+            dao.deleteAdmin(adminId);
+            forward = RESPONSE;
+                    request.setAttribute("adminBeans", dao.getAllAdmin());
+
+        } else if (action.equalsIgnoreCase("edit")){
+            forward = REQUEST;
+            int adminId = Integer.parseInt(request.getParameter("staff_id"));
+            Admin admin = dao.getAdminById(adminId);
+            request.setAttribute("adminBean", admin);
+        } else if (action.equalsIgnoreCase("list")){
+            forward = RESPONSE;
+            request.setAttribute("adminBeans", dao.getAllAdmin());
+        } else {
+            forward = REQUEST;
+        }
+
+         
+        //fowards it to the specific page
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+        
+        view.forward(request, response);
+     */
         processRequest(request, response);
     }
 
@@ -71,7 +110,16 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       String forward="";
+       String action = request.getParameter("action"); 
+
+         //   String key = request.getParameter("passKey");
+        
+         if(action == null){
+          //   forward =REGISTER;
+         }
         processRequest(request, response);
+        
     }
 
     /**
