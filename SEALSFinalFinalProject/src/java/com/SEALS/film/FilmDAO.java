@@ -63,85 +63,112 @@ public class FilmDAO {
     }
 
 //    delete product / remove from database 
-    public void deleteProduct(int product_id) {
+    public void deleteFilm(int film_id) {
         try {
             PreparedStatement preparedStatement = 
-                    connection.prepareStatement( "delete from mydatabase.product where product_id=?");
-            preparedStatement.setInt(1, product_id);
+                    connection.prepareStatement( "delete from sakila.film where film_id=?");
+            preparedStatement.setInt(1, film_id);
             preparedStatement.executeUpdate();
         }
         catch(SQLException e) {
             e.printStackTrace();
         }
     }
-//    update product and refresh from database
-//    public void updateProduct(Product product) {
-//        try {
-//            PreparedStatement preparedStatement = connection
-//                    .prepareStatement("update mydatabase.product set customer_id=?, order_num=?, quality=?, "
-//                            + "shipping_cost=?, sales_date=?, shipping_date=? where product_id=?");
-//            
-//            preparedStatement.setInt(1, product.getCustomer_id());
-//            preparedStatement.setInt(2, product.getOrder_num());
-//            preparedStatement.setInt(3, product.getQuality());
-//            preparedStatement.setInt(4, product.getShipping_cost());
-//            preparedStatement.setDate(5, new java.sql.Date(product.getSales_date().getTime()));
-//            preparedStatement.setDate(6, new java.sql.Date(product.getShipping_date().getTime()));
-//            preparedStatement.setInt(7, product.getProduct_id());
-//            preparedStatement.executeUpdate();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    
-////    method to display all products from database
-//    public List<Product> getAllProducts() {
-//        List<Product> products = new ArrayList<Product>();
-//        try {
-//            Statement statement = connection.createStatement();
-//            ResultSet rs = statement.executeQuery("select * from mydatabase.product");
-//            while (rs.next()) {
-//                Product product = new Product();
-//                product.setProduct_id(rs.getInt("product_id"));
-//                product.setCustomer_id(rs.getInt("customer_id"));
-//                product.setOrder_num(rs.getInt("order_num"));
-//                product.setQuality(rs.getInt("quality"));
-//                product.setShipping_cost(rs.getInt("shipping_cost"));
-//                product.setSales_date(rs.getDate("sales_date"));
-//                product.setShipping_date(rs.getDate("shipping_date"));
-//                products.add(product);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return products;
-//    }
-////    display product if productid is certain number
-//    public Product getProductById(int product_id) {
-//        Product product = new Product();
-//        try {
-//            PreparedStatement preparedStatement = connection.
-//                    prepareStatement("select * from mydatabase.product where product_id=?");
-//            preparedStatement.setInt(1, product_id);
-//            ResultSet rs = preparedStatement.executeQuery();
-//
-//            if (rs.next()) {
-//             
-//                product.setProduct_id(rs.getInt("product_id"));
-//                product.setCustomer_id(rs.getInt("customer_id"));
-//                product.setOrder_num(rs.getInt("order_num"));
-//                product.setQuality(rs.getInt("quality"));
-//                product.setShipping_cost(rs.getInt("shipping_cost"));
-//                product.setSales_date(rs.getDate("sales_date"));
-//                product.setShipping_date(rs.getDate("shipping_date"));
-//               
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return product;
-//    }
+  //  update film and refresh from database
+    public void updateFilm(Film film) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("update sakila.film set film_id=?, title=?, description=?, "
+                            + "release_year=?, language_id=?, original_language_id=?, rental_duration=?,"
+                            + "rental_rate=?, length=?, replacement_cost=?, rating=?, special_features=?,"
+                            + "last_update=?"
+                            + "where film_id=?");
+            
+            preparedStatement.setInt(1, film.getFilm_id());
+            preparedStatement.setString(2, film.getTitle());
+            preparedStatement.setString(3, film.getDescription());
+            preparedStatement.setDate(4, new java.sql.Date(film.getRelease_year().getTime()));
+            preparedStatement.setInt(5, film.getLanguage_id());
+            preparedStatement.setInt(6, film.getOriginal_language_id());
+            preparedStatement.setInt(7, film.getRental_duration());
+            preparedStatement.setFloat(8, film.getRental_rate());
+            preparedStatement.setInt(9, film.getLength());
+            preparedStatement.setFloat(10, film.getReplacement_cost());
+            preparedStatement.setString(11, film.getRating());
+            preparedStatement.setString(12, film.getSpecial_features());
+            preparedStatement.setDate(13, new java.sql.Date(film.getLast_update().getTime()));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+//    method to display all products from database
+    public List<Film> getAllFilms() {
+        List<Film> films = new ArrayList<Film>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from sakila.film");
+            while (rs.next()) {
+                Film film = new Film();
+                film.setFilm_id(rs.getInt("film_id"));
+                film.setTitle(rs.getString("title"));
+                film.setDescription(rs.getString("description"));
+                film.setRelease_year(rs.getDate("release_year"));
+                film.setLanguage_id(rs.getInt("language_id"));
+                film.setOriginal_language_id(rs.getInt("original_language_id"));
+                film.setRental_duration(rs.getInt("rental_duration"));
+                film.setRental_rate(rs.getFloat("rental_rate"));
+                film.setLength(rs.getInt("length"));
+                film.setReplacement_cost(rs.getFloat("replacement_cost"));
+                film.setRating(rs.getString("rating"));
+                film.setSpecial_features(rs.getString("special_features"));
+                film.setLast_update(rs.getDate("last_update"));
+                films.add(film);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return films;
+    }
+//    display product if productid is certain number
+    public Film getFilmById(int film_id) {
+        Film film = new Film();
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("select * from sakila.film where film_id=?");
+            preparedStatement.setInt(1, film_id);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+             
+                film.setFilm_id(rs.getInt("film_id"));
+                film.setTitle(rs.getString("title"));
+                film.setDescription(rs.getString("description"));
+                film.setRelease_year(rs.getDate("release_year"));
+                film.setLanguage_id(rs.getInt("language_id"));
+                film.setOriginal_language_id(rs.getInt("original_language_id"));
+                film.setRental_duration(rs.getInt("rental_duration"));
+                film.setRental_rate(rs.getFloat("rental_rate"));
+                film.setLength(rs.getInt("length"));
+                film.setReplacement_cost(rs.getFloat("replacement_cost"));
+                film.setRating(rs.getString("rating"));
+                film.setSpecial_features(rs.getString("special_features"));
+                film.setLast_update(rs.getDate("last_update"));
+            
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return film;
+    }
+    
+    
+    
+    //make method to display rentals for each customer
+    
+    
 }
