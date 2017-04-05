@@ -50,8 +50,8 @@
                         <td>Store ID number:</td>
                         <!--i want this to be a drop down box with the potential store ids, the customer shouldn't really know this-->
                         <td><select name="store_id">
-                                <option></option>
-                                <option></option>
+                                <option>1</option>
+                                <option>2</option>
                             </select></td>
                     </tr>
                     <tr>
