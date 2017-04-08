@@ -5,8 +5,10 @@
  */
 package com.SEALS.login;
 
+import com.SEALS.admin.Admin;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +25,12 @@ import javax.servlet.http.HttpServletResponse;
 })
 public class loginController extends HttpServlet
 {
+    
+    private static final long serialVersionUID = 1L;
+    private static String ADMIN_HOME = "/adminActionPage.jsp";
+    private static String CUST_HOME = "/custActionPage.jsp";
 
+    private loginDAO dao = new loginDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -80,6 +87,33 @@ public class loginController extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        String forward = "";
+        Admin admin = new Admin();
+        
+
+        // String action = request.getParameter("action");
+        // String passKey = request.getParameter("passKey");
+        // String forward="";
+        String action = request.getParameter("action");
+
+        //   String key = request.getParameter("passKey");
+        if (action == "login")
+        {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+
+            int x = dao.confirmAdminLogin(username, password);
+            if(x != -1 ){
+                admin = dao.getLonginWID(x);
+            }
+            else{
+                //check customer
+            }
+        }
+
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+
+        view.forward(request, response);
         processRequest(request, response);
     }
 
