@@ -5,10 +5,12 @@ package com.SEALS.admin;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import com.SEALS.admin.Admin;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,10 +25,11 @@ import javax.servlet.http.HttpServletResponse;
 //@WebServlet(urlPatterns = {"/AdminController"})
 public class AdminController extends HttpServlet {
 
-      private static final long serialVersionUID = 1L;
-    private static String REQUEST = "/request.jsp";
+    private static final long serialVersionUID = 1L;
+    private static String REGISTER = "/adminRegisterPage.jsp";
     private static String RESPONSE = "/response.jsp";
-  //  private AdminDAO dao = new AdminDAO();
+    //  private AdminDAO dao = new AdminDAO();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,7 +47,7 @@ public class AdminController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminController</title>");            
+            out.println("<title>Servlet AdminController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet AdminController at " + request.getContextPath() + "</h1>");
@@ -65,11 +68,22 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String forward="";
-     
-       // String action = request.getParameter("action");
-       // String passKey = request.getParameter("passKey");
+        String forward = "";
 
+        // String action = request.getParameter("action");
+        // String passKey = request.getParameter("passKey");
+        // String forward="";
+        String action = request.getParameter("action");
+
+        //   String key = request.getParameter("passKey");
+        if (action == null) {
+            forward = REGISTER;
+        }
+
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+
+        view.forward(request, response);
+        processRequest(request, response);
         /*
         //based off which action is sent, either delete, update or list all products
         if (action.equalsIgnoreCase("delete")){
@@ -95,7 +109,7 @@ public class AdminController extends HttpServlet {
         RequestDispatcher view = request.getRequestDispatcher(forward);
         
         view.forward(request, response);
-     */
+         */
         processRequest(request, response);
     }
 
@@ -110,16 +124,39 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       String forward="";
-       String action = request.getParameter("action"); 
+        String forward = "";
+        String action = request.getParameter("action");
 
-         //   String key = request.getParameter("passKey");
-        
-         if(action == null){
-          //   forward =REGISTER;
-         }
+        Admin newAdmin = new Admin();
+
+        if (action == "validateKey") {
+            String key = request.getParameter("staff_id");
+            //heres where you would actually need to validate that key
+            forward = REGISTER;
+        } else if (action.equals("adminRegister")) {
+            newAdmin.setFirst_name(request.getParameter("first_name"));
+            newAdmin.setLast_name(request.getParameter("last_name"));
+            newAdmin.setAddress_id(Integer.parseInt(request.getParameter("address_id")));
+            newAdmin.setEmail(request.getParameter("email"));
+            newAdmin.setStore_id(Integer.parseInt(request.getParameter("store_id")));
+            //newAdmin.setActive(Boolean.parseBool(request.getParameter("Active")));
+            String active = request.getParameter("Active");
+            newAdmin.setUsername(request.getParameter("username"));
+            newAdmin.setPassword(request.getParameter("password"));
+             try {
+            Date last_update = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("last_update"));
+            newAdmin.setLast_update(new java.sql.Date(last_update.getTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+            
+        }
+
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+
+        view.forward(request, response);
         processRequest(request, response);
-        
+
     }
 
     /**

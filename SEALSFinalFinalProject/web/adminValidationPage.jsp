@@ -15,11 +15,11 @@
     <body>
         <h1>Hello potential administrator</h1>
         <h3>Please type in your administration passkey to continue to registration.</h3>
-        <form action='AdminController?action=validate&passKey=<c:out value="passKey" />' name="frmValidateKey">
+        <form method="POST" action='AdminController' name="frmValidateKey">
             <table border="0">
                 <tbody>
-                    <tr>
-                        <td><input type="password" name="passKey" value="" /></td>
+                    <tr> 
+                        <td><input type="text" name="staff_id" value="<c:out value="${adminBean.staff_id}"  />"/> <input type="hidden" name="action" value="validateKey"/></td>
                         <td><input type="submit" value="Validate" name="checkPassKey" /></td>
                     </tr>
                 </tbody>

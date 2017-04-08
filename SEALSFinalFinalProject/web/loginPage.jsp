@@ -34,7 +34,7 @@
                             <td><input type="submit" value="Enter" name="login" /></td>
                         </tr>
                         <tr>
-                            <td><a href="adminValidationPage.jsp"></a></td>
+                            <td><a href="adminRegisterPage.jsp">Admin</a></td>
                             <td><a href="custRegisterPage.jsp">New User</a></td>
                         </tr>
                     </tbody>
