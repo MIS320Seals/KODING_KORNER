@@ -14,7 +14,7 @@
     </head>
     <body style = "text-align: center;">
         <div class="hdr">
-            <h1>Welcome to the Crimson Video Store website!</h1>
+            <h1>Crimson Video Store</h1>
            
         </div>
         <div Style = "background-color: whitesmoke; margin:auto; width:45%; border-radius: 5px; text-align: center;">
