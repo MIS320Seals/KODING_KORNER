@@ -1,3 +1,5 @@
+package com.SEALS.customer;
+
 import java.sql.Date;
 
 /*
