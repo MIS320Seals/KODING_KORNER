@@ -43,8 +43,8 @@
             </form>
              
         </div>
-        <h2>We are currently working on getting our member less viewing up and running.</h2>
-            <h3>But until then,</h3>
-            <h2>Please log in below to get started</h2>
+        <h3>We are currently working on getting our member less viewing up and running.</h2>
+        <h3>But until then,</h3>
+        <h3>Please log in below to get started</h2>
     </body>
 </html>

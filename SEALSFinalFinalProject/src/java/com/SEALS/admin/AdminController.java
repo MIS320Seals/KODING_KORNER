@@ -23,7 +23,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author ering
  */
 //@WebServlet(urlPatterns = {"/AdminController"})
-public class AdminController extends HttpServlet {
+public class AdminController extends HttpServlet
+{
 
     private static final long serialVersionUID = 1L;
     private static String REGISTER = "/adminRegisterPage.jsp";
@@ -40,9 +41,11 @@ public class AdminController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter())
+        {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -67,7 +70,8 @@ public class AdminController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         String forward = "";
 
         // String action = request.getParameter("action");
@@ -76,7 +80,8 @@ public class AdminController extends HttpServlet {
         String action = request.getParameter("action");
 
         //   String key = request.getParameter("passKey");
-        if (action == null) {
+        if (action == null)
+        {
             forward = REGISTER;
         }
 
@@ -123,17 +128,21 @@ public class AdminController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         String forward = "";
         String action = request.getParameter("action");
 
         Admin newAdmin = new Admin();
 
-        if (action == "validateKey") {
+        if (action == "validateKey")
+        {
             String key = request.getParameter("staff_id");
             //heres where you would actually need to validate that key
             forward = REGISTER;
-        } else if (action.equals("adminRegister")) {
+        } 
+        else if (action.equals("adminRegister"))
+        {
             newAdmin.setFirst_name(request.getParameter("first_name"));
             newAdmin.setLast_name(request.getParameter("last_name"));
             newAdmin.setAddress_id(Integer.parseInt(request.getParameter("address_id")));
@@ -143,13 +152,13 @@ public class AdminController extends HttpServlet {
             String active = request.getParameter("Active");
             newAdmin.setUsername(request.getParameter("username"));
             newAdmin.setPassword(request.getParameter("password"));
-             try {
-            Date last_update = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("last_update"));
-            newAdmin.setLast_update(new java.sql.Date(last_update.getTime()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-            
+            try{
+                Date last_update = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("last_update"));
+                newAdmin.setLast_update(new java.sql.Date(last_update.getTime()));
+            } catch (ParseException e){
+                e.printStackTrace();
+            }
+
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -165,7 +174,8 @@ public class AdminController extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+    public String getServletInfo()
+    {
         return "Short description";
     }// </editor-fold>
 
