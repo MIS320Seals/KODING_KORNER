@@ -25,12 +25,13 @@ import javax.servlet.http.HttpServletResponse;
 })
 public class loginController extends HttpServlet
 {
-    
+
     private static final long serialVersionUID = 1L;
     private static String ADMIN_HOME = "/adminActionPage.jsp";
     private static String CUST_HOME = "/custActionPage.jsp";
 
     private loginDAO dao = new loginDAO();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,7 +51,7 @@ public class loginController extends HttpServlet
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet loginController</title>");            
+            out.println("<title>Servlet loginController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet loginController at " + request.getContextPath() + "</h1>");
@@ -89,7 +90,6 @@ public class loginController extends HttpServlet
     {
         String forward = "";
         Admin admin = new Admin();
-        
 
         // String action = request.getParameter("action");
         // String passKey = request.getParameter("passKey");
