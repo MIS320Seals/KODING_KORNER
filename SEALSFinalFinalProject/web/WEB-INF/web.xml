@@ -18,4 +18,16 @@
         <servlet-name>AdminController</servlet-name>
         <url-pattern>/AdminController</url-pattern>
     </servlet-mapping>
+
+<servlet>
+        <description></description>
+        <display-name>loginController</display-name>
+        <servlet-name>loginController</servlet-name>
+        <servlet-class>com.SEALS.admin.loginController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>loignController</servlet-name>
+        <url-pattern>/loginController</url-pattern>
+    </servlet-mapping>
+
 </web-app>

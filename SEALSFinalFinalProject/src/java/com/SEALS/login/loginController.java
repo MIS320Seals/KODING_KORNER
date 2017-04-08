@@ -19,10 +19,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Austin
  */
-@WebServlet(name = "loginController", urlPatterns =
-{
-    "/loginController"
-})
+//@WebServlet(name = "loginController", urlPatterns =
+//{
+//    "/loginController"
+//})
 public class loginController extends HttpServlet
 {
     
