@@ -18,16 +18,16 @@
            
         </div>
         <div Style = "background-color: whitesmoke; margin:auto; width:45%; border-radius: 5px; text-align: center;">
-            <form action="login" style = "margin: auto; width: 90%;">
+            <form action="loginController" method="POST" style = "margin: auto; width: 90%;">
                 <table border="0">
                     <tbody>
                         <tr>
-                            <td>Username:</td>
-                            <td><input type="text" name="cust_username" value="" /></td>
+                            <td>Email:</td>
+                            <td><input type="text" name="username" value=${custbean.email} /></td>
                         </tr>
                         <tr>
-                            <td>Password:</td>
-                            <td><input type="password" name="cust_password" value="" /></td>
+                            <td>ID:</td>
+                            <td><input type="password" name="password" value="${custbean.id}" /></td>
                         </tr>
                         <tr>
                             <td><a href="custActionPage.jsp">Break shit</a></td>

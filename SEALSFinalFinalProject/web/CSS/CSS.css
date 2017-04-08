@@ -113,7 +113,7 @@ input[type=number], select {
     box-sizing: border-box;
 }
 input[type=submit] {
-    width: 30%;
+    width: 40%;
     background-color: grey;
     color: white;
     padding: 14px 20px;

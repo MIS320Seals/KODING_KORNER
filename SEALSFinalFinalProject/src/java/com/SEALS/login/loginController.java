@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 })
 public class loginController extends HttpServlet
 {
-
+    
     private static final long serialVersionUID = 1L;
     private static String ADMIN_HOME = "/adminActionPage.jsp";
     private static String CUST_HOME = "/custActionPage.jsp";
@@ -90,6 +90,7 @@ public class loginController extends HttpServlet
     {
         String forward = "";
         Admin admin = new Admin();
+
 
         // String action = request.getParameter("action");
         // String passKey = request.getParameter("passKey");
