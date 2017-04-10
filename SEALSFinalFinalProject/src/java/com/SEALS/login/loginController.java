@@ -30,6 +30,7 @@ public class loginController extends HttpServlet
     private static String ADMIN_HOME = "/adminActionPage.jsp";
     private static String CUST_HOME =  "/custActionPage.jsp";
 
+    
     private loginDAO dao = new loginDAO();
 
     /**
@@ -98,7 +99,7 @@ public class loginController extends HttpServlet
         String action = request.getParameter("action");
 
         //   String key = request.getParameter("passKey");
-        if (action == "login")
+        if (action == "adminLogin")
         {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
@@ -110,6 +111,9 @@ public class loginController extends HttpServlet
             else{
                 //check customer
             }
+        }
+        else if(action == "custLogin"){
+            
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);

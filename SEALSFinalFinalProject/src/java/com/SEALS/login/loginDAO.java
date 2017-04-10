@@ -36,6 +36,16 @@ public class loginDAO
             if (rs.next()) {
              
                admin.setStaff_id(staff_id);
+               admin.setFirst_name(rs.getString("first_name"));
+               admin.setLast_name(rs.getString("last_name"));
+               admin.setAddress_id(rs.getInt("address_id"));
+               admin.setEmail(rs.getString("email"));
+               admin.setStore_id(rs.getInt("store_id"));
+               admin.setActive(rs.getBoolean("active"));
+               admin.setUsername(rs.getString("username"));
+               admin.setPassword(rs.getString("password"));
+               admin.setLast_update(rs.getDate("last_update"));
+
                //get the rest if that shit
               
             }
