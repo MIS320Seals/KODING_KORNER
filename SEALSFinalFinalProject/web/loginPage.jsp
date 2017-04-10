@@ -30,7 +30,9 @@
                             <td><input type="password" name="password" value="${custbean.id}" /></td>
                         </tr>
                         <tr>
-                            <td><a href="custActionPage.jsp">Break shit</a></td>
+                            <td><a href="custActionPage.jsp">cust login break</a></td>
+                            <td><a href="adminActionPage.jsp">admin login break</a></td>
+                            
                             <td><input type="submit" value="Enter" name="login" /></td>
                         </tr>
                         <tr>

@@ -12,6 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <ul>
+            <li class="active"><a href="adminActionPage.jsp">Home</a></li>
+            <li><a href="adminRegisterPages.jsp">Employees</a></li>
+            <li><a href="filmController?user=admin&action=list">Films</a></li>
+            <li><a href="">Log-out</a></li>
+        </ul>
+
     </body>
 </html>

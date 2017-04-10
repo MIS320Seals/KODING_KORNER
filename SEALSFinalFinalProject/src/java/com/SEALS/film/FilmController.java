@@ -5,7 +5,6 @@ package com.SEALS.film;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -20,11 +19,14 @@ import javax.servlet.http.HttpServletResponse;
  * @author ering
  */
 //@WebServlet(urlPatterns = {"/FilmController"})
-public class FilmController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+public class FilmController extends HttpServlet
+{
+
+    private static final long serialVersionUID = 1L;
     private static String MYMOVIES = "/myMovies.jsp";
-  //  private static String RESPONSE = "/response.jsp";
+    //  private static String RESPONSE = "/response.jsp";
     private FilmDAO dao = new FilmDAO();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,14 +37,16 @@ public class FilmController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter())
+        {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CustController</title>");            
+            out.println("<title>Servlet CustController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CustController at " + request.getContextPath() + "</h1>");
@@ -62,34 +66,37 @@ public class FilmController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        /*String forward="";
-     
+            throws ServletException, IOException
+    {
+        String forward = "";
+
         String action = request.getParameter("action");
-
-        
-        //based off which action is sent, either delete, update or list all products
-        if (action.equalsIgnoreCase("delete")){
-            int filmId = Integer.parseInt(request.getParameter("film_id"));
+        String user = request.getParameter("user");
+        // based off which action is sent, either delete, update or list all products
+        if (action.equalsIgnoreCase("delete") && user.equalsIgnoreCase("admin"))
+        {
+            int filmId = Integer.parseInt(request.getParameter("filmId"));
             dao.deleteFilm(filmId);
-            forward = MYMOVIES;
-                    request.setAttribute("filmBeans", dao.getAllFilms());
+            forward = "adminMovie.jsp";
+            request.setAttribute("films", dao.getAllFilms());
 
-        } 
         } else if (action.equalsIgnoreCase("list")){
-            forward = MYMOVIES;
-            request.setAttribute("filmBeans", dao.getAllFilms());
-        } else {
+            if (user.equalsIgnoreCase("admin")){
+                forward = "adminMovie.jsp";}
+            else{
+                forward = MYMOVIES;}
+            request.setAttribute("films", dao.getAllFilms());
+        } else
+        {
             forward = MYMOVIES;
         }
 
-         
         //fowards it to the specific page
         RequestDispatcher view = request.getRequestDispatcher(forward);
-        
-        view.forward(request, response);*/
-      
-        processRequest(request, response);
+
+        view.forward(request, response);
+
+       // processRequest(request, response);
     }
 
     /**
@@ -102,7 +109,8 @@ public class FilmController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         processRequest(request, response);
     }
 
@@ -112,7 +120,8 @@ public class FilmController extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+    public String getServletInfo()
+    {
         return "Short description";
     }// </editor-fold>
 
