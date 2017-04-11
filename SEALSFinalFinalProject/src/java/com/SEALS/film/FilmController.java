@@ -53,7 +53,10 @@ public class FilmController extends HttpServlet
 
         }
         else if(action.equalsIgnoreCase("edit")){
-            
+            forward = ;
+            int productId = Integer.parseInt(request.getParameter("productId"));
+            Film film = dao.getFilmById(filmId);
+            request.setAttribute("film", film);
         }
         else if (action.equalsIgnoreCase("list"))
         {

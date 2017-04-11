@@ -23,7 +23,7 @@
                     <tbody>
                         <tr>
                             <td>Email:</td>
-                            <td><input type="email" name="email" value="${custbean.email}"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}"/></td>
+                            <td><input type="email" name="email" value="${custbean.email}"  /></td>
                         </tr>
                         <tr>
                             <td>ID:</td>
