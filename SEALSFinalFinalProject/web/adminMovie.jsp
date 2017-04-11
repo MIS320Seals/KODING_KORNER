@@ -12,8 +12,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Films</title>
-
-        
         <link rel="stylesheet" type="text/css" href="CSS/CSS.css">
     </head>
     <body>
@@ -30,11 +28,9 @@
                         <th>Film ID</th>
                         <th>Title</th>
                         <th>Description</th>
-                        <th>Category</th>
                         <th>Price</th>
                         <th>Length</th>
                         <th>Rating</th>
-                        <!--<th>Actors</th>-->
                         <th colspan=2>Action</th>
                     </tr>
                 </thead>
@@ -44,18 +40,17 @@
                             <td><c:out value="${film.film_id}" /></td>
                             <td><c:out value="${film.title}" /></td>
                             <td><c:out value="${film.description}" /></td>
-                            <td><c:out value="${film.category}" /></td>
                             <td><c:out value="${film.replacement_cost}" /></td>
                             <td><c:out value="${film.length}" /></td>
                             <td><c:out value="${film.rating}" /></td>
-                            <!--<td><c:out value="${film.actors}" /></td>-->
-                            <td><a href="filmcontroller?action=edit&filmId=<c:out value="${film.film_id}"/>">Update</a></td>
-                            <td><a href="filmcontroller?action=delete&filmId=<c:out value="${film.film_id}"/>">Delete</a></td>
+                            
+                            <td><a href="FilmController?action=edit&filmId=<c:out value="${film.film_id}"/>">Update</a></td>
+                            <td><a href="FilmController?action=delete&filmId=<c:out value="${film.film_id}"/>">Delete</a></td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
-            <p><a href="ProductController?action=insert">Add Product</a></p>
+            <p><a href="FilmController?action=insert">Add Film</a></p>
         </div>
     </body>
 </html>

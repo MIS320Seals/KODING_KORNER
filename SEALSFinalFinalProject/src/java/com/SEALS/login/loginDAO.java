@@ -91,7 +91,7 @@ public class loginDAO
             PreparedStatement preparedStatement = connection.
                     prepareStatement("select address_id from sakila.customer where customer_id=? and email=?");
             preparedStatement.setInt(1, Integer.parseInt(id));
-            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, email);
            
             ResultSet rs = preparedStatement.executeQuery();
 

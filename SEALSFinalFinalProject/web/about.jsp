@@ -19,6 +19,7 @@
                 <li><a href="custActionPage.jsp">Home</a></li>
                 <li><a href="myMovies.jsp">My Movies</a></li>
                 <li class = "active"><a href="about.jsp">About</a></li>
+                <li><a href="custSearch.jsp">Search</a></li>
                 <li><a href="custCheckOutPage.jsp">Check Out</a></li>
                 <li><a href="loginPage.jsp">Log-out</a></li>
             </ul>

@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    
+    <servlet>
+        <display-name>FilmController</display-name>
+        <servlet-name>FilmController</servlet-name>
+        <servlet-class>com.SEALS.film.FilmController</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>FilmController</servlet-name>
+        <url-pattern>/FilmController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -9,18 +20,45 @@
         <welcome-file>loginPage.jsp</welcome-file>
     </welcome-file-list>
     <servlet>
-        <description></description>
+        <description/>
         <display-name>AdminController</display-name>
         <servlet-name>AdminController</servlet-name>
         <servlet-class>com.SEALS.admin.AdminController</servlet-class>
     </servlet>
+
+    <servlet>
+        <description/>
+        <display-name>TestController</display-name>
+        <servlet-name>TestController</servlet-name>
+        <servlet-class>com.SEALS.admin.TestController</servlet-class>
+    </servlet>
+    <servlet>
+        <description/>
+        <display-name>LoginController</display-name>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>com.SEALS.login.LoginController</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
         <url-pattern>/AdminController</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>TestController</servlet-name>
+        <url-pattern>/TestController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/LoginController</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/AdminController</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
-        <description></description>
+        <description/>
         <display-name>loginController</display-name>
         <servlet-name>loginController</servlet-name>
         <servlet-class>com.SEALS.login.loginController</servlet-class>
@@ -28,17 +66,6 @@
     <servlet-mapping>
         <servlet-name>loginController</servlet-name>
         <url-pattern>/loginController</url-pattern>
-    </servlet-mapping>
 
-
-    <servlet>
-        <description></description>
-        <display-name>FilmController</display-name>
-        <servlet-name>FilmController</servlet-name>
-        <servlet-class>com.SEALS.film.FilmController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>FilmController</servlet-name>
-        <url-pattern>/filmController</url-pattern>
     </servlet-mapping>
 </web-app>
