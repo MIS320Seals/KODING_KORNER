@@ -40,28 +40,22 @@ public class FilmController extends HttpServlet
             dao.deleteFilm(filmId);
             forward = "adminMovie.jsp";
             request.setAttribute("films", dao.getAllFilms());
-
         } 
-        else if (action.equalsIgnoreCase("edit"))
-        {
-
+        else if (action.equalsIgnoreCase("edit")){
+            
         } 
-        else if (action.equalsIgnoreCase("list"))
-        {
+        else if (action.equalsIgnoreCase("list")){
             forward = "adminMovie.jsp";
             request.setAttribute("films", dao.getAllFilms());
         } 
-        else
-        {
-            forward = "adminMovie.jsp";
+        else{
+            forward = "adminRegisterPage.jsp";
         }
-
+        
         //fowards it to the specific page
         RequestDispatcher view = request.getRequestDispatcher(forward);
 
         view.forward(request, response);
-
-        //processRequest(request, response);
     }
 
     
