@@ -1,6 +1,7 @@
 package com.SEALS.customer;
 
 import com.SEALS.admin.Admin;
+import com.SEALS.film.Film;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -178,5 +179,39 @@ public class CustDAO {
             e.printStackTrace();
         }
         return categories; 
+    }
+    //creates a list of all the movies that are found in the search
+    public List<Film> getAllSearchedFilms(int cat_id, int act_id, int store_id)
+    {
+        List<Film> films = new ArrayList<Film>();
+        try {
+            Statement statement = connection.createStatement();
+            //select all the films that have the specified category and actor
+            if (cat_id > 0 && act_id > 0)
+            {
+                ResultSet rs = statement.executeQuery("select * from sakila.film"
+                        + "where ");
+            }
+            //select all the films that have the specified category
+            else if (cat_id > 0 && act_id == 0)
+            {
+                ResultSet rs = statement.executeQuery("select * from sakila.film"
+                        + "where");
+            }
+            //select all the films that habe the specified actor
+            else if (cat_id == 0 && act_id > 0)
+            {
+                ResultSet rs = statement.executeQuery("select * from sakila.film"
+                        + "where");    
+            }
+            //select all the films
+            else
+            {
+                ResultSet rs = statement.executeQuery("select * from sakila.film");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return films;
     }
 }

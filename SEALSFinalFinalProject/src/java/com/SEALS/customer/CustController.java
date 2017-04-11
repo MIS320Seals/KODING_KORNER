@@ -74,6 +74,11 @@ public class CustController extends HttpServlet {
             List<Category> categories = dao.getAllCategories();
             request.setAttribute("categories", dao.getAllCategories());
         }
+//        if (action.equalsIgnoreCase("searchResults"))
+//        {
+//            forward = "custSearchResultPage.jsp";
+//            
+//        }
         //fowards it to the specific page
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
@@ -90,8 +95,11 @@ public class CustController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException 
+    {
+        String forward = "";
+        
+        //processRequest(request, response);
     }
 
     /**

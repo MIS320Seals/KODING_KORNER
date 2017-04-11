@@ -32,7 +32,8 @@
         </div>
         
         <%-- ACTIONS --%>
-        <form name="searchResult" action="custSearchResultPage.jsp">
+        <form name="searchResult" action="custSearchResultPage.jsp">-->
+        <!--<form method="POST" action='CustController' name="frmSearch">-->
             <table border="0">
                 <tbody>
                     <tr>
