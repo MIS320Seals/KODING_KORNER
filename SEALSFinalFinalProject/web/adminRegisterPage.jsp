@@ -80,7 +80,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="submit" value="adminRegister" name="action" /></td>
+                        <td><input type="submit" value="Register" name="action" /></td>
                     </tr>
                 </tbody>
             </table>
