@@ -22,20 +22,27 @@ public class DBConnectionUtil {
         else {
             try {
             	Properties prop = new Properties();
-                InputStream inputStream = DBConnectionUtil.class.getClassLoader().getResourceAsStream("/db.properties");
-                prop.load(inputStream);
-                String driver = prop.getProperty("driver");
-                String url = prop.getProperty("url");
-                String user = prop.getProperty("user");
-                String password = prop.getProperty("password");
-                Class.forName(driver);
+//                InputStream inputStream = DBConnectionUtil.class.getClassLoader().getResourceAsStream("/db.properties");
+//                prop.load(inputStream);
+//                String driver = prop.getProperty("driver");
+                String url = prop.getProperty("jdbc:mysql://localhost:3306/mydatabase");
+                String user = prop.getProperty("root");
+                String password = prop.getProperty("nbuser");
+                Class.forName("com.mysql.jdbc.Driver");
                 connection = DriverManager.getConnection(url, user, password);
             //catches all possible exceptions
-            } catch (ClassNotFoundException | SQLException | IOException e) {
+            } catch (ClassNotFoundException | SQLException e) {
+                e.getMessage();
             }
             return connection;
         }
 
     }
 }
+//#these are the properties that allow access to the database, can be easily changed here
+//driver=com.mysql.jdbc.Driver
+//url=jdbc:mysql://localhost:3306/mydatabase
+//user=root
+//password=nbuser
+
 

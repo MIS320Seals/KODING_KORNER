@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import com.SEALS.*;
+//import com.SEALS.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -22,12 +22,7 @@ import com.SEALS.*;
  */
 public class FilmDAO {
 
-    
-
-
-   
-
-    private Connection connection;
+   Connection connection;
 
     public FilmDAO() {
         connection = com.SEALS.db.DBConnectionUtil.getConnection();
@@ -109,7 +104,7 @@ public class FilmDAO {
         List<Film> films = new ArrayList<Film>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("select * from sakila.film");
+            ResultSet rs = statement.executeQuery("select * sakila.film");
             while (rs.next()) {
                 Film film = new Film();
                 film.setFilm_id(rs.getInt("film_id"));
@@ -127,10 +122,8 @@ public class FilmDAO {
                 film.setLast_update(rs.getDate("last_update"));
                 films.add(film);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
         }
-
         return films;
     }
 //    display product if productid is certain number

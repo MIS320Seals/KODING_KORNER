@@ -16,7 +16,7 @@
         <ul>
             <li><a href="adminActionPage.jsp">Home</a></li>
             <li class = "active"><a href="adminEmployees.jsp">Employees</a></li>
-            <li><a href="/FilmController?action=list">Films</a></li>
+            <li><a href="FilmController?action=list">Films</a></li>
             <li><a href="loginPage.jsp">Log-out</a></li>
         </ul>
     </body>
