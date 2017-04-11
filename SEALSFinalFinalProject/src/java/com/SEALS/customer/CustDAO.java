@@ -140,5 +140,43 @@ public class CustDAO {
 
         return cust;
     }
-    
+    //creates and returns an array list of actors
+    public List<Actor> getAllActors()
+    {
+        List<Actor> actors = new ArrayList<Actor>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from sakila.actor");
+            while (rs.next()) 
+            {
+                Actor actor = new Actor();
+                actor.setActor_id(rs.getInt("actor_id"));
+                actor.setFirst_name(rs.getString("first_name"));
+                actor.setLast_name(rs.getString("last_name"));
+                actors.add(actor);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return actors;
+    }
+    //creates and returns an array list of the movie categories
+    public List<Category> getAllCategories()
+    {
+        List<Category> categories = new ArrayList<Category>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from sakila.category");
+            while (rs.next()) 
+            {
+                Category categ = new Category();
+                categ.setCategory_id(rs.getInt("category_id"));
+                categ.setName(rs.getString("name"));
+                categories.add(categ);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categories; 
+    }
 }
