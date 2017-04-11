@@ -22,20 +22,20 @@ public class DBConnectionUtil {
         else {
             try {
             	Properties prop = new Properties();
-                InputStream inputStream = DBConnectionUtil.class.getClassLoader().getResourceAsStream("/db.properties");
-                prop.load(inputStream);
-                String driver = prop.getProperty("driver");
-                String url = prop.getProperty("url");
-                String user = prop.getProperty("user");
-                String password = prop.getProperty("password");
+////                InputStream inputStream = DBConnectionUtil.class.getClassLoader().getResourceAsStream("/db.properties");
+////                prop.load(inputStream);
+                String driver = "com.mysql.jdbc.Driver";
+                String url = "jdbc:mysql://localhost:3306/sakila?zeroDateTimeBehavior=convertToNull";
+                String user = "root";
+                String password = "nbuser";
                 Class.forName(driver);
                 connection = DriverManager.getConnection(url, user, password);
             //catches all possible exceptions
-            } catch (ClassNotFoundException | SQLException | IOException e) {
+            } catch (ClassNotFoundException | SQLException e) {
+                
             }
             return connection;
         }
 
     }
 }
-

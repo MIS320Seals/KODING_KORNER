@@ -18,7 +18,7 @@
            
         </div>
         <div Style = "background-color: whitesmoke; margin:auto; width:45%; border-radius: 5px; text-align: center;">
-            <form action="loginController" method="POST" style = "margin: auto; width: 90%;">
+            <form action="LoginController" method="POST" style = "margin: auto; width: 90%;">
                 <table border="0">
                     <tbody>
                         <tr>
@@ -32,7 +32,7 @@
                         <tr>
                             <td><a href="custActionPage.jsp">cust login break</a></td>
                             <td><a href="adminActionPage.jsp">admin login break</a></td>
-                            
+                            <input type="hidden" name="action" value="custLogin"/></td>
                             <td><input type="submit" value="Enter" name="custLogin" /></td>
                         </tr>
                         <tr>
