@@ -14,13 +14,13 @@
     </head>
     <body>
         <h1>Admin Login</h1>
-        <h3>Please type in your administration passkey to continue to registration.</h3>
-        <form method="POST" action='loginController' name="frmValidateKey">
+        <h3>Please type in your username and password.</h3>
+        <form method="POST" action='LoginController' name="frmValidateKey">
             <table border="0">
                 <tbody>
                     <tr>
                             <td>Username:</td>
-                            <td><input type="text" name="username" value=${adminBean.username} /></td>
+                            <td><input type="text" name="username" value="${adminBean.username}" required /></td>
                         </tr>
                         <tr>
                             <td>Password:</td>

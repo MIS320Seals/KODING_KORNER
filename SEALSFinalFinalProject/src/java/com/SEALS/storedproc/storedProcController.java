@@ -109,7 +109,7 @@ public class storedProcController extends HttpServlet
 
             int x = dao.confirmAdminLogin(username, password);
             if(x != -1 ){
-                admin = dao.getLoginWID(x);
+                //admin = dao.getLoginWID(x);
             }
             else{
                 //check customer

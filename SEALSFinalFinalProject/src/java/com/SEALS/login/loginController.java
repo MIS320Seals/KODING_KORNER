@@ -35,6 +35,8 @@ public class LoginController extends HttpServlet
     private static String ADMIN_HOME = "/adminActionPage.jsp";
     private static String CUST_HOME =  "/custActionPage.jsp";
 
+    private static String ADMIN_RELOGIN =  "/adminValidationPageError.jsp";
+    private static String CUST_RELOGIN =  "/loginPageError.jsp";
     
    
 
@@ -113,11 +115,11 @@ public class LoginController extends HttpServlet
 
             int x = dao.confirmAdminLogin(username, password);
             if(x != -1 ){
-                admin = dao.getLoginWID(x);
+                admin = dao.getAdminLoginWID(x);
                 forward = ADMIN_HOME;
             }
             else{
-                //check customer
+                forward= ADMIN_RELOGIN;//check customer
             }
         }
         else if(action.equals("custLogin")){
@@ -130,7 +132,7 @@ public class LoginController extends HttpServlet
                 forward = CUST_HOME;
             }
             else{
-                //check customer
+                forward = CUST_RELOGIN;//check customer
             }
         }
 

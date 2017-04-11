@@ -25,7 +25,7 @@ public class loginDAO
         connection = com.SEALS.db.DBConnectionUtil.getConnection();
     }
     
-    public Admin getLoginWID(int staff_id){
+    public Admin getAdminLoginWID(int staff_id){
         Admin admin = new Admin();
         
          try {

@@ -154,17 +154,17 @@ public class storedProcDAO
      public void create_date(){
          String query = "{call customer_create_date }";
      
-         try
+     /*    try
          {
              
              
              
          }
          
-         catch()
+       /*  catch()
                  {
                      
-                 }
+                 }*/
      
      }
      
@@ -217,7 +217,7 @@ public class storedProcDAO
       }
      
      //ins_film
-      public void insertFilm 
+     // public void insertFilm 
      
      //inventory_held_by_customer
      
