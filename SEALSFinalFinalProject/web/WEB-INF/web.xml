@@ -25,7 +25,7 @@
         <servlet-name>AdminController</servlet-name>
         <servlet-class>com.SEALS.admin.AdminController</servlet-class>
     </servlet>
-<<<<<<< HEAD
+
     <servlet>
         <description/>
         <display-name>TestController</display-name>
@@ -59,7 +59,7 @@
     <servlet-mapping>
         <servlet-name>FilmController</servlet-name>
         <url-pattern>/filmController</url-pattern>
-=======
+
     
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
@@ -74,6 +74,6 @@
     <servlet-mapping>
         <servlet-name>loginController</servlet-name>
         <url-pattern>/loginController</url-pattern>
->>>>>>> f5d034ca46849b4b35f6b60d51fb08a0f7adf1ac
+
     </servlet-mapping>
 </web-app>
