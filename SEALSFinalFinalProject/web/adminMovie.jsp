@@ -20,7 +20,7 @@
         <ul>
             <li><a href="adminActionPage.jsp">Home</a></li>
             <li><a href="adminEmployees.jsp">Employees</a></li>
-            <li class = "active"><a href="FilmController?action=list">Films</a></li>
+            <li class = "active"><a href="/FilmController?action=list">Films</a></li>
             <li><a href="loginPage.jsp">Log-out</a></li>
         </ul>
         <div>
