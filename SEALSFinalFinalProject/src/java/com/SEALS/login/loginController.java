@@ -6,6 +6,7 @@
 package com.SEALS.login;
 
 import com.SEALS.admin.Admin;
+import com.SEALS.customer.Cust;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -91,6 +92,7 @@ public class loginController extends HttpServlet
     {
         String forward = "";
         Admin admin = new Admin();
+        Cust customer = new Cust();
 
 
         // String action = request.getParameter("action");
@@ -106,14 +108,24 @@ public class loginController extends HttpServlet
 
             int x = dao.confirmAdminLogin(username, password);
             if(x != -1 ){
-                admin = dao.getLonginWID(x);
+                admin = dao.getLoginWID(x);
             }
             else{
                 //check customer
             }
         }
         else if(action == "custLogin"){
-            
+            String email = request.getParameter("email");
+            String id = request.getParameter("id");
+
+            int x = dao.confirmCustomerLogin(email, id);
+            if(x != -1 ){
+                customer = dao.getCustomerWID(id);
+                
+            }
+            else{
+                //check customer
+            }
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
