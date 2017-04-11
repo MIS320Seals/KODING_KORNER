@@ -208,6 +208,24 @@ public class CustDAO {
             else
             {
                 ResultSet rs = statement.executeQuery("select * from sakila.film");
+                while (rs.next())
+                {
+                    Film film = new Film();
+                    film.setFilm_id(rs.getInt("film_id"));
+                    film.setTitle(rs.getString("title"));
+                    film.setDescription(rs.getString("description"));
+                    film.setRelease_year(rs.getDate("release_year"));
+                    film.setLanguage_id(rs.getInt("language_id"));
+                    film.setOriginal_language_id(rs.getInt("original_language_id"));
+                    film.setRental_duration(rs.getInt("rental_duration"));
+                    film.setRental_rate(rs.getFloat("rental_rate"));
+                    film.setLength(rs.getInt("length"));
+                    film.setReplacement_cost(rs.getFloat("replacement_cost"));
+                    film.setRating(rs.getString("rating"));
+                    film.setSpecial_features(rs.getString("special_features"));
+                    film.setLast_update(rs.getDate("last_update"));
+                    films.add(film);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
