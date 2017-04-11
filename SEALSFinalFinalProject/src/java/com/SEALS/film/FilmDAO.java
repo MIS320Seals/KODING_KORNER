@@ -101,7 +101,7 @@ public class FilmDAO {
     
 //    method to display all products from database
     public List<Film> getAllFilms() {
-        List<Film> films = new ArrayList<Film>();
+        List<Film> films = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("select * from sakila.film");

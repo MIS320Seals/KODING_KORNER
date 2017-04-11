@@ -31,7 +31,6 @@
                         <th>Price</th>
                         <th>Length</th>
                         <th>Rating</th>
-                       
                         <th colspan=2>Action</th>
                     </tr>
                 </thead>
