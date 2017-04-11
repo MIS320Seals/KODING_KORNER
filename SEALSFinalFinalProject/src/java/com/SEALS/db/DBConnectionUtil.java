@@ -22,8 +22,7 @@ public class DBConnectionUtil {
         else {
             try {
             	Properties prop = new Properties();
-////                InputStream inputStream = DBConnectionUtil.class.getClassLoader().getResourceAsStream("/db.properties");
-////                prop.load(inputStream);
+
                 String driver = "com.mysql.jdbc.Driver";
                 String url = "jdbc:mysql://localhost:3306/sakila?zeroDateTimeBehavior=convertToNull";
                 String user = "root";
@@ -33,6 +32,7 @@ public class DBConnectionUtil {
             //catches all possible exceptions
             } catch (ClassNotFoundException | SQLException e) {
                 
+
             }
             return connection;
         }

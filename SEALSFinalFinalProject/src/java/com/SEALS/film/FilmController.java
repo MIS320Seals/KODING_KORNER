@@ -1,59 +1,30 @@
 package com.SEALS.film;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ering
+ * @author Austin
  */
-//@WebServlet(urlPatterns = {"/FilmController"})
 public class FilmController extends HttpServlet
 {
-
+   
     private static final long serialVersionUID = 1L;
-    private static String MYMOVIES = "/myMovies.jsp";
+    private static final String MYMOVIES = "/myMovies.jsp";
     //  private static String RESPONSE = "/response.jsp";
-    private FilmDAO dao = new FilmDAO();
+    private FilmDAO dao;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+    public FilmController()
     {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter())
-        {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CustController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CustController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        super();
+        dao = new FilmDAO();
     }
+
 
     
     /**
@@ -64,6 +35,9 @@ public class FilmController extends HttpServlet
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
+    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
@@ -80,41 +54,41 @@ public class FilmController extends HttpServlet
             forward = "adminMovie.jsp";
             request.setAttribute("films", dao.getAllFilms());
 
+
         }
         else if(action.equalsIgnoreCase("edit")){
             
         }
         else if (action.equalsIgnoreCase("list"))
         {
+
             forward = "adminMovie.jsp";
             request.setAttribute("films", dao.getAllFilms());
-        } else
-        {
-            forward = MYMOVIES;
+        } 
+        else{
+            forward = "adminRegisterPage.jsp";
         }
-
+        
         //fowards it to the specific page
         RequestDispatcher view = request.getRequestDispatcher(forward);
 
         view.forward(request, response);
-
-        processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        processRequest(request, response);
+        String forward = "adminMovie.jsp";
+        
+        
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+
+        view.forward(request, response);
     }
+
 
     /**
      * Returns a short description of the servlet.
@@ -126,5 +100,6 @@ public class FilmController extends HttpServlet
     {
         return "Short description";
     }
+
 
 }

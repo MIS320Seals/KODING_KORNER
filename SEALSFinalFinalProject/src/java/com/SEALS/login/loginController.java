@@ -1,12 +1,16 @@
+package com.SEALS.login;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.SEALS.login;
+
 
 import com.SEALS.admin.Admin;
+
 import com.SEALS.customer.Cust;
+import com.SEALS.login.loginDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -20,11 +24,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Austin
  */
-//@WebServlet(name = "loginController", urlPatterns =
+//@WebServlet(name = "LoginController", urlPatterns =
 //{
-//    "/loginController"
+//    "/LoginController"
 //})
-public class loginController extends HttpServlet
+public class LoginController extends HttpServlet
 {
     
     private static final long serialVersionUID = 1L;
@@ -32,7 +36,7 @@ public class loginController extends HttpServlet
     private static String CUST_HOME =  "/custActionPage.jsp";
 
     
-    private loginDAO dao = new loginDAO();
+   
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -94,6 +98,7 @@ public class loginController extends HttpServlet
         Admin admin = new Admin();
         Cust customer = new Cust();
 
+        loginDAO dao = new loginDAO();
 
         // String action = request.getParameter("action");
         // String passKey = request.getParameter("passKey");
@@ -114,7 +119,7 @@ public class loginController extends HttpServlet
                 //check customer
             }
         }
-        else if(action == "custLogin"){
+        else if(action.equals("custLogin")){
             String email = request.getParameter("email");
             String id = request.getParameter("id");
 

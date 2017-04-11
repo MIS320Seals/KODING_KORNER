@@ -16,7 +16,11 @@
         <ul>
             <li class="active"><a href="adminActionPage.jsp">Home</a></li>
             <li><a href="adminEmployees.jsp">Employees</a></li>
+<<<<<<< HEAD
             <li><a href="/filmController?action=list">Films</a></li>
+=======
+            <li><a href="FilmController?action=list">Films</a></li>
+>>>>>>> f5d034ca46849b4b35f6b60d51fb08a0f7adf1ac
             <li><a href="loginPage.jsp">Log-out</a></li>
         </ul>
 
