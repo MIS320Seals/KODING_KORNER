@@ -1,6 +1,7 @@
 package com.SEALS.film;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,14 +18,7 @@ public class FilmController extends HttpServlet
     private static final long serialVersionUID = 1L;
     private static final String MYMOVIES = "/myMovies.jsp";
     //  private static String RESPONSE = "/response.jsp";
-    private FilmDAO dao;
-
-    public FilmController()
-    {
-        super();
-        dao = new FilmDAO();
-    }
-
+    
 
     
     /**
@@ -42,7 +36,9 @@ public class FilmController extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        FilmDAO dao = new FilmDAO();
         String forward = "";
+        Film film = new Film();
 
         String action = request.getParameter("action");
         // String user = request.getParameter("user");
@@ -63,6 +59,7 @@ public class FilmController extends HttpServlet
         {
 
             forward = "adminMovie.jsp";
+            List<Film> films = dao.getAllFilms();
             request.setAttribute("films", dao.getAllFilms());
         } 
         else{
@@ -81,6 +78,7 @@ public class FilmController extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        FilmDAO dao = new FilmDAO();
         String forward = "adminMovie.jsp";
         
         

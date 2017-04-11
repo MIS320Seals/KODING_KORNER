@@ -18,7 +18,7 @@
         <ul>
             <li><a href="adminActionPage.jsp">Home</a></li>
             <li><a href="adminEmployees.jsp">Employees</a></li>
-            <li class = "active"><a href="/FilmController?action=list">Films</a></li>
+            <li class = "active"><a href="FilmController?action=list">Films</a></li>
             <li><a href="loginPage.jsp">Log-out</a></li>
         </ul>
         <div>
@@ -28,7 +28,6 @@
                         <th>Film ID</th>
                         <th>Title</th>
                         <th>Description</th>
-                        <th>Category</th>
                         <th>Price</th>
                         <th>Length</th>
                         <th>Rating</th>
@@ -42,7 +41,6 @@
                             <td><c:out value="${film.film_id}" /></td>
                             <td><c:out value="${film.title}" /></td>
                             <td><c:out value="${film.description}" /></td>
-                            <td><c:out value="${film.category}" /></td>
                             <td><c:out value="${film.replacement_cost}" /></td>
                             <td><c:out value="${film.length}" /></td>
                             <td><c:out value="${film.rating}" /></td>

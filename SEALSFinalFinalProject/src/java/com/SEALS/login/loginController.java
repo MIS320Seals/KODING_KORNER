@@ -106,7 +106,7 @@ public class LoginController extends HttpServlet
         String action = request.getParameter("action");
 
         //   String key = request.getParameter("passKey");
-        if (action == "adminLogin")
+        if (action.equals("adminLogin"))
         {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
@@ -114,6 +114,7 @@ public class LoginController extends HttpServlet
             int x = dao.confirmAdminLogin(username, password);
             if(x != -1 ){
                 admin = dao.getLoginWID(x);
+                forward = ADMIN_HOME;
             }
             else{
                 //check customer
@@ -126,7 +127,7 @@ public class LoginController extends HttpServlet
             int x = dao.confirmCustomerLogin(email, id);
             if(x != -1 ){
                 customer = dao.getCustomerWID(id);
-                
+                forward = CUST_HOME;
             }
             else{
                 //check customer

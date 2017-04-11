@@ -104,7 +104,7 @@ public class FilmDAO {
         List<Film> films = new ArrayList<Film>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("select * sakila.film");
+            ResultSet rs = statement.executeQuery("select * from sakila.film");
             while (rs.next()) {
                 Film film = new Film();
                 film.setFilm_id(rs.getInt("film_id"));
