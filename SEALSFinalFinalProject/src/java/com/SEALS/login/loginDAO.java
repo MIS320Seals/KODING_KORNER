@@ -6,6 +6,7 @@
 package com.SEALS.login;
 
 import com.SEALS.admin.Admin;
+import com.SEALS.customer.Cust;
 import com.SEALS.film.Film;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +25,7 @@ public class loginDAO
         connection = com.SEALS.db.DBConnectionUtil.getConnection();
     }
     
-    public Admin getLonginWID(int staff_id){
+    public Admin getLoginWID(int staff_id){
         Admin admin = new Admin();
         
          try {
@@ -80,6 +81,64 @@ public class loginDAO
 
     
     
+    }
+    
+     public int confirmCustomerLogin(String email, String id){
+        //Select staff_id From staff where username ='Jon' and password is null
+        
+        int x = -1;
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("select address_id from sakila.customer where customer_id=? and email=?");
+            preparedStatement.setInt(1, Integer.parseInt(id));
+            preparedStatement.setString(1, email);
+           
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+             
+                x = (rs.getInt("address_id"));
+                
+              
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return x;
+
+   
+    }
+     
+     public Cust getCustomerWID(String custID){
+        Cust cust = new Cust();
+        
+         try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("select * from sakila.customer where customer_id=?");
+            preparedStatement.setInt(1, Integer.parseInt(custID));
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+             
+               cust.setCustomer_id(rs.getInt("customer_id"));
+               cust.setStore_id(rs.getInt("store_id"));
+               cust.setFirst_name(rs.getString("first_name"));
+               cust.setLast_name(rs.getString("last_name"));
+               cust.setEmail(rs.getString("email"));
+               cust.setAddress_id(rs.getInt("address_id"));
+               cust.setActive(rs.getBoolean("active"));
+               cust.setCreate_date(rs.getDate("create_date"));
+               cust.setLast_update(rs.getDate("last_update"));
+               
+               
+              
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return cust;
+                
     }
     
 }

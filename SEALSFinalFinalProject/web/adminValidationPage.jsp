@@ -13,13 +13,21 @@
         <link rel="stylesheet" type="text/css" href="CSS/CSS.css">
     </head>
     <body>
-        <h1>Hello potential administrator</h1>
+        <h1>Admin Login</h1>
         <h3>Please type in your administration passkey to continue to registration.</h3>
-        <form method="POST" action='AdminController' name="frmValidateKey">
+        <form method="POST" action='loginController' name="frmValidateKey">
             <table border="0">
                 <tbody>
+                    <tr>
+                            <td>Username:</td>
+                            <td><input type="text" name="username" value=${adminBean.username} /></td>
+                        </tr>
+                        <tr>
+                            <td>Password:</td>
+                            <td><input type="password" name="password" value="${adminBean.password}" /></td>
+                        </tr>
                     <tr> 
-                        <td><input type="text" name="staff_id" value="<c:out value="${adminBean.staff_id}"  />"/> <input type="hidden" name="action" value="validateKey"/></td>
+                       <input type="hidden" name="action" value="adminLogin"/></td>
                         <td><input type="submit" value="Validate" name="checkPassKey" /></td>
                     </tr>
                 </tbody>

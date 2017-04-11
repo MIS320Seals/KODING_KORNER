@@ -23,20 +23,20 @@
                     <tbody>
                         <tr>
                             <td>Email:</td>
-                            <td><input type="text" name="username" value=${custbean.email} /></td>
+                            <td><input type="text" name="email" value=${custbean.email} /></td>
                         </tr>
                         <tr>
                             <td>ID:</td>
-                            <td><input type="password" name="password" value="${custbean.id}" /></td>
+                            <td><input type="password" name="id" value="${custbean.id}" /></td>
                         </tr>
                         <tr>
                             <td><a href="custActionPage.jsp">cust login break</a></td>
                             <td><a href="adminActionPage.jsp">admin login break</a></td>
                             
-                            <td><input type="submit" value="Enter" name="login" /></td>
+                            <td><input type="submit" value="Enter" name="custLogin" /></td>
                         </tr>
                         <tr>
-                            <td><a href="adminRegisterPage.jsp">Admin</a></td>
+                            <td><a href="adminRegisterPage.jsp">Admin Portal</a></td>
                             <td><a href="custRegisterPage.jsp">New User</a></td>
                         </tr>
                     </tbody>
