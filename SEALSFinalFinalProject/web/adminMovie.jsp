@@ -12,10 +12,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Films</title>
+
         
         <link rel="stylesheet" type="text/css" href="CSS/CSS.css">
     </head>
     <body>
+        <ul>
+            <li><a href="adminActionPage.jsp">Home</a></li>
+            <li><a href="adminEmployees.jsp">Employees</a></li>
+            <li class = "active"><a href="FilmController?action=list">Films</a></li>
+            <li><a href="loginPage.jsp">Log-out</a></li>
+        </ul>
         <div>
             <table>
                 <thead>
@@ -27,7 +34,7 @@
                         <th>Price</th>
                         <th>Length</th>
                         <th>Rating</th>
-                        <th>Actors</th>
+                        <!--<th>Actors</th>-->
                         <th colspan=2>Action</th>
                     </tr>
                 </thead>
@@ -41,9 +48,9 @@
                             <td><c:out value="${film.replacement_cost}" /></td>
                             <td><c:out value="${film.length}" /></td>
                             <td><c:out value="${film.rating}" /></td>
-                            <td><c:out value="${film.actors}" /></td>
-                            <td><a href="filmController?action=edit&filmId=<c:out value="${film.film_id}"/>">Update</a></td>
-                            <td><a href="filmController?action=delete&filmId=<c:out value="${film.film_id}"/>">Delete</a></td>
+                            <!--<td><c:out value="${film.actors}" /></td>-->
+                            <td><a href="filmcontroller?action=edit&filmId=<c:out value="${film.film_id}"/>">Update</a></td>
+                            <td><a href="filmcontroller?action=delete&filmId=<c:out value="${film.film_id}"/>">Delete</a></td>
                         </tr>
                     </c:forEach>
                 </tbody>

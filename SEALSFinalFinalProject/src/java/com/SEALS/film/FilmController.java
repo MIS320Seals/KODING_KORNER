@@ -71,20 +71,18 @@ public class FilmController extends HttpServlet
         String forward = "";
 
         String action = request.getParameter("action");
-        String user = request.getParameter("user");
+        // String user = request.getParameter("user");
         // based off which action is sent, either delete, update or list all products
-        if (action.equalsIgnoreCase("delete") && user.equalsIgnoreCase("admin"))
+        if (action.equalsIgnoreCase("delete"))
         {
             int filmId = Integer.parseInt(request.getParameter("filmId"));
             dao.deleteFilm(filmId);
             forward = "adminMovie.jsp";
             request.setAttribute("films", dao.getAllFilms());
 
-        } else if (action.equalsIgnoreCase("list")){
-            if (user.equalsIgnoreCase("admin")){
-                forward = "adminMovie.jsp";}
-            else{
-                forward = MYMOVIES;}
+        } else if (action.equalsIgnoreCase("list"))
+        {
+            forward = "adminMovie.jsp";
             request.setAttribute("films", dao.getAllFilms());
         } else
         {
@@ -96,7 +94,7 @@ public class FilmController extends HttpServlet
 
         view.forward(request, response);
 
-       // processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**
