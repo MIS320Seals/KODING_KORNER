@@ -7,6 +7,8 @@ package com.SEALS.customer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -57,8 +59,30 @@ public class CustController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException 
+    {
+        CustDAO dao = new CustDAO();
+        String forward = "";
+        String action = request.getParameter("action");
+        
+        //when the user goes to search something it forwards to the search page, and send the list of actors to that page
+        if (action.equalsIgnoreCase("search"))
+        {
+            forward = "custSearch.jsp";
+            List<Actor> actors = dao.getAllActors();
+            request.setAttribute("actors", dao.getAllActors());
+            List<Category> categories = dao.getAllCategories();
+            request.setAttribute("categories", dao.getAllCategories());
+        }
+//        if (action.equalsIgnoreCase("searchResults"))
+//        {
+//            forward = "custSearchResultPage.jsp";
+//            
+//        }
+        //fowards it to the specific page
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+        view.forward(request, response);
+        //processRequest(request, response);
     }
 
     /**
@@ -71,8 +95,26 @@ public class CustController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException 
+    {
+        String forward = "";
+        CustDAO dao = new CustDAO();
+        String action = request.getParameter("action");
+        if (action.equalsIgnoreCase("searchResults"))
+        {
+            String cat_name = "";
+            String act_name = "";
+            int store_id = 1;
+            if (request.getParameter("categories") != null)
+            {
+                cat_name = request.getParameter("categories");
+            }
+            else if (request.getParameter("actorsFullName") != null)
+            {
+                act_name = request.getParameter("actorsFullName");
+            }
+        }
+        //processRequest(request, response);
     }
 
     /**

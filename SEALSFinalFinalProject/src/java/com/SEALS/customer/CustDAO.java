@@ -1,6 +1,7 @@
 package com.SEALS.customer;
 
 import com.SEALS.admin.Admin;
+import com.SEALS.film.Film;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -140,5 +141,95 @@ public class CustDAO {
 
         return cust;
     }
-    
+    //creates and returns an array list of actors
+    public List<Actor> getAllActors()
+    {
+        List<Actor> actors = new ArrayList<Actor>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from sakila.actor");
+            while (rs.next()) 
+            {
+                Actor actor = new Actor();
+                actor.setActor_id(rs.getInt("actor_id"));
+                actor.setFirst_name(rs.getString("first_name"));
+                actor.setLast_name(rs.getString("last_name"));
+                actors.add(actor);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return actors;
+    }
+    //creates and returns an array list of the movie categories
+    public List<Category> getAllCategories()
+    {
+        List<Category> categories = new ArrayList<Category>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from sakila.category");
+            while (rs.next()) 
+            {
+                Category categ = new Category();
+                categ.setCategory_id(rs.getInt("category_id"));
+                categ.setName(rs.getString("name"));
+                categories.add(categ);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categories; 
+    }
+    //creates a list of all the movies that are found in the search
+    public List<Film> getAllSearchedFilms(String cat_name, String act_name, int store_id)
+    {
+        List<Film> films = new ArrayList<Film>();
+        try {
+            Statement statement = connection.createStatement();
+            //select all the films from the database
+            if (cat_name.isEmpty() && act_name.isEmpty())
+            {
+                ResultSet rs = statement.executeQuery("select * from sakila.film");
+                while (rs.next())
+                {
+                    Film film = new Film();
+                    film.setFilm_id(rs.getInt("film_id"));
+                    film.setTitle(rs.getString("title"));
+                    film.setDescription(rs.getString("description"));
+                    film.setRelease_year(rs.getDate("release_year"));
+                    film.setLanguage_id(rs.getInt("language_id"));
+                    film.setOriginal_language_id(rs.getInt("original_language_id"));
+                    film.setRental_duration(rs.getInt("rental_duration"));
+                    film.setRental_rate(rs.getFloat("rental_rate"));
+                    film.setLength(rs.getInt("length"));
+                    film.setReplacement_cost(rs.getFloat("replacement_cost"));
+                    film.setRating(rs.getString("rating"));
+                    film.setSpecial_features(rs.getString("special_features"));
+                    film.setLast_update(rs.getDate("last_update"));
+                    films.add(film);
+                }
+            }
+            //select all the films that have the specified category
+            else if (cat_name.length() > 0 && act_name.isEmpty())
+            {
+                ResultSet rs = statement.executeQuery("select * from sakila.film"
+                        + "where");
+            }
+            //select all the films that habe the specified actor
+            else if (cat_name.isEmpty() && act_name.length() > 0)
+            {
+                ResultSet rs = statement.executeQuery("select * from sakila.film"
+                        + "where");    
+            }
+            //select all the films specified by BOTH category AND actor
+            else
+            {
+                ResultSet rs = statement.executeQuery("select * from sakila.film"
+                        + "where");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return films;
+    }
 }
