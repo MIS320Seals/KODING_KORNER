@@ -22,8 +22,10 @@
                 <table border="0">
                     <tbody>
                         <tr>
+
                             <td>Username:</td>
                             <td><input type="text" name="username" value="${custbean.username}"  /></td>
+
                         </tr>
                         <tr>
                             <td>Password:</td>
