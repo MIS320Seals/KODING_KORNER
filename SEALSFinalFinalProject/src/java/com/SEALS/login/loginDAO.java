@@ -83,21 +83,21 @@ public class loginDAO
     
     }
     
-     public int confirmCustomerLogin(String email, String id){
+     public int confirmCustomerLogin(String username, String password){
         //Select staff_id From staff where username ='Jon' and password is null
         
         int x = -1;
         try {
             PreparedStatement preparedStatement = connection.
-                    prepareStatement("select address_id from sakila.customer where customer_id=? and email=?");
-            preparedStatement.setInt(1, Integer.parseInt(id));
-            preparedStatement.setString(2, email);
+                    prepareStatement("select customer_id from sakila.customer where username=? and password=?");
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
            
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
              
-                x = (rs.getInt("address_id"));
+                x = (rs.getInt("customer_id"));
                 
               
             }
@@ -109,13 +109,13 @@ public class loginDAO
    
     }
      
-     public Cust getCustomerWID(String custID){
+     public Cust getCustomerWID(int custID){
         Cust cust = new Cust();
         
          try {
             PreparedStatement preparedStatement = connection.
                     prepareStatement("select * from sakila.customer where customer_id=?");
-            preparedStatement.setInt(1, Integer.parseInt(custID));
+            preparedStatement.setInt(1, custID);
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {

@@ -22,12 +22,12 @@
                 <table border="0">
                     <tbody>
                         <tr>
-                            <td>Email:</td>
-                            <td><input type="email" name="email" value="${custbean.email}"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}"/></td>
+                            <td>Username:</td>
+                            <td><input type="text" name="username" value="${custbean.username}"  /></td>
                         </tr>
                         <tr>
-                            <td>ID:</td>
-                            <td><input type="password" name="id" value="${custbean.id}" required min = "1"/></td>
+                            <td>Password:</td>
+                            <td><input type="password" name="password" value="${custbean.password}" /></td>
                         </tr>
                         <tr>
                             <td><a href="custActionPage.jsp">cust login break</a></td>

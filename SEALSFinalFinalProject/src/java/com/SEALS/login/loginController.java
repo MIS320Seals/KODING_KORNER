@@ -123,12 +123,12 @@ public class LoginController extends HttpServlet
             }
         }
         else if(action.equals("custLogin")){
-            String email = request.getParameter("email");
-            String id = request.getParameter("id");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
 
-            int x = dao.confirmCustomerLogin(email, id);
+            int x = dao.confirmCustomerLogin(username, password);
             if(x != -1 ){
-                customer = dao.getCustomerWID(id);
+                customer = dao.getCustomerWID(x);
                 forward = CUST_HOME;
             }
             else{

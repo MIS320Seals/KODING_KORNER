@@ -22,9 +22,28 @@ public class Cust {
     private boolean active;
     private Date create_date;
     private Date last_update;
-
+    private String username;
+    private String password;
     
     public Cust(){}
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    
     /**
      * @return the customer_id
      */
