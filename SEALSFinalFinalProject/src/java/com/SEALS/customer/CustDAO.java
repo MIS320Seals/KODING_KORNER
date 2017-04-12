@@ -181,6 +181,7 @@ public class CustDAO {
         return categories; 
     }
     //creates a list of all the movies that are found in the search
+    //STILL NOT WORKING 
     public List<Film> getAllSearchedFilms(String cat_name, String act_name, int store_id)
     {
         List<Film> films = new ArrayList<Film>();
@@ -213,7 +214,7 @@ public class CustDAO {
             else if (cat_name.length() > 0 && act_name.isEmpty())
             {
                 ResultSet rs = statement.executeQuery
-        ("select title "
+                ("select title "
                 + "from sakila.film as f "
                 + "join sakila.film_actor as FA"
                 + "on f.film_id = fa.film_id"
@@ -225,7 +226,7 @@ public class CustDAO {
             else if (cat_name.isEmpty() && act_name.length() > 0)
             {
                 ResultSet rs = statement.executeQuery
-        ("select title "
+                ("select title "
                 + "from sakila.film as f"
                 + "join sakila.film_actor as FA"
                 + "on f.film_id = FA.film_id"
@@ -235,7 +236,7 @@ public class CustDAO {
             else
             {
                 ResultSet rs = statement.executeQuery
-        ("select title"
+                ("select title"
                 + " from sakila.film as f"
                 + "join sakila.film_category as FC"
                 + "on f.film_id = fc.film_id"

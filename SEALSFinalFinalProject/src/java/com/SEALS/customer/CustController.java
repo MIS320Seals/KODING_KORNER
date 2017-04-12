@@ -100,20 +100,28 @@ public class CustController extends HttpServlet {
         String forward = "";
         CustDAO dao = new CustDAO();
         String action = request.getParameter("action");
+        //if the user has decided on a search function and has clicked search
+        //STILL NOT WORKING!
         if (action.equalsIgnoreCase("searchResults"))
         {
+            //initializes values to empty
             String cat_name = "";
             String act_name = "";
             int store_id = 1;
+            //if they selected a category set the name to their selection
             if (request.getParameter("categories") != null)
             {
                 cat_name = request.getParameter("categories");
             }
+            //if they selected an actor set the name to their selection
             else if (request.getParameter("actorsFullName") != null)
             {
                 act_name = request.getParameter("actorsFullName");
             }
         }
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+        view.forward(request, response);
+        processRequest(request, response);
         //processRequest(request, response);
     }
 

@@ -5,10 +5,6 @@
     Created on : Apr 10, 2017, 8:56:27 PM
     Author     : ering
 --%>
-<%-- not working yet --%>
-<%--<sql:query var="actors" dataSource="jdbc/sakila">
-    SELECT actor_id, name FROM actor
-</sql:query>--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
