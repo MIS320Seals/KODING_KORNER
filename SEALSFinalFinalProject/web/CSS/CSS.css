@@ -153,3 +153,12 @@ tr:nth-child(odd) {
     background-color: #ffffff;
 
 }
+
+.loginTable{
+ background-color: whitesmoke;
+ border: 0;
+ 
+}
+.loginTable tr:nth-child(odd){
+    background-color: whitesmoke;
+}
