@@ -217,9 +217,9 @@ public class CustDAO {
                 + "from sakila.film as f "
                 + "join sakila.film_actor as FA"
                 + "on f.film_id = fa.film_id"
-                + "join sakila.film_category"
+                + "join sakila.film_category as FC"
                 + "on fa.film_id = fc.film_id"
-                        + "where fa.actor_id = @actor_id AND fc.category_id = @category_id");
+                        + "where actor_id = @actor_id AND category_id = @category_id");
             }
             //select all the films that have the specified actor
             else if (cat_name.isEmpty() && act_name.length() > 0)
