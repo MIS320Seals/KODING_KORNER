@@ -158,12 +158,12 @@ public class storedProcDAO
      public void create_date() throws SQLException{
          String query = "{call customer_create_date}";
      
-<<<<<<< HEAD
+
          CallableStatement callableStatement = connection.prepareCall(query);
          
          callableStatement.executeUpdate();
          
-=======
+
      /*    try
          {
              
@@ -176,7 +176,6 @@ public class storedProcDAO
                      
                  }*/
      
->>>>>>> dcb486fb3ac72f325809ca9e1ba57684adb20a75
      }
      
      //del_film
@@ -230,17 +229,14 @@ public class storedProcDAO
       }
      
      //ins_film
-<<<<<<< HEAD
+
       public void insertFilm () throws SQLException {
           String query = "{call ins_film}";
           
           CallableStatement callableStatement = connection.prepareCall(query);
           
           callableStatement.executeUpdate();
-      }
-=======
-     // public void insertFilm 
->>>>>>> dcb486fb3ac72f325809ca9e1ba57684adb20a75
+      }     // public void insertFilm 
      
      //inventory_held_by_customer
       public void customerInventory (int inventory_id) throws SQLException {

@@ -22,7 +22,7 @@ public class FilmController extends HttpServlet
     private static final long serialVersionUID = 1L;
     //  private static final String MYMOVIES = "/myMovies.jsp";
     //  private static String RESPONSE = "/response.jsp";
-    
+    FilmDAO dao;
 
     
     /**
@@ -37,7 +37,7 @@ public class FilmController extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        FilmDAO dao = new FilmDAO();
+        dao = new FilmDAO();
         String forward = "";
         Film film = new Film();
 
@@ -50,8 +50,6 @@ public class FilmController extends HttpServlet
             dao.deleteFilm(filmId);
             forward = "adminMovie.jsp";
             request.setAttribute("films", dao.getAllFilms());
-
-
         }
         else if(action.equalsIgnoreCase("edit")){
             forward = "adminMovieUpdate.jsp";
@@ -87,7 +85,7 @@ public class FilmController extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        FilmDAO dao = new FilmDAO();
+        dao = new FilmDAO();
         Film f = new Film();
         String forward = "FilmController?action=list";
         

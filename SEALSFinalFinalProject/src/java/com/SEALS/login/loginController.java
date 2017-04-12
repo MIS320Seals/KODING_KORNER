@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 //{
 //    "/LoginController"
 //})
-public class LoginController extends HttpServlet
+public class loginController extends HttpServlet
 {
     
     private static final long serialVersionUID = 1L;
