@@ -145,32 +145,30 @@ public class storedProcDAO
     }
      //
      //
+     //
+     //
      // stored procedures
+     //
+     //
      //
      //
      
      
      //customer_create_date
-     public void create_date(){
-         String query = "{call customer_create_date }";
+     public void create_date() throws SQLException{
+         String query = "{call customer_create_date}";
      
-         try
-         {
-             
-             
-             
-         }
+         CallableStatement callableStatement = connection.prepareCall(query);
          
-         catch()
-                 {
-                     
-                 }
-     
+         callableStatement.executeUpdate();
+         
      }
      
      //del_film
-     public void deleteFilm(){
+     public void deleteFilm() throws SQLException{
+         String query = "{call del_film}";
          
+         CallableStatement callableStatement = connection.prepareCall(query);
      }
      
      //film_in_stock
@@ -190,7 +188,7 @@ public class storedProcDAO
      
      
      //film_not_in_stock
-      public int notInStock(int film_id, int store_id) throws SQLException{
+      public int notInStock(int film_id, int store_id, int film_count) throws SQLException{
       String query = "{call film_not_in_stock(?,?,?)";
           
           CallableStatement callableStatement = connection.prepareCall(query);
@@ -217,20 +215,78 @@ public class storedProcDAO
       }
      
      //ins_film
-      public void insertFilm 
+      public void insertFilm () throws SQLException {
+          String query = "{call ins_film}";
+          
+          CallableStatement callableStatement = connection.prepareCall(query);
+          
+          callableStatement.executeUpdate();
+      }
      
      //inventory_held_by_customer
+      public void customerInventory (int inventory_id) throws SQLException {
+          String query = "{call inventory_held_by_customer}";
+          
+          CallableStatement callableStatement = connection.prepareCall(query);
+          callableStatement.setInt(1, inventory_id);
+          
+          callableStatement.executeUpdate();
+      }
      
      //inventory_in_stock
-     
+       public void inventoryInStock (int inventory_id) throws SQLException {
+          String query = "{call inventory_in_stock}";
+          
+          CallableStatement callableStatement = connection.prepareCall(query);
+          callableStatement.setInt(1, inventory_id);
+          
+          callableStatement.executeUpdate();
+      }
+      
+      
      //payment_date
+       public void paymentDate () throws SQLException{
+           String query = "{payment_date}";
+           
+           CallableStatement callableStatement = connection.prepareCall(query);
+           
+           callableStatement.executeUpdate();
+       }
+       
      
      //rental_date
+           public void rentalDate () throws SQLException{
+           String query = "{rental_date}";
+           
+           CallableStatement callableStatement = connection.prepareCall(query);
+           
+           callableStatement.executeUpdate();
+       }
      
      //rewards_report
-     
+     public int rewardsReport(int min_monthly_purchases, int min_dollar_amount_purchased, int count_rewardees) throws SQLException{
+      String query = "{call rewards_report(?,?,?)";
+          
+          CallableStatement callableStatement = connection.prepareCall(query);
+          callableStatement.setInt(1, min_monthly_purchases);
+          callableStatement.setInt(2, min_dollar_amount_purchased);
+          callableStatement.registerOutParameter(3, java.sql.Types.INTEGER);
+
+          callableStatement.executeUpdate();
+          
+          return callableStatement.getInt(3);
+          
+      }
+           
+           
      //upd_film
-     
+     public void updateFilm () throws SQLException{
+           String query = "{rental_date}";
+           
+           CallableStatement callableStatement = connection.prepareCall(query);
+           
+           callableStatement.executeUpdate();
+       }
      
     
 }
