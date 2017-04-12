@@ -73,25 +73,24 @@ public class FilmDAO {
     public void updateFilm(Film film) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("update sakila.film set film_id=?, title=?, description=?, "
-                            + "release_year=?, language_id=?, original_language_id=?, rental_duration=?,"
-                            + "rental_rate=?, length=?, replacement_cost=?, rating=?, special_features=?,"
+                    .prepareStatement("update sakila.film set title=?, description=?, "
+                            + "rental_rate=?, length=?, replacement_cost=?, rating=?, "
                             + "last_update=?"
                             + "where film_id=?");
             
-            preparedStatement.setInt(1, film.getFilm_id());
-            preparedStatement.setString(2, film.getTitle());
-            preparedStatement.setString(3, film.getDescription());
-            preparedStatement.setDate(4, new java.sql.Date(film.getRelease_year().getTime()));
-            preparedStatement.setInt(5, film.getLanguage_id());
-            preparedStatement.setInt(6, film.getOriginal_language_id());
-            preparedStatement.setInt(7, film.getRental_duration());
-            preparedStatement.setFloat(8, film.getRental_rate());
-            preparedStatement.setInt(9, film.getLength());
-            preparedStatement.setFloat(10, film.getReplacement_cost());
-            preparedStatement.setString(11, film.getRating());
-            preparedStatement.setString(12, film.getSpecial_features());
-            preparedStatement.setDate(13, new java.sql.Date(film.getLast_update().getTime()));
+            //preparedStatement.setInt(1, film.getFilm_id());
+            preparedStatement.setString(1, film.getTitle());
+            preparedStatement.setString(2, film.getDescription());
+            //preparedStatement.setDate(4, new java.sql.Date(film.getRelease_year().getTime()));
+            //preparedStatement.setInt(5, film.getLanguage_id());
+            //preparedStatement.setInt(6, film.getOriginal_language_id());
+            //preparedStatement.setInt(7, film.getRental_duration());
+            preparedStatement.setFloat(3, film.getRental_rate());
+            preparedStatement.setInt(4, film.getLength());
+            preparedStatement.setFloat(5, film.getReplacement_cost());
+            preparedStatement.setString(6, film.getRating());
+            //preparedStatement.setString(12, film.getSpecial_features());
+            preparedStatement.setDate(7, new java.sql.Date(film.getLast_update().getTime()));
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
