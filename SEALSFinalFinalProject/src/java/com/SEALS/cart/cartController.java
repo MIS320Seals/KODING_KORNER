@@ -122,7 +122,7 @@ public class cartController extends HttpServlet
 
             int x = dao.confirmCustomerLogin(email, id);
             if(x != -1 ){
-                customer = dao.getCustomerWID(id);
+               // customer = dao.getCustomerWID(id);
                 
             }
             else{
