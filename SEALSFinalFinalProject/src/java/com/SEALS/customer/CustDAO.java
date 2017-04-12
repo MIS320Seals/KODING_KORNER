@@ -212,20 +212,34 @@ public class CustDAO {
             //select all the films that have the specified category
             else if (cat_name.length() > 0 && act_name.isEmpty())
             {
-                ResultSet rs = statement.executeQuery("select * from sakila.film"
-                        + "where");
+                ResultSet rs = statement.executeQuery
+        ("select title "
+                + "from sakila.film as f "
+                + "join sakila.film_actor as FA"
+                + "on f.film_id = fa.film_id"
+                + "join sakila.film_category"
+                + "on fa.film_id = fc.film_id"
+                        + "where fa.actor_id = @actor_id AND fc.category_id = @category_id");
             }
-            //select all the films that habe the specified actor
+            //select all the films that have the specified actor
             else if (cat_name.isEmpty() && act_name.length() > 0)
             {
-                ResultSet rs = statement.executeQuery("select * from sakila.film"
-                        + "where");    
+                ResultSet rs = statement.executeQuery
+        ("select title "
+                + "from sakila.film as f"
+                + "join sakila.film_actor as FA"
+                + "on f.film_id = FA.film_id"
+                        + "where fa.actor_id = @actor_id");    
             }
             //select all the films specified by BOTH category AND actor
             else
             {
-                ResultSet rs = statement.executeQuery("select * from sakila.film"
-                        + "where");
+                ResultSet rs = statement.executeQuery
+        ("select title"
+                + " from sakila.film as f"
+                + "join sakila.film_category as FC"
+                + "on f.film_id = fc.film_id"
+                        + "where fc.category_id = @category_id");
             }
         } catch (SQLException e) {
             e.printStackTrace();
