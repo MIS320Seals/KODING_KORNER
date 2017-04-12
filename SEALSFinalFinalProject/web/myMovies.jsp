@@ -17,18 +17,23 @@
         <div class = "loginBar">
             <ul> 
                 <li><a href="custActionPage.jsp">Home</a></li>
-                <li class = "active"><a href="myMovies.jsp">My Movies</a></li>
+                <li class = "active"><a href="myMovies.jsp">My Movies</a>
+                    <div class="dropdown-content">
+                        <a href="#">Checked Out</a>
+                        <a href="#">History</a>
+                        <a href="#">Wishlist</a>
+                    </div></li>
                 <li><a href="about.jsp">About</a></li>
                 <li><a href="custSearch.jsp">Search</a></li>
                 <li><a href="custCheckOutPage.jsp">Check Out</a></li>
                 <li><a href="loginPage.jsp">${custbean.email} Log-out</a></li>
             </ul>
         </div>
-        
-        
-        
+
+
+
         <%-- Table --%>
-        
+
     <f:view>
         <h:form>
             <h:dataTable value="" var="item">
@@ -36,5 +41,5 @@
         </h:form>
     </f:view>
 
-    </body>
+</body>
 </html>
