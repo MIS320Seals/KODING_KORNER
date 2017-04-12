@@ -181,31 +181,13 @@ public class CustDAO {
         return categories; 
     }
     //creates a list of all the movies that are found in the search
-    public List<Film> getAllSearchedFilms(int cat_id, int act_id, int store_id)
+    public List<Film> getAllSearchedFilms(String cat_name, String act_name, int store_id)
     {
         List<Film> films = new ArrayList<Film>();
         try {
             Statement statement = connection.createStatement();
-            //select all the films that have the specified category and actor
-            if (cat_id > 0 && act_id > 0)
-            {
-                ResultSet rs = statement.executeQuery("select * from sakila.film"
-                        + "where ");
-            }
-            //select all the films that have the specified category
-            else if (cat_id > 0 && act_id == 0)
-            {
-                ResultSet rs = statement.executeQuery("select * from sakila.film"
-                        + "where");
-            }
-            //select all the films that habe the specified actor
-            else if (cat_id == 0 && act_id > 0)
-            {
-                ResultSet rs = statement.executeQuery("select * from sakila.film"
-                        + "where");    
-            }
-            //select all the films
-            else
+            //select all the films from the database
+            if (cat_name.isEmpty() && act_name.isEmpty())
             {
                 ResultSet rs = statement.executeQuery("select * from sakila.film");
                 while (rs.next())
@@ -226,6 +208,24 @@ public class CustDAO {
                     film.setLast_update(rs.getDate("last_update"));
                     films.add(film);
                 }
+            }
+            //select all the films that have the specified category
+            else if (cat_name.length() > 0 && act_name.isEmpty())
+            {
+                ResultSet rs = statement.executeQuery("select * from sakila.film"
+                        + "where");
+            }
+            //select all the films that habe the specified actor
+            else if (cat_name.isEmpty() && act_name.length() > 0)
+            {
+                ResultSet rs = statement.executeQuery("select * from sakila.film"
+                        + "where");    
+            }
+            //select all the films specified by BOTH category AND actor
+            else
+            {
+                ResultSet rs = statement.executeQuery("select * from sakila.film"
+                        + "where");
             }
         } catch (SQLException e) {
             e.printStackTrace();

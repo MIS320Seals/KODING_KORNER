@@ -98,7 +98,22 @@ public class CustController extends HttpServlet {
             throws ServletException, IOException 
     {
         String forward = "";
-        
+        CustDAO dao = new CustDAO();
+        String action = request.getParameter("action");
+        if (action.equalsIgnoreCase("searchResults"))
+        {
+            String cat_name = "";
+            String act_name = "";
+            int store_id = 1;
+            if (request.getParameter("categories") != null)
+            {
+                cat_name = request.getParameter("categories");
+            }
+            else if (request.getParameter("actorsFullName") != null)
+            {
+                act_name = request.getParameter("actorsFullName");
+            }
+        }
         //processRequest(request, response);
     }
 
