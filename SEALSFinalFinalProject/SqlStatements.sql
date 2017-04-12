@@ -7,22 +7,24 @@
  * Author:  Lauren
  * Created: Apr 12, 2017
  */
+
+
 ALTER TABLE sakila.customer
 ADD username varchar(100) NOT NULL,
 ADD password varchar(100) NOT NULL;
 
-Update customer
+Update sakila.customer
 set username = email
 where username like '';
 
-Update customer 
+Update sakila.customer 
 set password = CONCAT(first_name , '_' , last_name)
 where password like '';
 
-Update customer
+Update sakila.customer
 set username = 'hi'
 where customer_id = 1;
 
-update customer 
+update sakila.customer 
 set password = 'hi'
 where customer_id = 1;
