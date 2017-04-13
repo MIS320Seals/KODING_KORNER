@@ -5,54 +5,53 @@
         <servlet-name>FilmController</servlet-name>
         <servlet-class>com.SEALS.film.FilmController</servlet-class>
     </servlet>
+    
     <servlet-mapping>
         <servlet-name>FilmController</servlet-name>
         <url-pattern>/FilmController</url-pattern>
     </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    
     <welcome-file-list>
         <welcome-file>loginPage.jsp</welcome-file>
     </welcome-file-list>
+    
     <servlet>
         <description/>
         <display-name>AdminController</display-name>
         <servlet-name>AdminController</servlet-name>
         <servlet-class>com.SEALS.admin.AdminController</servlet-class>
     </servlet>
+    
     <servlet>
         <description/>
         <display-name>CustController</display-name>
         <servlet-name>CustController</servlet-name>
         <servlet-class>com.SEALS.customer.CustController</servlet-class>
     </servlet>
-    <servlet>
-        <description/>
-        <display-name>TestController</display-name>
-        <servlet-name>TestController</servlet-name>
-        <servlet-class>com.SEALS.admin.TestController</servlet-class>
-    </servlet>
+    
     <servlet>
         <description/>
         <display-name>LoginController</display-name>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>com.SEALS.login.LoginController</servlet-class>
     </servlet>
+    
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
         <url-pattern>/AdminController</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>CustController</servlet-name>
         <url-pattern>/CustController</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>TestController</servlet-name>
-        <url-pattern>/TestController</url-pattern>
-    </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>

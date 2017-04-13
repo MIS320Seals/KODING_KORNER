@@ -84,82 +84,13 @@ public class FilmController extends HttpServlet
             throws ServletException, IOException
     {
         dao = new FilmDAO();
-        Film f = new Film();
-        //String forward = "FilmController?action=list";
-        
-        // Title
-        try{
-            f.setTitle(request.getParameter("title"));
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
-        }
-        
-        // Description
-        try{
-            f.setDescription(request.getParameter("description"));
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
-        }
-        
-        //Release
-        try{
-            java.util.Date release = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("releaseYear"));
-            f.setRelease_year(new java.sql.Date(release.getTime()));
-        }catch(ParseException ex){
-            System.out.println(ex.getMessage());
-        }
-        
-        //Rental Rate
-        try{
-            float rate = Float.parseFloat(request.getParameter("rentalRate"));
-            f.setRental_rate(rate);
-        }catch(NumberFormatException ex){
-            System.out.println(ex.getMessage());
-        }
-        
-        //Length 
-        try{
-            int l = Integer.parseInt(request.getParameter("length"));
-            f.setLength(l);
-        }catch(NumberFormatException ex){
-            System.out.println(ex.getMessage());
-        }
-        
-        //Replacement cost
-        try{
-            float replace = Float.parseFloat(request.getParameter("replacementCost"));
-            f.setReplacement_cost(replace);
-        }catch(NumberFormatException ex){
-            System.out.println(ex.getMessage());
-        }
-        
-        //Rating
-        try{
-            f.setRating(request.getParameter("rating"));
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
-        }
        
-        f.setSpecial_features("NA");
-        f.setLanguage_id(1);
-        f.setOriginal_language_id(1);
-        
-        
-        java.sql.Date d = (java.sql.Date) new Date(Calendar.getInstance().getTime().getTime());
-        f.setLast_update(d);
-        
-        
-        String filmId = request.getParameter("filmId");
-        if(filmId == null || filmId.isEmpty()){
-            dao.addFilm(f);
-        }else{
-            f.setFilm_id(Integer.parseInt(filmId));
-            dao.updateFilm(f);
-        }
-        
         RequestDispatcher view;
+       
         view = request.getRequestDispatcher("/adminMovie.jsp");
+        
         request.setAttribute("films", dao.getAllFilms());
+        
         view.forward(request, response);
     }
 }
