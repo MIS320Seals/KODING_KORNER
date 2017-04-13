@@ -13,6 +13,7 @@ import java.sql.Date;
  * @author ering
  */
 public class Cust {
+    public static int customerID;
     private int customer_id;
     private int store_id;
     private String first_name;

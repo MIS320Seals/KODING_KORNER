@@ -9,6 +9,7 @@ import com.SEALS.storedproc.*;
 import com.SEALS.login.*;
 import com.SEALS.admin.Admin;
 import com.SEALS.customer.Cust;
+import com.SEALS.film.Film;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -95,6 +96,8 @@ public class cartController extends HttpServlet
         String forward = "";
         Admin admin = new Admin();
         Cust customer = new Cust();
+        Film film = new Film();
+        cartDAO cartdao = new cartDAO();
 
 
         // String action = request.getParameter("action");
@@ -102,32 +105,12 @@ public class cartController extends HttpServlet
         // String forward="";
         String action = request.getParameter("action");
 
-        //   String key = request.getParameter("passKey");
-        if (action == "adminLogin")
-        {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-
-            int x = dao.confirmAdminLogin(username, password);
-            if(x != -1 ){
-               // admin = dao.getLoginWID(x);
-            }
-            else{
-                //check customer
-            }
-        }
-        else if(action == "custLogin"){
-            String email = request.getParameter("email");
-            String id = request.getParameter("id");
-
-            int x = dao.confirmCustomerLogin(email, id);
-            if(x != -1 ){
-               // customer = dao.getCustomerWID(id);
-                
-            }
-            else{
-                //check customer
-            }
+        if(action.equals("addToCart")){
+            int film_id = Integer.parseInt(request.getParameter("film_id"));
+            int customer_id = Integer.parseInt(request.getParameter("customer_id"));
+            cartdao.addToCart(film_id, customer_id);
+            forward = "myMovies.jsp";
+            Cust.customerID=customer_id;
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);

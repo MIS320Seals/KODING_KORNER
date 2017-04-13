@@ -116,6 +116,7 @@ public class LoginController extends HttpServlet
             int x = dao.confirmAdminLogin(username, password);
             if(x != -1 ){
                 admin = dao.getAdminLoginWID(x);
+                request.setAttribute("adminBean", admin);
                 forward = ADMIN_HOME;
             }
             else{
@@ -129,6 +130,7 @@ public class LoginController extends HttpServlet
             int x = dao.confirmCustomerLogin(username, password);
             if(x != -1 ){
                 customer = dao.getCustomerWID(x);
+                request.setAttribute("custBean", customer);
                 forward = CUST_HOME;
             }
             else{

@@ -19,7 +19,12 @@
         <div class = "loginBar">
             <ul> 
                 <li><a href="custActionPage.jsp">Home</a></li>
-                <li><a href="myMovies.jsp">My Movies</a></li>
+                <li><a href="myMovies.jsp">My Movies</a>
+                                    <div class="dropdown-content">
+                        <a href="#">Checked Out</a>
+                        <a href="#">History</a>
+                        <a href="#">Wishlist</a>
+                    </div></li></li>
                 <li><a href="about.jsp">About</a></li>
                 <li class="active"><a href="custSearch.jsp">Search</a></li>
                 <li><a href="custCheckOutPage.jsp">Check Out</a></li>
@@ -28,26 +33,26 @@
         </div>
         
         <%-- ACTIONS --%>
-        <form name="searchResult" action="custSearchResultPage.jsp">-->
+        <form action="CustController" method="POST">-->
         <!--<form method="POST" action='CustController' name="frmSearch">-->
             <table border="0">
                 <tbody>
                     <tr>
                         <td>Search by Category</td>
-                        <td><select name="categories">
-                                <option></option>
+                        <td><select name="categories" >
+                                <option>Select Category</option>
                                 <c:forEach items="${categories}" var="category">
-                                    <option><c:out value="${category.name}"/></option>
+                                    <option value="${category.category_id}"><c:out value="${category.name}"/></option>
                                 </c:forEach>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td>Search by Actor</td>
-                        <td><select name="actorsFullName">
-                                <option></option>
+                        <td><select name="actorsFullName" >
+                                <option>Select Actor</option>
                                 <c:forEach items="${actors}" var="actor">
-                                    <option><c:out value="${actor.first_name} ${actor.last_name}"/></option>
+                                    <option value="${actor.actor_id}"><c:out value="${actor.first_name} ${actor.last_name}"/></option>
                                 </c:forEach>
                             </select>
                         </td>
@@ -61,7 +66,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td></td>
+                        <td><input type="hidden" name="action" value="searchMultiples"/></td></td>
                         <td><input type="submit" value="Search" name="searchResults" /></td>
                     </tr>
                 </tbody>

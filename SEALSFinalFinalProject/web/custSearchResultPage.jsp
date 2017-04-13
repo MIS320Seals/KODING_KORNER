@@ -19,42 +19,45 @@
         <div class = "loginBar">
             <ul> 
                 <li><a href="custActionPage.jsp">Home</a></li>
-                <li><a href="myMovies.jsp">My Movies</a></li>
+                <li><a href="myMovies.jsp">My Movies</a>
+                                    <div class="dropdown-content">
+                        <a href="myMovies.jsp">Checked Out</a>
+                        <a href="#">History</a>
+                        <a href="#">Wishlist</a>
+                    </div></li></li>
                 <li><a href="about.jsp">About</a></li>
                 <li class="active"><a href="custSearch.jsp">Search</a></li>
                 <li><a href="custCheckOutPage.jsp">Check Out</a></li>
                 <li><a href="loginPage.jsp">Log-out</a></li>
             </ul>
         </div>
-        <!--    ACTIONS  -->
-        <br></br> 
-        <table border="0">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Release Year</th>
-                    <th>Rental Price</th>
-                    <th>Length of Movie</th>
-                    <th>Rating</th>
-                    <th>Special Features</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${films}" var="film">
+        <table>
+                <thead>
                     <tr>
-                        <td><c:out value="${film.title}" /></td>
-                        <td><c:out value="${film.description}" /></td>
-                        <td><c:out value="${film.release_year}" /></td>
-                        <td><c:out value="${film.rental_rate}" /></td>
-                        <td><c:out value="${film.length}" /></td>
-                        <td><c:out value="${film.rating}" /></td>
-                        <td><c:out value="${film.special_features}" /></td>
-                        <td><input type="submit" value="Rent" name="rentFilm" /></td>
-                    </tr>    
-                </c:forEach>
-            </tbody>
-        </table>
+                        <th>Film ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Release Year</th>
+                        <th>Rating</th>
+                        <th colspan=2>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach end="300" step="7" items="${films}" var="film">
+                        <tr>
+                            <td><c:out value="${film.film_id}" /></td>
+                            <td><c:out value="${film.title}" /></td>
+                            <td><c:out value="${film.description}" /></td>
+                            <td><c:out value="${film.rental_rate}" /></td>
+                            <td><c:out value="${film.release_year}" /></td>
+                            <td><c:out value="${film.rating}" /></td>
+
+                            <td><a href="FilmController?action=edit&filmId=<c:out value="${film.film_id}"/>">Add To Cart</a></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+            <p><a href="FilmController?action=insert">Add Film</a></p>
     <body>
 </html>

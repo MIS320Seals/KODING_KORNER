@@ -17,7 +17,12 @@
         <div class = "loginBar">
             <ul> 
                 <li><a href="custActionPage.jsp">Home</a></li>
-                <li><a href="myMovies.jsp">My Movies</a></li>
+                <li><a href="myMovies.jsp">My Movies</a>
+                                    <div class="dropdown-content">
+                        <a href="#">Checked Out</a>
+                        <a href="#">History</a>
+                        <a href="#">Wishlist</a>
+                    </div></li></li>
                 <li><a href="about.jsp">About</a></li>
                 <li><a href="custSearch.jsp">Search</a></li>
                 <li class = "active" ><a href="custCheckOutPage.jsp">Check Out</a></li>

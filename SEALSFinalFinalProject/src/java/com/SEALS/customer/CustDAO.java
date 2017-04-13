@@ -15,19 +15,18 @@ import java.util.List;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author ering
  */
 public class CustDAO {
-    
+
     private Connection connection;
 
     public CustDAO() {
         connection = com.SEALS.db.DBConnectionUtil.getConnection();
     }
-    
+
 //    insert into statement / communication with database
     public void addCust(Cust cust) {
         try {
@@ -54,16 +53,16 @@ public class CustDAO {
 //    delete product / remove from database 
     public void deleteCust(int customer_id) {
         try {
-            PreparedStatement preparedStatement = 
-                    connection.prepareStatement( "delete from sakila.customer where customer_id=?");
+            PreparedStatement preparedStatement
+                    = connection.prepareStatement("delete from sakila.customer where customer_id=?");
             preparedStatement.setInt(1, customer_id);
             preparedStatement.executeUpdate();
-        }
-        catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-  //  update film and refresh from database
+    //  update film and refresh from database
+
     public void updateCustomer(Cust cust) {
         try {
             PreparedStatement preparedStatement = connection
@@ -71,7 +70,7 @@ public class CustDAO {
                             + "first_name=?,last_name=?,email=?,address_id=?,active=?,"
                             + "create_date=?,last_update=?"
                             + "where customer_id=?");
-            
+
             preparedStatement.setInt(1, cust.getCustomer_id());
             preparedStatement.setInt(2, cust.getStore_id());
             preparedStatement.setString(3, cust.getFirst_name());
@@ -87,7 +86,7 @@ public class CustDAO {
             e.printStackTrace();
         }
     }
-    
+
 //    method to display all products from database
     public List<Cust> getAllCustomers() {
         List<Cust> customers = new ArrayList<Cust>();
@@ -114,6 +113,7 @@ public class CustDAO {
         return customers;
     }
 //    display product if productid is certain number
+
     public Cust getCustById(int customer_id) {
         Cust cust = new Cust();
         try {
@@ -123,7 +123,7 @@ public class CustDAO {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-            
+
                 cust.setCustomer_id(rs.getInt("customer"));
                 cust.setStore_id(rs.getInt("store_id"));
                 cust.setFirst_name(rs.getString("first_name"));
@@ -133,7 +133,7 @@ public class CustDAO {
                 cust.setActive(rs.getBoolean("active"));
                 cust.setCreate_date(rs.getDate("create_date"));
                 cust.setLast_update(rs.getDate("last_update"));
-                
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -141,15 +141,14 @@ public class CustDAO {
 
         return cust;
     }
+
     //creates and returns an array list of actors
-    public List<Actor> getAllActors()
-    {
+    public List<Actor> getAllActors() {
         List<Actor> actors = new ArrayList<Actor>();
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("select * from sakila.actor");
-            while (rs.next()) 
-            {
+            while (rs.next()) {
                 Actor actor = new Actor();
                 actor.setActor_id(rs.getInt("actor_id"));
                 actor.setFirst_name(rs.getString("first_name"));
@@ -161,15 +160,14 @@ public class CustDAO {
         }
         return actors;
     }
+
     //creates and returns an array list of the movie categories
-    public List<Category> getAllCategories()
-    {
+    public List<Category> getAllCategories() {
         List<Category> categories = new ArrayList<Category>();
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("select * from sakila.category");
-            while (rs.next()) 
-            {
+            while (rs.next()) {
                 Category categ = new Category();
                 categ.setCategory_id(rs.getInt("category_id"));
                 categ.setName(rs.getString("name"));
@@ -178,21 +176,31 @@ public class CustDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return categories; 
+        return categories;
     }
+
     //creates a list of all the movies that are found in the search
     //STILL NOT WORKING 
-    public List<Film> getAllSearchedFilms(String cat_name, String act_name, int store_id)
-    {
+    public List<Film> getAllSearchedFilms(String cat_name, String act_name, int store_id) {
+        int actor_id = -1;
+        int category_id = -1;
+        if (!act_name.equalsIgnoreCase("Select Actor")) {
+            actor_id = Integer.parseInt(act_name);
+            //get films with actor
+
+        }
+        //if they searched by category
+        if (!cat_name.equalsIgnoreCase("Select Category")) {
+            //get films by category
+            category_id = Integer.parseInt(cat_name);
+        }
         List<Film> films = new ArrayList<Film>();
         try {
             Statement statement = connection.createStatement();
             //select all the films from the database
-            if (cat_name.isEmpty() && act_name.isEmpty())
-            {
+            if (category_id == -1 && actor_id == -1) {
                 ResultSet rs = statement.executeQuery("select * from sakila.film");
-                while (rs.next())
-                {
+                while (rs.next()) {
                     Film film = new Film();
                     film.setFilm_id(rs.getInt("film_id"));
                     film.setTitle(rs.getString("title"));
@@ -209,38 +217,89 @@ public class CustDAO {
                     film.setLast_update(rs.getDate("last_update"));
                     films.add(film);
                 }
-            }
-            //select all the films that have the specified category
-            else if (cat_name.length() > 0 && act_name.isEmpty())
-            {
-                ResultSet rs = statement.executeQuery
-                ("select title "
-                + "from sakila.film as f "
-                + "join sakila.film_actor as FA"
-                + "on f.film_id = fa.film_id"
-                + "join sakila.film_category as FC"
-                + "on fa.film_id = fc.film_id"
-                        + "where actor_id = @actor_id AND category_id = @category_id");
-            }
-            //select all the films that have the specified actor
-            else if (cat_name.isEmpty() && act_name.length() > 0)
-            {
-                ResultSet rs = statement.executeQuery
-                ("select title "
-                + "from sakila.film as f"
-                + "join sakila.film_actor as FA"
-                + "on f.film_id = FA.film_id"
-                        + "where fa.actor_id = @actor_id");    
-            }
-            //select all the films specified by BOTH category AND actor
-            else
-            {
-                ResultSet rs = statement.executeQuery
-                ("select title"
-                + " from sakila.film as f"
-                + "join sakila.film_category as FC"
-                + "on f.film_id = fc.film_id"
-                        + "where fc.category_id = @category_id");
+            } //select all the films that have the specified category
+            else if (category_id != -1 && actor_id == -1) {
+
+                try {
+                    PreparedStatement preparedStatement = connection
+                            .prepareStatement("select f.film_id, f.title,f.description,f.rating,f.rental_rate,f.release_year\n"
+                                    + "from sakila.film as f \n"
+                                    + "join sakila.film_actor as FA\n"
+                                    + "on f.film_id = fa.film_id\n"
+                                    + "join sakila.film_category as FC\n"
+                                    + "on fa.film_id = fc.film_id\n"
+                                    + "where FC.category_id = ?");
+
+                    preparedStatement.setInt(1, category_id);
+                    ResultSet rs = preparedStatement.executeQuery();
+                    while (rs.next()) {
+                        Film film = new Film();
+                        film.setTitle(rs.getString("title"));
+                        film.setFilm_id(rs.getInt("film_id"));
+                        film.setRental_rate(rs.getInt("film_id"));
+                        film.setDescription(rs.getString("description"));
+                        film.setRating(rs.getString("rating"));
+                        film.setRelease_year((rs.getDate("release_year")));
+                        films.add(film);
+                    }
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } //select all the films that have the specified actor
+            else if (category_id == -1 && actor_id != -1) {
+                try {
+                    PreparedStatement preparedStatement = connection
+                            .prepareStatement("select f.film_id, f.title,f.description,f.rating,f.rental_rate,f.release_year\n"
+                                    + "from sakila.film as f\n"
+                                    + "join sakila.film_actor as FA\n"
+                                    + "on f.film_id = FA.film_id\n"
+                                    + "where fa.actor_id =?");
+
+                    preparedStatement.setInt(1, actor_id);
+                    ResultSet rs = preparedStatement.executeQuery();
+                    while (rs.next()) {
+                        Film film = new Film();
+                        film.setTitle(rs.getString("title"));
+                        film.setFilm_id(rs.getInt("film_id"));
+                        film.setDescription(rs.getString("description"));
+                        film.setRating(rs.getString("rating"));
+
+                        film.setRental_rate(rs.getInt("film_id"));
+
+                        film.setRelease_year((rs.getDate("release_year")));
+                        films.add(film);
+                    }
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+            } //select all the films specified by BOTH category AND actor
+            else {
+                PreparedStatement preparedStatement = connection
+                        .prepareStatement("select f.film_id, f.title,f.rental_rate, f.description,f.rating,f.release_year\n"
+                                + "from sakila.film as f\n"
+                                + "join sakila.film_actor as FA\n"
+                                + "on f.film_id = fa.film_id\n"
+                                + "join sakila.film_category as FC\n"
+                                + "on fa.film_id = fc.film_id\n"
+                                + "where FC.category_id = ? AND FA.actor_id=? ");
+
+                preparedStatement.setInt(1, category_id);
+                preparedStatement.setInt(1, actor_id);
+                ResultSet rs = preparedStatement.executeQuery();
+                while (rs.next()) {
+                    Film film = new Film();
+                    film.setTitle(rs.getString("title"));
+                    film.setFilm_id(rs.getInt("film_id"));
+                    film.setRental_rate(rs.getInt("film_id"));
+
+                    film.setDescription(rs.getString("description"));
+                    film.setRating(rs.getString("rating"));
+                    film.setRelease_year((rs.getDate("release_year")));
+                    films.add(film);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

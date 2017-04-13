@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,7 +19,13 @@
         <div class = "loginBar">
             <ul> 
                 <li class = "active"><a href="custActionPage.jsp">Home</a></li>
-                <li><a href="myMovies.jsp">My Movies</a></li>
+                <li><a>My Movies</a>
+                        <div class="dropdown-content">
+                        <a href="#">Checked Out</a>
+                        <a href="#">History</a>
+                        <a href="#">Cart</a>
+                        <a href="CustController?action=TestAddToCart&customer_id=<c:out value="${custBean.customer_id}"/>">Test Checking Out</a>
+                    </div></li></li>
                 <li><a href="about.jsp">About</a></li>
                 <li><a href="CustController?action=search">Search</a></li>
                 <li><a href="custCheckOutPage.jsp">Check Out</a></li>

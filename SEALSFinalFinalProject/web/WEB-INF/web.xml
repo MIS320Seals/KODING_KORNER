@@ -25,6 +25,12 @@
     </servlet>
     <servlet>
         <description/>
+        <display-name>CustController</display-name>
+        <servlet-name>CustController</servlet-name>
+        <servlet-class>com.SEALS.customer.CustController</servlet-class>
+    </servlet>
+    <servlet>
+        <description/>
         <display-name>TestController</display-name>
         <servlet-name>TestController</servlet-name>
         <servlet-class>com.SEALS.admin.TestController</servlet-class>
@@ -38,6 +44,10 @@
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
         <url-pattern>/AdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustController</servlet-name>
+        <url-pattern>/CustController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TestController</servlet-name>

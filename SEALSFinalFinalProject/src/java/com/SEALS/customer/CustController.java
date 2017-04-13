@@ -5,6 +5,8 @@ package com.SEALS.customer;
  * and open the template in the editor.
  */
 
+import com.SEALS.film.Film;
+import com.SEALS.film.FilmDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -19,8 +21,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ering
  */
-@WebServlet(urlPatterns = {"/CustController"})
+//@WebServlet(urlPatterns = {"/CustController"})
 public class CustController extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    private static String ADD_TO_CART = "/myMovies.jsp";
+    private static String CUST_HOME =  "/custActionPage.jsp";
+    
+    private static String CUST_SEARCH_RESULT =  "/custSearchResultPage.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -64,7 +71,7 @@ public class CustController extends HttpServlet {
         CustDAO dao = new CustDAO();
         String forward = "";
         String action = request.getParameter("action");
-        
+        Cust cust = new Cust();
         //when the user goes to search something it forwards to the search page, and send the list of actors to that page
         if (action.equalsIgnoreCase("search"))
         {
@@ -80,6 +87,16 @@ public class CustController extends HttpServlet {
 //            
 //        }
         //fowards it to the specific page
+        
+        else if(action.equals("TestAddToCart")){
+            forward = ADD_TO_CART;
+            int customer_id = Integer.parseInt(request.getParameter("customer_id"));
+            cust.setCustomer_id(customer_id);
+            request.setAttribute("custBean", cust);
+            
+            
+            
+        }
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
         //processRequest(request, response);
@@ -98,7 +115,8 @@ public class CustController extends HttpServlet {
             throws ServletException, IOException 
     {
         String forward = "";
-        CustDAO dao = new CustDAO();
+        CustDAO custdao = new CustDAO();
+        FilmDAO filmdao = new FilmDAO();
         String action = request.getParameter("action");
         //if the user has decided on a search function and has clicked search
         //STILL NOT WORKING!
@@ -119,10 +137,30 @@ public class CustController extends HttpServlet {
                 act_name = request.getParameter("actorsFullName");
             }
         }
+        else if(action.equals("searchMultiples")){
+            String actor = request.getParameter("actorsFullName");
+            int actor_id;
+            int category_id;
+           // int actor_id = Integer.parseInt(
+            String category = request.getParameter("categories");
+            
+            //if they searched by actor
+            List<Film> films = custdao.getAllSearchedFilms(category, actor, 1);
+           
+            //if they searched by actor and category
+            request.setAttribute("films", films);
+            forward = CUST_SEARCH_RESULT;
+            
+        }
+                
+       
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
         processRequest(request, response);
         //processRequest(request, response);
+        
+
+       
     }
 
     /**
