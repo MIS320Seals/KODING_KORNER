@@ -38,34 +38,32 @@ public class FilmController extends HttpServlet
             throws ServletException, IOException
     {
         dao = new FilmDAO();
-        String forward = "";
+        String forward = "/adminMovieUpdate.jsp";
         Film film = new Film();
 
-        String action = request.getParameter("action");
+         String action = request.getParameter("action");
         // String user = request.getParameter("user");
         // based off which action is sent, either delete, update or list all products
-        if (action.equalsIgnoreCase("delete"))
+        if (action.equals("delete"))
         {
             int filmId = Integer.parseInt(request.getParameter("filmId"));
             dao.deleteFilm(filmId);
             forward = "/adminMovie.jsp";
             request.setAttribute("films", dao.getAllFilms());
         }
-        else if(action.equalsIgnoreCase("edit")){
+        if (action.equals("edit")){
             forward = "/adminMovieUpdate.jsp";
             int filmId = Integer.parseInt(request.getParameter("filmId"));
             film = dao.getFilmById(filmId);
             request.setAttribute("film", film);
         }
-        else if (action.equalsIgnoreCase("list"))
+        if (action.equals("list"))
         {
             forward = "/adminMovie.jsp";
             List<Film> films = dao.getAllFilms();
             request.setAttribute("films", dao.getAllFilms());
         } 
-        else{
-            forward = "/adminMovieUpdate.jsp";
-        }
+        
         
         //fowards it to the specific page
         RequestDispatcher view = request.getRequestDispatcher(forward);
