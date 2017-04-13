@@ -35,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach end="300" step="7" items="${films}" var="film">
+                    <c:forEach  items="${films}" var="film">
                         <tr>
                             <td><c:out value="${film.film_id}" /></td>
                             <td><c:out value="${film.title}" /></td>
@@ -43,9 +43,8 @@
                             <td><c:out value="${film.replacement_cost}" /></td>
                             <td><c:out value="${film.length}" /></td>
                             <td><c:out value="${film.rating}" /></td>
-
-                            <td><a href="FilmController?action=edit&filmId=<c:out value="${film.film_id}"/>">Update</a></td>
-                            <td><a href="FilmController?action=delete&filmId=<c:out value="${film.film_id}"/>">Delete</a></td>
+                            <td><a href="FilmController?action=edit&filmId=${film.film_id}">Update</a></td>
+                            <td><a href="FilmController?action=delete&filmId=${film.film_id}"/>Delete</a></td>
                         </tr>
                     </c:forEach>
                 </tbody>

@@ -48,23 +48,23 @@ public class FilmController extends HttpServlet
         {
             int filmId = Integer.parseInt(request.getParameter("filmId"));
             dao.deleteFilm(filmId);
-            forward = "adminMovie.jsp";
+            forward = "/adminMovie.jsp";
             request.setAttribute("films", dao.getAllFilms());
         }
         else if(action.equalsIgnoreCase("edit")){
-            forward = "adminMovieUpdate.jsp";
+            forward = "/adminMovieUpdate.jsp";
             int filmId = Integer.parseInt(request.getParameter("filmId"));
             film = dao.getFilmById(filmId);
             request.setAttribute("film", film);
         }
         else if (action.equalsIgnoreCase("list"))
         {
-            forward = "adminMovie.jsp";
+            forward = "/adminMovie.jsp";
             List<Film> films = dao.getAllFilms();
             request.setAttribute("films", dao.getAllFilms());
         } 
         else{
-            forward = "adminMovieUpdate.jsp";
+            forward = "/adminMovieUpdate.jsp";
         }
         
         //fowards it to the specific page
@@ -87,7 +87,7 @@ public class FilmController extends HttpServlet
     {
         dao = new FilmDAO();
         Film f = new Film();
-        String forward = "FilmController?action=list";
+        //String forward = "FilmController?action=list";
         
         // Title
         try{
@@ -105,8 +105,8 @@ public class FilmController extends HttpServlet
         
         //Release
         try{
-            Date release =(Date) new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("releaseYear"));
-            f.setRelease_year(release);
+            java.util.Date release = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("releaseYear"));
+            f.setRelease_year(new java.sql.Date(release.getTime()));
         }catch(ParseException ex){
             System.out.println(ex.getMessage());
         }
@@ -147,7 +147,7 @@ public class FilmController extends HttpServlet
         f.setOriginal_language_id(1);
         
         
-        Date d = new Date(Calendar.getInstance().getTime().getTime());
+        java.sql.Date d = (java.sql.Date) new Date(Calendar.getInstance().getTime().getTime());
         f.setLast_update(d);
         
         
@@ -159,7 +159,8 @@ public class FilmController extends HttpServlet
             dao.updateFilm(f);
         }
         
-        RequestDispatcher view = request.getRequestDispatcher(forward);
+        RequestDispatcher view;
+        view = request.getRequestDispatcher("/adminMovie.jsp");
         request.setAttribute("films", dao.getAllFilms());
         view.forward(request, response);
     }

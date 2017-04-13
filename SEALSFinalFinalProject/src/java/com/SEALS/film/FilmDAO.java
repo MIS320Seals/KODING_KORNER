@@ -1,7 +1,7 @@
 package com.SEALS.film;
 
 
-
+import java.sql.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -49,7 +49,7 @@ public class FilmDAO {
             preparedStatement.setFloat(9, film.getReplacement_cost());
             preparedStatement.setString(10, film.getRating());
             preparedStatement.setString(11, film.getSpecial_features());
-            preparedStatement.setDate(12, new java.sql.Date(film.getLast_update().getTime()));
+            preparedStatement.setDate(12, film.getLast_update());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -61,12 +61,11 @@ public class FilmDAO {
     public void deleteFilm(int film_id) {
         try {
             PreparedStatement preparedStatement = 
-                    connection.prepareStatement( "delete from sakila.film where film_id = ?");
+                    connection.prepareStatement("delete from sakila.film where film_id = ?");
             preparedStatement.setInt(1, film_id);
             preparedStatement.executeUpdate();
         }
         catch(SQLException e) {
-            e.printStackTrace();
         }
     }
   //  update film and refresh from database
@@ -90,7 +89,7 @@ public class FilmDAO {
             preparedStatement.setFloat(5, film.getReplacement_cost());
             preparedStatement.setString(6, film.getRating());
             //preparedStatement.setString(12, film.getSpecial_features());
-            preparedStatement.setDate(7, new java.sql.Date(film.getLast_update().getTime()));
+            preparedStatement.setDate(7, film.getLast_update());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
