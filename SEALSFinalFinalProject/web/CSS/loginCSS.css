@@ -9,7 +9,8 @@ and open the template in the editor.
 */
 
 body{
-    background-image: url('56255_rick_and_morty.jpg'); 
+    background-image: url("rex/rick_and_morty.jpg"); 
+    background-color: lightgray;
     text-align: center;
 }
 
@@ -20,8 +21,13 @@ div{
     width:45%; 
 }
 
+div table{
+    margin: auto;
+    width:90%;
+}
+
 input[type=submit] {
-    width: 40%;
+    width: 100%;
     background-color: grey;
     color: white;
     padding: 14px 20px;
@@ -50,3 +56,8 @@ input[type=password], select {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
+input[type=submit]:hover {
+    background-color: red;
+}
+

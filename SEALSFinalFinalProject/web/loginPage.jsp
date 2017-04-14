@@ -12,37 +12,36 @@
         <title>Login Page</title>
         <link rel="stylesheet" type="text/css" href="CSS/loginCSS.css">
     </head>
-    <body style = "text-align: center;">
-        <div class="hdr">
-            <h1>Crimson Video Store</h1>
-           
-        </div>
+    <body>
+
+        <h1>Crimson Video Store</h1>
+
+
         <div class="loginTable">
-            <form action="LoginController" method="POST" style = "margin: auto; width: 90%;">
+            <form action="LoginController" method="POST">
                 <table border="0">
                     <tbody>
                         <tr>
-
                             <td>Username:</td>
                             <td><input type="text" name="username" value="${custbean.username}"  /></td>
-
                         </tr>
                         <tr>
                             <td>Password:</td>
                             <td><input type="password" name="password" value="${custbean.password}" /></td>
                         </tr>
                         <tr>
-                            <input type="hidden" name="action" value="custLogin"/></td>
                             <td><input type="submit" value="Enter" name="custLogin" /></td>
-                            
                             <td><a href="custRegisterPage.jsp">New User</a></td>
                         </tr>
+                        <tr>
+                            <td><input type="hidden" name="action" value="custLogin"/></td></td>
+                        </tr>
                     </tbody>
-                    
+
                 </table>
 
             </form>
-             <td><a href="adminValidationPage.jsp">Admin Portal</a></td>
+            <td><a href="adminValidationPage.jsp">Admin Portal</a></td>
         </div>
     </body>
 </html>
