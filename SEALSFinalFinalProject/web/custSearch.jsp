@@ -33,7 +33,7 @@
         </div>
         
         <%-- ACTIONS --%>
-        <form action="CustController" method="POST">-->
+        <form action="CustController" method="POST">
         <!--<form method="POST" action='CustController' name="frmSearch">-->
             <table border="0">
                 <tbody>
