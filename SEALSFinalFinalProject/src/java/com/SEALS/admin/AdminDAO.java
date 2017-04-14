@@ -205,6 +205,42 @@ public class AdminDAO {
         return admin;
     } 
     
-    
-    
+    public List<Sales> getSalesByGenre(){
+        List<Sales> s = new ArrayList<Sales>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM sakila.sales_by_film_category");
+            while (rs.next()) {
+                Sales sale = new Sales();
+                sale.setGenre(rs.getString("category"));
+                sale.setRevenue(rs.getString("total_sales"));
+                s.add(sale);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        
+        return s;
+    }
+    public List<Sales> getSalesByStore(){
+        List<Sales> s = new ArrayList<Sales>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM sakila.sales_by_film_category");
+            while (rs.next()) {
+                Sales sale = new Sales();
+                sale.setGenre(rs.getString("store"));
+                sale.setRevenue(rs.getString("total_sales"));
+                s.add(sale);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        
+        return s;
+    }
 }
