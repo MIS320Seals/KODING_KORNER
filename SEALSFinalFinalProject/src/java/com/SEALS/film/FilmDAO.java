@@ -61,8 +61,8 @@ public class FilmDAO {
     public void deleteFilm(int film_id) {
         try {
             PreparedStatement preparedStatement = 
-                    connection.prepareStatement("delete from sakila.film where film_id = ?");
-            preparedStatement.setInt(1, film_id);
+                    connection.prepareStatement("delete from sakila.film where film_id =" + film_id);
+           // preparedStatement.setInt(1, film_id);
             preparedStatement.executeUpdate();
         }
         catch(SQLException e) {

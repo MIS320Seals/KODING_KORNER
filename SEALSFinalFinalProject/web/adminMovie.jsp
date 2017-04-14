@@ -16,12 +16,14 @@
     </head>
     <body>
         <ul>
-            <li><a href="adminActionPage.jsp">Home</a></li>
-            <li><a href="adminEmployees.jsp">Employees</a></li>
-            <li class = "active"><a href="FilmController?action=list">Films</a></li>
+            <li ><a href="adminActionPage.jsp">Home</a></li>
+            <li ><a href="adminEmployees.jsp">Employees</a></li>
+            <li class="active"><a href="FilmController?action=list">Films</a></li>
+            <li><a href="AdminController?action=custlist">Customers</a></li>
             <li><a href="loginPage.jsp">Log-out</a></li>
         </ul>
         <div>
+            <br>
             <table>
                 <thead>
                     <tr>
@@ -31,7 +33,7 @@
                         <th>Price</th>
                         <th>Length</th>
                         <th>Rating</th>
-                        <th colspan=2>Action</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,8 +45,7 @@
                             <td><c:out value="${film.replacement_cost}" /></td>
                             <td><c:out value="${film.length}" /></td>
                             <td><c:out value="${film.rating}" /></td>
-                            <td><a href="FilmController?action=edit&filmId=${film.film_id}">Update</a></td>
-                            <td><a href="FilmController?action=delete&filmId=${film.film_id}"/>Delete</a></td>
+                            <td><a href="FilmController?action=edit&filmId=${film.film_id}">View</a></td>
                         </tr>
                     </c:forEach>
                 </tbody>

@@ -10,45 +10,38 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
-        <link rel="stylesheet" type="text/css" href="CSS/CSS.css">
+        <link rel="stylesheet" type="text/css" href="CSS/loginCSS.css">
     </head>
-    <body style = "text-align: center;">
-        <div class="hdr">
-            <h1>Crimson Video Store</h1>
-           
-        </div>
-        <div Style = "background-color: whitesmoke; margin:auto; width:45%; border-radius: 5px; text-align: center;">
-            <form action="LoginController" method="POST" style = "margin: auto; width: 90%;">
+    <body>
+
+        <h1>Crimson Video Store</h1>
+
+
+        <div class="loginTable">
+            <form action="LoginController" method="POST">
                 <table border="0">
                     <tbody>
                         <tr>
-
                             <td>Username:</td>
                             <td><input type="text" name="username" value="${custbean.username}"  /></td>
-
                         </tr>
                         <tr>
                             <td>Password:</td>
                             <td><input type="password" name="password" value="${custbean.password}" /></td>
                         </tr>
                         <tr>
-                            <td><a href="custActionPage.jsp">cust login break</a></td>
-                            <td><a href="adminActionPage.jsp">admin login break</a></td>
-                            <input type="hidden" name="action" value="custLogin"/></td>
                             <td><input type="submit" value="Enter" name="custLogin" /></td>
-                        </tr>
-                        <tr>
-                            <td><a href="adminValidationPage.jsp">Admin Portal</a></td>
                             <td><a href="custRegisterPage.jsp">New User</a></td>
                         </tr>
+                        <tr>
+                            <td><input type="hidden" name="action" value="custLogin"/></td></td>
+                        </tr>
                     </tbody>
+
                 </table>
 
             </form>
-             
+            <td><a href="adminValidationPage.jsp">Admin Portal</a></td>
         </div>
-        <h3>We are currently working on getting our member less viewing up and running.</h2>
-        <h3>But until then,</h3>
-        <h3>Please log in below to get started</h2>
     </body>
 </html>

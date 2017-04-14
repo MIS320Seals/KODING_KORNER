@@ -3,42 +3,42 @@
     Author     : Austin
 */
 li a, .dropbtn {
-display: inline-block;
-color: white;
-text-align: center;
-padding: 14px 16px;
-text-decoration: none;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
 }
 
 li a:hover, .dropdown:hover .dropbtn {
-background-color: red;
+    background-color: red;
 }
 
 li.dropdown {
-display: inline-block;
+    display: inline-block;
 }
 
 .dropdown-content {
-display: none;
-position: absolute;
-background-color: #f9f9f9;
-min-width: 160px;
-box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-z-index: 1;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
 }
 
 .dropdown-content a {
-color: black;
-padding: 12px 16px;
-text-decoration: none;
-display: block;
-text-align: left;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
 }
 
 .dropdown-content a:hover {background-color: #f1f1f1}
 
 .dropdown:hover .dropdown-content {
-display: block;
+    display: block;
 }
 
 body{
@@ -96,13 +96,13 @@ li a:hover {
     margin: auto;
 }
 img {
-  display: inline-block;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
 
 .hdr{
@@ -115,12 +115,12 @@ img {
 }
 
 .frmReg{
-   
-margin-left: 25%;
-margin-right:25%;
-width: 50%;
 
-    
+    margin-left: 25%;
+    margin-right:25%;
+    width: 50%;
+
+
 }
 
 input[type=text], select {
@@ -170,7 +170,6 @@ table{
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid black;
 }
 th{
     background-color: #cc0000;
@@ -190,13 +189,4 @@ tr{
 tr:nth-child(odd) {
     background-color: #ffffff;
 
-}
-
-.loginTable{
- background-color: whitesmoke;
- border: 0;
- 
-}
-.loginTable tr:nth-child(odd){
-    background-color: whitesmoke;
 }

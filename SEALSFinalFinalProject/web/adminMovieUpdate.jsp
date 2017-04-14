@@ -15,7 +15,7 @@
         <link rel="stylesheet" type="text/css" href="CSS/CSS.css">
     </head>
     <body>
-        <h1>Movie Edit</h1>
+        <h1>Movie Details</h1>
         <div>
             <form method="POST" action='FilmController' name="frmAddProduct">
                 Film Id:
@@ -26,44 +26,44 @@
 
                 Title:
                 <br>
-                <input type="text" name="title" value="<c:out value="${film.title}" />" />
+                <input readonly type="text" name="title" value="<c:out value="${film.title}"  />" />
                 </br>
 
                 Description:
                 <br>
-                <input type="text" name="description" value="<c:out value="${film.description}" />" />
+                <input readonly type="text" name="description" value="<c:out value="${film.description}" />" />
                 </br>
 
                 Release Date: <br>
-                <input
+                <input readonly
                     type="text" name="releaseYear"  pattern = "[0-9]{2}/[0-9]{2}/[0-9]{4}" placeholder = "[MM/DD/YYYY]"
                     value="<fmt:formatDate pattern="MM/dd/yyyy" value="${film.release_year}" />" required /> 
                 </br> 
                 
                 Rental Rate:
                 <br>
-                <input type="number"  name="rentalRate"
+                <input readonly type="number"  name="rentalRate"
                        value="<c:out value="${film.rental_rate}" />" required/> 
                 </br>
                 
                 Length:
                 <br>
-                <input type="number"  name="length"
+                <input readonly type="number"  name="length"
                        value="<c:out value="${film.length}" />" required/> 
                 </br>
 
                 Replacement Cost:
                 <br>
-                <input type="number"  name="replacementCost"
+                <input readonly type="number"  name="replacementCost"
                        value="<c:out value="${film.replacement_cost}" />" required /> 
                 </br>
 
                 Rating:
                 <br>
-                <input type="text"  name="rating"
+                <input readonly type="text"  name="rating"
                        value="<c:out value="${film.rating}" />" required /> 
                 </br>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Done" />
                 
             </form>
         </div>

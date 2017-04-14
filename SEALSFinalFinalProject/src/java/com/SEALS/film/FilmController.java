@@ -38,34 +38,32 @@ public class FilmController extends HttpServlet
             throws ServletException, IOException
     {
         dao = new FilmDAO();
-        String forward = "";
+        String forward = "/adminMovieUpdate.jsp";
         Film film = new Film();
 
-        String action = request.getParameter("action");
+         String action = request.getParameter("action");
         // String user = request.getParameter("user");
         // based off which action is sent, either delete, update or list all products
-        if (action.equalsIgnoreCase("delete"))
+        if (action.equals("delete"))
         {
             int filmId = Integer.parseInt(request.getParameter("filmId"));
             dao.deleteFilm(filmId);
             forward = "/adminMovie.jsp";
             request.setAttribute("films", dao.getAllFilms());
         }
-        else if(action.equalsIgnoreCase("edit")){
+        if (action.equals("edit")){
             forward = "/adminMovieUpdate.jsp";
             int filmId = Integer.parseInt(request.getParameter("filmId"));
             film = dao.getFilmById(filmId);
             request.setAttribute("film", film);
         }
-        else if (action.equalsIgnoreCase("list"))
+        if (action.equals("list"))
         {
             forward = "/adminMovie.jsp";
             List<Film> films = dao.getAllFilms();
             request.setAttribute("films", dao.getAllFilms());
         } 
-        else{
-            forward = "/adminMovieUpdate.jsp";
-        }
+        
         
         //fowards it to the specific page
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -86,82 +84,13 @@ public class FilmController extends HttpServlet
             throws ServletException, IOException
     {
         dao = new FilmDAO();
-        Film f = new Film();
-        //String forward = "FilmController?action=list";
-        
-        // Title
-        try{
-            f.setTitle(request.getParameter("title"));
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
-        }
-        
-        // Description
-        try{
-            f.setDescription(request.getParameter("description"));
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
-        }
-        
-        //Release
-        try{
-            java.util.Date release = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("releaseYear"));
-            f.setRelease_year(new java.sql.Date(release.getTime()));
-        }catch(ParseException ex){
-            System.out.println(ex.getMessage());
-        }
-        
-        //Rental Rate
-        try{
-            float rate = Float.parseFloat(request.getParameter("rentalRate"));
-            f.setRental_rate(rate);
-        }catch(NumberFormatException ex){
-            System.out.println(ex.getMessage());
-        }
-        
-        //Length 
-        try{
-            int l = Integer.parseInt(request.getParameter("length"));
-            f.setLength(l);
-        }catch(NumberFormatException ex){
-            System.out.println(ex.getMessage());
-        }
-        
-        //Replacement cost
-        try{
-            float replace = Float.parseFloat(request.getParameter("replacementCost"));
-            f.setReplacement_cost(replace);
-        }catch(NumberFormatException ex){
-            System.out.println(ex.getMessage());
-        }
-        
-        //Rating
-        try{
-            f.setRating(request.getParameter("rating"));
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
-        }
        
-        f.setSpecial_features("NA");
-        f.setLanguage_id(1);
-        f.setOriginal_language_id(1);
-        
-        
-        java.sql.Date d = (java.sql.Date) new Date(Calendar.getInstance().getTime().getTime());
-        f.setLast_update(d);
-        
-        
-        String filmId = request.getParameter("filmId");
-        if(filmId == null || filmId.isEmpty()){
-            dao.addFilm(f);
-        }else{
-            f.setFilm_id(Integer.parseInt(filmId));
-            dao.updateFilm(f);
-        }
-        
         RequestDispatcher view;
+       
         view = request.getRequestDispatcher("/adminMovie.jsp");
+        
         request.setAttribute("films", dao.getAllFilms());
+        
         view.forward(request, response);
     }
 }

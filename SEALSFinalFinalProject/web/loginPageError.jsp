@@ -10,14 +10,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
-        <link rel="stylesheet" type="text/css" href="CSS/CSS.css">
+        <link rel="stylesheet" type="text/css" href="CSS/loginCSS.css">
     </head>
     <body style = "text-align: center;">
         <div class="hdr">
             <h1>Crimson Video Store</h1>
            <h1>Incorrect Login, Please Try Again</h1>
         </div>
-        <div Style = "background-color: whitesmoke; margin:auto; width:45%; border-radius: 5px; text-align: center;">
+        <div>
             <form action="LoginController" method="POST" style = "margin: auto; width: 90%;">
                 <table border="0">
                     <tbody>
@@ -29,9 +29,7 @@
                             <td>Password:</td>
                             <td><input type="password" name="password" value="${custbean.password}" required min = "1"/></td>
                         </tr>
-                        <tr>
-                            <td><a href="custActionPage.jsp">cust login break</a></td>
-                            <td><a href="adminActionPage.jsp">admin login break</a></td>
+                        <tr>    
                             <input type="hidden" name="action" value="custLogin"/></td>
                             <td><input type="submit" value="Enter" name="custLogin" /></td>
                         </tr>
@@ -41,12 +39,7 @@
                         </tr>
                     </tbody>
                 </table>
-
             </form>
-             
         </div>
-        <h3>We are currently working on getting our member less viewing up and running.</h2>
-        <h3>But until then,</h3>
-        <h3>Please log in below to get started</h2>
     </body>
 </html>

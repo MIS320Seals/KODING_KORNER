@@ -122,6 +122,30 @@ public class AdminDAO {
 
         return admins;
     }
+    public List<CustInfo> getAllCustomerInfo() {
+        List<CustInfo> custs = new ArrayList<CustInfo>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM sakila.customer_list");
+            while (rs.next()) {
+                CustInfo admin = new CustInfo();
+                admin.setId((rs.getInt("ID"))+"");
+                admin.setName(rs.getString("name"));
+                admin.setAddress(rs.getString("address"));
+                admin.setZip(rs.getString("zip code"));
+                admin.setPhoneNumber(rs.getString("phone"));
+                admin.setCity(rs.getString("city"));
+                admin.setCountry(rs.getString("country"));
+                admin.setNotes(rs.getString("notes"));
+                admin.setStoreId(rs.getInt("SID")+"");
+                custs.add(admin);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return custs;
+    }
 //    display product if productid is certain number
     public Admin getAdminById(int staff_id) {
         Admin admin = new Admin();
@@ -151,7 +175,35 @@ public class AdminDAO {
 
         return admin;
     }
-    
+    public CustInfo getCustInfoById(String id) {
+        //Admin admin = new Admin();
+        CustInfo admin = new CustInfo();
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("select * from sakila.customer_list where id=?");
+            preparedStatement.setString(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            if (rs.next()) {
+            
+                admin.setId((rs.getInt("ID"))+"");
+                admin.setName(rs.getString("name"));
+                admin.setAddress(rs.getString("address"));
+                admin.setZip(rs.getString("zip code"));
+                admin.setPhoneNumber(rs.getString("phone"));
+                admin.setCity(rs.getString("city"));
+                admin.setCountry(rs.getString("country"));
+                admin.setNotes(rs.getString("notes"));
+                admin.setStoreId(rs.getInt("SID")+"");
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+
+        return admin;
+    } 
     
     
     
