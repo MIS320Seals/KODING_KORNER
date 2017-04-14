@@ -170,7 +170,6 @@ table{
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid black;
 }
 th{
     background-color: #cc0000;
@@ -190,13 +189,4 @@ tr{
 tr:nth-child(odd) {
     background-color: #ffffff;
 
-}
-
-.loginTable{
- background-color: whitesmoke;
- border: 0;
- 
-}
-.loginTable tr:nth-child(odd){
-    background-color: whitesmoke;
 }
