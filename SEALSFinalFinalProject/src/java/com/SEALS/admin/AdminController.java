@@ -29,10 +29,8 @@ public class AdminController extends HttpServlet
     private static final long serialVersionUID = 1L;
     private static String REGISTER = "/adminRegisterPage.jsp";
     private static String RESPONSE = "/response.jsp";
-    private AdminDAO dao ;
+    private AdminDAO dao;
 
- 
-   
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -46,9 +44,13 @@ public class AdminController extends HttpServlet
             throws ServletException, IOException
     {
         String forward = "";
-         dao = new AdminDAO();
-        String action = request.getParameter("action");
+        dao = new AdminDAO();
 
+        String action = "";
+        if (request.getParameter("action") != null)
+        {
+            action = request.getParameter("action");
+        }
         //   String key = request.getParameter("passKey");
         if (action == null)
         {
@@ -56,49 +58,58 @@ public class AdminController extends HttpServlet
         }
 
         //based off which action is sent, either delete, update or list all products
-        if (action.equalsIgnoreCase("delete")){
+        if (action.equalsIgnoreCase("delete"))
+        {
             int adminId = Integer.parseInt(request.getParameter("staff_id"));
             dao.deleteAdmin(adminId);
             forward = RESPONSE;
-                    request.setAttribute("admins", dao.getAllAdmins());
+            request.setAttribute("admins", dao.getAllAdmins());
 
-        } else if (action.equalsIgnoreCase("edit")){
+        } else if (action.equalsIgnoreCase("edit"))
+        {
             //forward = ;
             int adminId = Integer.parseInt(request.getParameter("staff_id"));
             Admin admin = dao.getAdminById(adminId);
             request.setAttribute("adminBean", admin);
-        
-        } else if (action.equalsIgnoreCase("list")){
-        
+
+        } else if (action.equalsIgnoreCase("list"))
+        {
+
             forward = RESPONSE;
             request.setAttribute("adminBeans", dao.getAllAdmins());
-        
-        } else if(action.equals("custinfo")){
-        
+
+        } else if (action.equals("custinfo"))
+        {
+
             forward = "/adminCustView.jsp";
-            request.setAttribute("cust", dao.getCustInfoById(request.getParameter("filmId")+""));
-        
-        } else if(action.equals("custlist")){
-            
+            request.setAttribute("cust", dao.getCustInfoById(request.getParameter("filmId") + ""));
+
+        } else if (action.equals("custlist"))
+        {
+
             forward = "/adminCustomers.jsp";
             request.setAttribute("c", dao.getAllCustomerInfo());
-        
-        }else if(action.equals("addcust")){
+
+        } else if (action.equals("addcust"))
+        {
             forward = "/custRegisterPage.jsp";
-        }else if (action.equals("viewSales")){
+        } else if (action.equals("viewSales"))
+        {
             forward = "/adminSales.jsp";
             request.setAttribute("sale", dao.getSalesByGenre());
             request.setAttribute("revenue", dao.getSalesByStore());
-            
+
+        } else
+        {
+            forward = "/adminCustomers.jsp";
+            request.setAttribute("c", dao.getAllCustomerInfo());
         }
 
-         
         //fowards it to the specific page
         RequestDispatcher view = request.getRequestDispatcher(forward);
-        
+
         view.forward(request, response);
-        
-        
+
     }
 
     /**
@@ -123,8 +134,7 @@ public class AdminController extends HttpServlet
             String key = request.getParameter("staff_id");
             //heres where you would actually need to validate that key
             forward = REGISTER;
-        } 
-        else if (action.equals("adminRegister"))
+        } else if (action.equals("adminRegister"))
         {
             newAdmin.setFirst_name(request.getParameter("first_name"));
             newAdmin.setLast_name(request.getParameter("last_name"));
@@ -135,10 +145,12 @@ public class AdminController extends HttpServlet
             String active = request.getParameter("Active");
             newAdmin.setUsername(request.getParameter("username"));
             newAdmin.setPassword(request.getParameter("password"));
-            try{
+            try
+            {
                 Date last_update = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("last_update"));
                 newAdmin.setLast_update(new java.sql.Date(last_update.getTime()));
-            } catch (ParseException e){
+            } catch (ParseException e)
+            {
                 e.printStackTrace();
             }
 

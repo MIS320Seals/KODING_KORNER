@@ -10,14 +10,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" type="text/css" href="CSS/loginCSS.css">
     </head>
     <body>
         <div class = "hdr">
             <h1>Customer Details</h1>
         </div
         <div class = "frmRegDiv">
-        <form class = "frmReg" action="custRegister">
-            <table border="0">
+            <form class = "frmReg" action="AdminController" method="GET">
+            <table border="0" style = "margin: auto">
                 <tbody>
                    
                     <tr>
@@ -58,7 +59,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="submit" value="Enter" name="custRegister" /></td>
+                        <td><input type="submit" value="Enter" /></td>
                     </tr>
                 </tbody>
             </table>
