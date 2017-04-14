@@ -236,7 +236,7 @@ public class CustDAO {
                         Film film = new Film();
                         film.setTitle(rs.getString("title"));
                         film.setFilm_id(rs.getInt("film_id"));
-                        film.setRental_rate(rs.getInt("film_id"));
+                        film.setRental_rate(rs.getFloat("rental_rate"));
                         film.setDescription(rs.getString("description"));
                         film.setRating(rs.getString("rating"));
                         film.setRelease_year((rs.getDate("release_year")));
@@ -265,7 +265,7 @@ public class CustDAO {
                         film.setDescription(rs.getString("description"));
                         film.setRating(rs.getString("rating"));
 
-                        film.setRental_rate(rs.getInt("film_id"));
+                        film.setRental_rate(rs.getFloat("rental_rate"));
 
                         film.setRelease_year((rs.getDate("release_year")));
                         films.add(film);
@@ -293,7 +293,7 @@ public class CustDAO {
                     Film film = new Film();
                     film.setTitle(rs.getString("title"));
                     film.setFilm_id(rs.getInt("film_id"));
-                    film.setRental_rate(rs.getInt("film_id"));
+                    film.setRental_rate(rs.getFloat("film_id"));
 
                     film.setDescription(rs.getString("description"));
                     film.setRating(rs.getString("rating"));

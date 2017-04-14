@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.derby.client.am.Decimal;
 
 /**
  *
@@ -37,6 +38,48 @@ public class cartDAO
         throw new UnsupportedOperationException("Not supported yet.");
         //To change body of generated methods, choose Tools | Templates.
         
+    }
+
+    void addCart(String title, int film_id, float price) {
+         //To change body of generated methods, choose Tools | Templates.
+    
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("insert into cart(customer_id, film_id, title, price) values (?,?,?,?)");
+
+            preparedStatement.setInt(1, Cust.customerID);
+            preparedStatement.setInt(2, film_id);
+            preparedStatement.setString(3, title);
+            preparedStatement.setFloat(4, price);
+            preparedStatement.executeUpdate();
+
+            
+          
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+         
+    }
+
+    void addWish(String title, int film_id, float price) {
+        
+    
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("insert into wishlist(customer_id, film_id, title, price) values (?,?,?,?)");
+
+            preparedStatement.setInt(1, Cust.customerID);
+            preparedStatement.setInt(2, film_id);
+            preparedStatement.setString(3, title);
+            preparedStatement.setFloat(4, price);
+            preparedStatement.executeUpdate();
+
+            
+          
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+     
     }
      
      

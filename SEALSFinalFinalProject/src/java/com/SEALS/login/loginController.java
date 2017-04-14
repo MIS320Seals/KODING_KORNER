@@ -132,6 +132,7 @@ public class LoginController extends HttpServlet
                 customer = dao.getCustomerWID(x);
                 request.setAttribute("custBean", customer);
                 forward = CUST_HOME;
+                Cust.customerID = customer.getCustomer_id();
             }
             else{
                 forward = CUST_RELOGIN;//check customer

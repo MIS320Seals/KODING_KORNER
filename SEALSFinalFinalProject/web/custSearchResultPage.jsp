@@ -53,7 +53,9 @@
                             <td><c:out value="${film.release_year}" /></td>
                             <td><c:out value="${film.rating}" /></td>
 
-                            <td><a href="FilmController?action=edit&filmId=<c:out value="${film.film_id}"/>">Add To Cart</a></td>
+                            <td><a href="cartController?action=addCart&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>">Add To Cart</a></td>
+                            <td><a href="cartController?action=addWishList&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>">Add To Wish List</a></td>
+
                         </tr>
                     </c:forEach>
                 </tbody>

@@ -6,6 +6,7 @@
 package com.SEALS.cart;
 
 import com.SEALS.storedproc.*;
+import java.sql.*;
 import com.SEALS.login.*;
 import com.SEALS.admin.Admin;
 import com.SEALS.customer.Cust;
@@ -18,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.derby.client.am.Decimal;
 
 /**
  *
@@ -78,6 +80,32 @@ public class cartController extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+      String forward = "";
+      
+      cartDAO cart = new cartDAO();
+        
+        String action = request.getParameter("action");
+        
+        if(action.equals("addCart")){
+            String title = request.getParameter("title");
+            String x = request.getParameter("film_id");
+            int film_id = Integer.parseInt(request.getParameter("film_id"));
+            float price = Float.parseFloat(request.getParameter("price"));
+            cart.addCart(title, film_id, price);
+            forward = CUST_HOME;
+        }
+        else if(action.equals("addWishList")){
+            String title = request.getParameter("title");
+            String x = request.getParameter("film_id");
+            int film_id = Integer.parseInt(request.getParameter("film_id"));
+            float price = Float.parseFloat(request.getParameter("price"));
+            cart.addWish(title, film_id, price);
+            forward = CUST_HOME;
+        }
+        
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+
+        view.forward(request, response);
         processRequest(request, response);
     }
 

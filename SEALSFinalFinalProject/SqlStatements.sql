@@ -29,24 +29,20 @@ update sakila.customer
 set password = 'hi'
 where customer_id = 1;
 
-
-
-GO  
-CREATE PROCEDURE sakila.getFilmsByCategory   
-   @Category_id TINYINT     
-AS    
-select f.title,f.description,f.rating,f.release_year
-from sakila.film as f 
-join sakila.film_actor as FA
-on f.film_id = fa.film_id
-join sakila.film_category as FC
-on fa.film_id = fc.film_id
-where FC.category_id = @Category_id
-go
-
-
 create Table cart(
+cart_id int NOT NULL AUTO_INCREMENT,
 customer_id SMALLINT,
 film_id SMALLINT,
 title VARCHAR(255),
-date_added TIMESTAMP Default CURRENT_TIMESTAMP)
+price DECIMAL(3,2),
+date_added TIMESTAMP Default CURRENT_TIMESTAMP,
+PRIMARY KEY (cart_id))
+
+create Table wishlist(
+cart_id int NOT NULL AUTO_INCREMENT,
+customer_id SMALLINT,
+film_id SMALLINT,
+title VARCHAR(255),
+price DECIMAL(3,2),
+date_added TIMESTAMP Default CURRENT_TIMESTAMP,
+PRIMARY KEY (cart_id))
