@@ -229,7 +229,7 @@ public class AdminDAO {
         
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM sakila.sales_by_film_category");
+            ResultSet rs = statement.executeQuery("SELECT * FROM sakila.sales_by_store");
             while (rs.next()) {
                 Sales sale = new Sales();
                 sale.setGenre(rs.getString("store"));

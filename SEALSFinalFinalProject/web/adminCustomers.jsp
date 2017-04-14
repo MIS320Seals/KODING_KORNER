@@ -23,9 +23,9 @@
             <li><a href = "AdminController?action=viewSales">Sales</a></li>
             <li><a href="loginPage.jsp">Log-out</a></li>
         </ul>
-        <br>
+       
         <div>
-            <br>
+            
             <table>
                 <thead>
                     <tr>

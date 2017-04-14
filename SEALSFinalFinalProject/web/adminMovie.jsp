@@ -24,7 +24,7 @@
             <li><a href="loginPage.jsp">Log-out</a></li>
         </ul>
         <div>
-            <br>
+           
             <table>
                 <thead>
                     <tr>

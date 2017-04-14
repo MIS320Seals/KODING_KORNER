@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-          <link rel="stylesheet" type="text/css" href="CSS/CSS.css">
+        <link rel="stylesheet" type="text/css" href="CSS/CSS.css">
     </head>
     <body>
         <ul>
@@ -23,44 +23,47 @@
             <li class = "active"><a href = "AdminController?action=viewSales">Sales</a></li>
             <li><a href="loginPage.jsp">Log-out</a></li>
         </ul>
-        <br>
-        <h1>Sales and Revenue</h1>
-        <h2>Sales by Genre</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Genre</th>
-                    <th>Sales</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${sale}" var="s">
-                        <tr>
-                            <td><c:out value="${s.genre}" /></td>
-                            <td><c:out value="${s.revenue}" /></td>
-                        </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-        <br>
-        
-        <h2>Revenue by Store</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Store</th>
-                    <th>Revenue</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${revenue}" var="s">
-                        <tr>
-                            <td><c:out value="${s.genre}" /></td>
-                            <td><c:out value="${s.revenue}" /></td>
-                        </tr>
-                </c:forEach>
-            </tbody>
-        </table>
 
+        <h1 style="text-align: center">Sales and Revenue</h1>
+        <div>
+            <h2 style="margin-left: 5%;">Sales by Genre</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Genre</th>
+                        <th>Sales</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${sale}" var="s">
+                        <tr>
+                            <td><c:out value="${s.genre}" /></td>
+                            <td><c:out value="${s.revenue}" /></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+        <br>
+
+        <div>
+            <h2 style="margin-left: 5%;">Revenue by Store</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Store</th>
+                        <th>Revenue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${revenue}" var="s">
+                        <tr>
+                            <td><c:out value="${s.genre}" /></td>
+                            <td><c:out value="${s.revenue}" /></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>
