@@ -73,8 +73,8 @@ public class AdminController extends HttpServlet
             throws ServletException, IOException
     {
         String forward = "";
-
-        // String action = request.getParameter("action");
+        AdminDAO dao = new AdminDAO();
+        //String action = request.getParameter("action");
         // String passKey = request.getParameter("passKey");
         // String forward="";
         String action = request.getParameter("action");
@@ -85,28 +85,32 @@ public class AdminController extends HttpServlet
             forward = REGISTER;
         }
 
-        RequestDispatcher view = request.getRequestDispatcher(forward);
+        //RequestDispatcher view = request.getRequestDispatcher(forward);
 
-        view.forward(request, response);
-        processRequest(request, response);
-        /*
+        //view.forward(request, response);
+        //processRequest(request, response);
+        
         //based off which action is sent, either delete, update or list all products
         if (action.equalsIgnoreCase("delete")){
             int adminId = Integer.parseInt(request.getParameter("staff_id"));
             dao.deleteAdmin(adminId);
             forward = RESPONSE;
-                    request.setAttribute("adminBeans", dao.getAllAdmin());
+                    request.setAttribute("admins", dao.getAllAdmins());
 
         } else if (action.equalsIgnoreCase("edit")){
-            forward = REQUEST;
+            //forward = ;
             int adminId = Integer.parseInt(request.getParameter("staff_id"));
             Admin admin = dao.getAdminById(adminId);
             request.setAttribute("adminBean", admin);
         } else if (action.equalsIgnoreCase("list")){
             forward = RESPONSE;
-            request.setAttribute("adminBeans", dao.getAllAdmin());
-        } else {
-            forward = REQUEST;
+            request.setAttribute("adminBeans", dao.getAllAdmins());
+        }else if(action.equals("custinfo")){
+            forward = "/adminCustView.jsp";
+            request.setAttribute("cust", dao.getCustInfoById(request.getParameter("id")+""));
+        } else if(action.equals("custlist")){
+            forward = "/adminCustomers.jsp";
+            request.setAttribute("custs", dao.getAllCustomerInfo());
         }
 
          
@@ -114,8 +118,8 @@ public class AdminController extends HttpServlet
         RequestDispatcher view = request.getRequestDispatcher(forward);
         
         view.forward(request, response);
-         */
-        processRequest(request, response);
+        
+        
     }
 
     /**
@@ -164,19 +168,5 @@ public class AdminController extends HttpServlet
         RequestDispatcher view = request.getRequestDispatcher(forward);
 
         view.forward(request, response);
-        processRequest(request, response);
-
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo()
-    {
-        return "Short description";
-    }// </editor-fold>
-
 }
