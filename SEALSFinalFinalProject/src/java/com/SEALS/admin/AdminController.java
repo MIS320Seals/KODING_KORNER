@@ -29,7 +29,7 @@ public class AdminController extends HttpServlet
     private static final long serialVersionUID = 1L;
     private static String REGISTER = "/adminRegisterPage.jsp";
     private static String RESPONSE = "/response.jsp";
-    //  private AdminDAO dao = new AdminDAO();
+    private AdminDAO dao ;
 
  
    
@@ -46,10 +46,7 @@ public class AdminController extends HttpServlet
             throws ServletException, IOException
     {
         String forward = "";
-        AdminDAO dao = new AdminDAO();
-        //String action = request.getParameter("action");
-        // String passKey = request.getParameter("passKey");
-        // String forward="";
+         dao = new AdminDAO();
         String action = request.getParameter("action");
 
         //   String key = request.getParameter("passKey");
@@ -58,11 +55,6 @@ public class AdminController extends HttpServlet
             forward = REGISTER;
         }
 
-        //RequestDispatcher view = request.getRequestDispatcher(forward);
-
-        //view.forward(request, response);
-        //processRequest(request, response);
-        
         //based off which action is sent, either delete, update or list all products
         if (action.equalsIgnoreCase("delete")){
             int adminId = Integer.parseInt(request.getParameter("staff_id"));
@@ -84,15 +76,17 @@ public class AdminController extends HttpServlet
         } else if(action.equals("custinfo")){
         
             forward = "/adminCustView.jsp";
-            request.setAttribute("cust", dao.getCustInfoById(request.getParameter("id")+""));
+            request.setAttribute("cust", dao.getCustInfoById(request.getParameter("filmId")+""));
         
         } else if(action.equals("custlist")){
             
             forward = "/adminCustomers.jsp";
-            request.setAttribute("custs", dao.getAllCustomerInfo());
+            request.setAttribute("c", dao.getAllCustomerInfo());
         
         }else if(action.equals("addcust")){
             forward = "/custRegisterPage.jsp";
+        }else{
+            
         }
 
          

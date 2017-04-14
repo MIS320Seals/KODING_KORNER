@@ -4,6 +4,8 @@
     Author     : Austin
 --%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -39,23 +41,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach  items="${custs}" var="a">
+                <c:forEach  items="${c}" var="a">
                     <tr>
                         <td><c:out value="${a.id}" /></td>
-                    <td><c:out value="${a.name}" /></td>
-                    <td><c:out value="${a.address}" /></td>
-                    <td><c:out value="${a.zip}" /></td>
-                    <td><c:out value="${a.phoneNumber}" /></td>
-                    <td><c:out value="${a.city}" /></td>
-                    <td><c:out value="${a.country}" /></td>
-                    <td><c:out value="${a.notes}" /></td>
-                    <td><c:out value="${a.storeId}" /></td>
-                    <td><a href="AdminController?action=custinfo&id=${a.id}">View</a></td>
+                        <td><c:out value="${a.name}" /></td>
+                        <td><c:out value="${a.address}" /></td>
+                        <td><c:out value="${a.zip}" /></td>
+                        <td><c:out value="${a.phoneNumber}" /></td>
+                        <td><c:out value="${a.city}" /></td>
+                        <td><c:out value="${a.country}" /></td>
+                        <td><c:out value="${a.notes}" /></td>
+                        <td><c:out value="${a.storeId}" /></td>
+                        <td><a href="AdminController?action=custinfo&filmId=${a.id}">View</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
-            <p><a href="AdminController?action=addCust">Add Customer</a></p>
+            <p><a href="/custRegisterPage.jsp">Add Customer</a></p>
         </div>
     </body>
 </html>

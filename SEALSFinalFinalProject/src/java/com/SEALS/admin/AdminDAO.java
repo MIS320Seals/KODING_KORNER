@@ -180,8 +180,8 @@ public class AdminDAO {
         CustInfo admin = new CustInfo();
         try {
             PreparedStatement preparedStatement = connection.
-                    prepareStatement("select * from sakila.customer_list where id=?");
-            preparedStatement.setString(1, id);
+                    prepareStatement("select * from sakila.customer_list where id = " + id);
+            
             ResultSet rs = preparedStatement.executeQuery();
             
             if (rs.next()) {

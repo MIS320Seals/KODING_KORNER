@@ -60,7 +60,7 @@ public class FilmController extends HttpServlet
         if (action.equals("list"))
         {
             forward = "/adminMovie.jsp";
-            List<Film> films = dao.getAllFilms();
+            //List<Film> films = dao.getAllFilms();
             request.setAttribute("films", dao.getAllFilms());
         } 
         
