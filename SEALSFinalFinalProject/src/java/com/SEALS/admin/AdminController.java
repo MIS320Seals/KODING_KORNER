@@ -91,6 +91,8 @@ public class AdminController extends HttpServlet
             forward = "/adminCustomers.jsp";
             request.setAttribute("custs", dao.getAllCustomerInfo());
         
+        }else if(action.equals("addcust")){
+            forward = "/custRegisterPage.jsp";
         }
 
          

@@ -9,29 +9,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Employees</title>
+        <title>Customers</title>
         <link rel="stylesheet" type="text/css" href="CSS/CSS.css">
     </head>
     <body>
         <ul>
             <li><a href="adminActionPage.jsp">Home</a></li>
-            <li class = "active"><a href="AdminController?action=custlist">Employees</a></li>
+            <li><a href="adminEmployees.jsp">Employees</a></li>
             <li><a href="FilmController?action=list">Films</a></li>
+            <li class="active"><a href="AdminController?action=custlist">Customers</a></li>
             <li><a href="loginPage.jsp">Log-out</a></li>
         </ul>
         <br>
-        <!--
-            private String id;
-            private String name;
-            private String address;
-            private String zip;
-            private String phoneNumber;
-            private String city;
-            private String country;
-            private String notes;
-            private String storeId;
-        -->
-
         <div>
             <br>
             <table>
@@ -50,7 +39,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach  items="${admins}" var="a">
+                <c:forEach  items="${custs}" var="a">
                     <tr>
                         <td><c:out value="${a.id}" /></td>
                     <td><c:out value="${a.name}" /></td>
@@ -66,7 +55,7 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <p><a href="AdminController?action=addCust">Add Film</a></p>
+            <p><a href="AdminController?action=addCust">Add Customer</a></p>
         </div>
     </body>
 </html>
