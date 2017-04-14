@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /*
@@ -48,6 +49,29 @@ public class CustDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    //adds a new address entry
+    public void addCustAddress(Address custAdd) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("insert into sakila.address"
+                + "(address_id,address,address2,district,city_id,postal_code,phone,location,last_update)"
+                + "values (?, ?, ?, ?, ?, ?, ?, ?, ?");
+            
+            ps.setInt(1, custAdd.getAddress_id());
+            ps.setString(2, custAdd.getAddress());
+            ps.setString(3, custAdd.getAddress2());
+            ps.setString(3, custAdd.getDistrict());
+            ps.setInt(5, custAdd.getCity_id());
+            ps.setString(6, custAdd.getPostal_code());
+            ps.setString(7, custAdd.getPhone());
+            //I would like to drop this column from the table??
+            ps.setInt(8, custAdd.getLocation());
+            ps.setDate(9, new java.sql.Date(custAdd.getLast_update().getTime()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
     }
 
 //    delete product / remove from database 
