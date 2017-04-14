@@ -25,7 +25,7 @@
         </ul>
        
         <div>
-            
+            <p><a href="custRegisterPage.jsp" style="text-decoration: none; margin-left: 5%;">Add Customer</a></p>
             <table>
                 <thead>
                     <tr>
@@ -58,7 +58,7 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <p><a href="/custRegisterPage.jsp">Add Customer</a></p>
+            
         </div>
     </body>
 </html>

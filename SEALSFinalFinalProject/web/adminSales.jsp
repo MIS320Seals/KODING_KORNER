@@ -23,8 +23,6 @@
             <li class = "active"><a href = "AdminController?action=viewSales">Sales</a></li>
             <li><a href="loginPage.jsp">Log-out</a></li>
         </ul>
-
-        <h1 style="text-align: center">Sales and Revenue</h1>
         <div>
             <h2 style="margin-left: 5%;">Sales by Genre</h2>
             <table>
