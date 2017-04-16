@@ -9,6 +9,9 @@ import com.SEALS.film.Film;
 import com.SEALS.film.FilmDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,7 +29,6 @@ public class CustController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String ADD_TO_CART = "/myMovies.jsp";
     private static String CUST_HOME =  "/custActionPage.jsp";
-    
     private static String CUST_SEARCH_RESULT =  "/custSearchResultPage.jsp";
 
     /**
@@ -81,21 +83,11 @@ public class CustController extends HttpServlet {
             List<Category> categories = dao.getAllCategories();
             request.setAttribute("categories", dao.getAllCategories());
         }
-//        if (action.equalsIgnoreCase("searchResults"))
-//        {
-//            forward = "custSearchResultPage.jsp";
-//            
-//        }
-        //fowards it to the specific page
-        
         else if(action.equals("TestAddToCart")){
             forward = ADD_TO_CART;
             int customer_id = Integer.parseInt(request.getParameter("customer_id"));
             cust.setCustomer_id(customer_id);
-            request.setAttribute("custBean", cust);
-            
-            
-            
+            request.setAttribute("custBean", cust);  
         }
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
@@ -119,7 +111,6 @@ public class CustController extends HttpServlet {
         FilmDAO filmdao = new FilmDAO();
         String action = request.getParameter("action");
         //if the user has decided on a search function and has clicked search
-        //STILL NOT WORKING!
         if (action.equalsIgnoreCase("searchResults"))
         {
             //initializes values to empty
@@ -137,30 +128,78 @@ public class CustController extends HttpServlet {
                 act_name = request.getParameter("actorsFullName");
             }
         }
+        //if the user searched by multiple results 
         else if(action.equals("searchMultiples")){
             String actor = request.getParameter("actorsFullName");
-            int actor_id;
-            int category_id;
-           // int actor_id = Integer.parseInt(
             String category = request.getParameter("categories");
-            
-            //if they searched by actor
             List<Film> films = custdao.getAllSearchedFilms(category, actor, 1);
-           
-            //if they searched by actor and category
             request.setAttribute("films", films);
             forward = CUST_SEARCH_RESULT;
+        }
+        //registers the customer in both the customer table AND address table
+        else if (action.equalsIgnoreCase("custRegister"))
+        {
+            forward = CUST_HOME;
+            
+            //sets initial needed values
+            Cust cust = new Cust();
+            Address custAddress = new Address();
+            boolean active = true;
+            
+            //sets the rest of the needed information
+            int store_id = Integer.parseInt(request.getParameter("store_id"));
+            String first_name = request.getParameter("first_name");
+            String last_name = request.getParameter("last_name");
+            String email = request.getParameter("email");
+            //int address_id = ;
+            String address = request.getParameter("address"); //for the address table
+            String address2 = request.getParameter("address2"); //for address table
+            String district = request.getParameter("district"); //for address table
+            String postal_code = request.getParameter("postal_code"); //for address table
+            Date create_date = null;
+            try { create_date = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("create_date"));
+            } catch (ParseException e){
+                e.printStackTrace();
+            }
+            //Date create_date = SimpleDateFormat.parse(request.getParameter("create_date")); //will be the same date as last_update because its a NEW account
+            String phone = request.getParameter("phone");
+            //need help with this
+//            if(custCheckBox.isChecked()){
+//            } else {
+//                active = false;
+//            }
+            String username = request.getParameter("username");
+            String password = request.getParameter("password"); 
+            
+            //adds in the customer
+            cust.setStore_id(store_id);
+            cust.setFirst_name(first_name);
+            cust.setLast_name(last_name);
+            cust.setEmail(email);
+            cust.setActive(active);
+            cust.setCreate_date(new java.sql.Date(create_date.getTime()));
+            cust.setLast_update(new java.sql.Date(create_date.getTime()));
+            cust.setUsername(username);
+            cust.setPassword(password);
+            custdao.addCust(cust);
+            
+            //adds in the address
+            //skipped address_id
+            custAddress.setAddress(address);
+            custAddress.setAddress2(address2);
+            custAddress.setDistrict(district);
+            custAddress.setCity_id(100);    //we dont know how this is determined so just made it up
+            custAddress.setPostal_code(postal_code);
+            custAddress.setPhone(phone);
+            //skipped location
+            custAddress.setLast_update(create_date);
+            custdao.addCustAddress(custAddress);
+            
             
         }
-                
-       
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
         processRequest(request, response);
-        //processRequest(request, response);
-        
-
-       
     }
 
     /**

@@ -44,7 +44,6 @@ public class Cust {
         this.password = password;
     }
     
-    
     /**
      * @return the customer_id
      */

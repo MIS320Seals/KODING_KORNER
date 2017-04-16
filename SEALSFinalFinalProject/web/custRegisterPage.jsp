@@ -20,7 +20,7 @@
             <h3>Please fill out the following information to join the Crimson Video family</h3>
         </div
         <div class = "frmRegDiv">
-        <form class = "frmReg" action="custRegister">
+            <form action="custController" method="POST">
             <table border="0">
                 <tbody>
                     <!--not something the user should have to enter themselves-->
@@ -53,11 +53,15 @@
                         <td><input type="text" name="email" value="" /></td>
                     </tr>
                     <tr>
+                        <td>Primary Phone #:</td>
+                        <td><input type="text" name="phone" value="" /></td>
+                    </tr>
+                    <tr>
                         <td>Store ID number:</td>
                         <!--i want this to be a drop down box with the potential store ids, the customer shouldn't really know this-->
                         <td><select name="store_id">
-                                <option>1</option>
-                                <option>2</option>
+                                <option>1, your current site</option>
+                                <option>2, still in beta mode</option>
                             </select></td>
                     </tr>
                     <tr>
@@ -83,7 +87,7 @@
                     </tr>
                     <tr>
                         <td>Check box if active:</td>
-                        <td><input type="checkbox" name="active" value="ON" /></td>
+                        <td><input type="checkbox" name="custCheckBox" value="ON" /></td>
                     </tr>
                     <tr>
                         <!--I would like to get the calendar implementation on this as well-->
