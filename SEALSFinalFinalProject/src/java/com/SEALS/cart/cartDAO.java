@@ -40,17 +40,18 @@ public class cartDAO
         
     }
 
-    void addCart(String title, int film_id, float price) {
+    void addCart(String title, int film_id, float price, int rental_duration) {
          //To change body of generated methods, choose Tools | Templates.
     
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("insert into cart(customer_id, film_id, title, price) values (?,?,?,?)");
+                    .prepareStatement("insert into cart(customer_id, film_id, title, price, rental_duration) values (?,?,?,?,?)");
 
             preparedStatement.setInt(1, Cust.customerID);
             preparedStatement.setInt(2, film_id);
             preparedStatement.setString(3, title);
             preparedStatement.setFloat(4, price);
+            preparedStatement.setInt(5, rental_duration);
             preparedStatement.executeUpdate();
 
             
@@ -61,17 +62,18 @@ public class cartDAO
          
     }
 
-    void addWish(String title, int film_id, float price) {
+    void addWish(String title, int film_id, float price, int rental_duration) {
         
     
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("insert into wishlist(customer_id, film_id, title, price) values (?,?,?,?)");
+                    .prepareStatement("insert into wishlist(customer_id, film_id, title, price, rental_duration) values (?,?,?,?,?)");
 
             preparedStatement.setInt(1, Cust.customerID);
             preparedStatement.setInt(2, film_id);
             preparedStatement.setString(3, title);
             preparedStatement.setFloat(4, price);
+            preparedStatement.setInt(5, rental_duration);
             preparedStatement.executeUpdate();
 
             

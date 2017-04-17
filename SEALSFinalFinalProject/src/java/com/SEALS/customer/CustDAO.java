@@ -52,14 +52,20 @@ public class CustDAO {
             e.printStackTrace();
         }
     }
-    
+
     //adds a new address entry
     public void addCustAddress(Address custAdd) {
         try {
             PreparedStatement ps = connection.prepareStatement("insert into sakila.address"
+<<<<<<< HEAD
                 + "(address_id, address,address2,district,city_id,postal_code,phone,last_update)"
                 + "values (null, ?, ?, ?, ?, ?, ?, ?");
             
+=======
+                    + "(address_id,address,address2,district,city_id,postal_code,phone,location,last_update)"
+                    + "values (?, ?, ?, ?, ?, ?, ?, ?, ?");
+
+>>>>>>> origin/master
             ps.setInt(1, custAdd.getAddress_id());
             ps.setString(2, custAdd.getAddress());
             ps.setString(3, custAdd.getAddress2());
@@ -74,6 +80,7 @@ public class CustDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+<<<<<<< HEAD
     }
     
     //returns back the address id of the last address saved into the database
@@ -88,6 +95,9 @@ public class CustDAO {
             e.printStackTrace();
         }
         return address_id; 
+=======
+
+>>>>>>> origin/master
     }
 
 //    delete product / remove from database 
