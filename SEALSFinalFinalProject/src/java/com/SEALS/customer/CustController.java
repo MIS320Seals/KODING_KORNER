@@ -137,7 +137,7 @@ public class CustController extends HttpServlet {
             forward = CUST_SEARCH_RESULT;
         }
         //registers the customer in both the customer table AND address table
-        else if (action.equalsIgnoreCase("custRegister"))
+        else //if (action.equalsIgnoreCase("custRegister"))
         {
             forward = CUST_HOME;
             
@@ -194,8 +194,6 @@ public class CustController extends HttpServlet {
             //skipped location
             custAddress.setLast_update(create_date);
             custdao.addCustAddress(custAddress);
-            
-            
         }
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);

@@ -24,7 +24,7 @@
                         <a href="#">Wishlist</a>
                     </div></li></li>
                 <li><a href="about.jsp">About</a></li>
-                <li><a href="custSearch.jsp">Search</a></li>
+                <li><a href="CustController?action=search">Search</a></li>
                 <li class = "active" ><a href="custCheckOutPage.jsp">Check Out</a></li>
                 <li><a href="loginPage.jsp">Log-out</a></li>
             </ul>
