@@ -72,6 +72,7 @@ public class CustDAO {
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            
         }
     }
     
