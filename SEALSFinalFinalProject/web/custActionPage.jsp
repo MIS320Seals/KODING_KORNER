@@ -23,12 +23,12 @@
                         <div class="dropdown-content">
                         <a href="#">Checked Out</a>
                         <a href="#">History</a>
-                        <a href="#">Cart</a>
+                        <a href="cartController?action=displayCart">Cart</a>
                         <a href="CustController?action=TestAddToCart&customer_id=<c:out value="${custBean.customer_id}"/>">Test Checking Out</a>
                     </div></li></li>
                 <li><a href="about.jsp">About</a></li>
                 <li><a href="CustController?action=search">Search</a></li>
-                <li><a href="custCheckOutPage.jsp">Check Out</a></li>
+                <li><a href="cartController?action=checkOutCart">Check Out</a></li>
                 <li><a href="loginPage.jsp">Log-out</a></li>
             </ul>
         </div>

@@ -13,6 +13,7 @@ import com.SEALS.customer.Cust;
 import com.SEALS.film.Film;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,6 +36,7 @@ public class cartController extends HttpServlet {
     private static String ADMIN_HOME = "/adminActionPage.jsp";
     private static String CUST_HOME = "/custActionPage.jsp";
 
+    private static String CUST_CHECK_OUT = "/custCheckOutPage.jsp";
     private loginDAO dao = new loginDAO();
 
     /**
@@ -100,7 +102,20 @@ public class cartController extends HttpServlet {
             cart.addWish(title, film_id, price, rental_duration);
             forward = CUST_HOME;
         }
-
+  
+        else if(action.equals("checkOutCart")){
+            List<Cart> carts = cart.ListCart(Cust.customerID);
+            forward = CUST_CHECK_OUT;
+            request.setAttribute("carts", carts);
+        }
+        else if(action.equals("removeCartItem")){
+       
+            int cartID = Integer.parseInt(request.getParameter("cart_id"));
+            cart.removeCart(cartID);
+            List<Cart> carts = cart.ListCart(Cust.customerID);
+            forward = CUST_CHECK_OUT;
+            request.setAttribute("carts", carts);
+        }
         RequestDispatcher view = request.getRequestDispatcher(forward);
 
         view.forward(request, response);

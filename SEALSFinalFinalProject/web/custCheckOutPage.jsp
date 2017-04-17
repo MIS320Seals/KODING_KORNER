@@ -3,7 +3,8 @@
     Created on : Mar 31, 2017, 3:33:09 PM
     Author     : ering
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,5 +30,32 @@
                 <li><a href="loginPage.jsp">Log-out</a></li>
             </ul>
         </div>
+         <table>
+                <thead>
+                    <tr>
+                        <th>Film ID</th>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Date Added</th>
+                        <th>Rental Duration</th>
+                        <th colspan=2>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach end="300" step="7" items="${carts}" var="cart">
+                        <tr>
+                            <td><c:out value="${cart.filmID}" /></td>
+                            <td><c:out value="${cart.title}" /></td>
+                            <td><c:out value="${cart.price}" /></td>
+                            <td><c:out value="${film.dateAdded}" /></td>
+                            <td><c:out value="${film.rentalDuration}" /></td>
+
+                            <td><a href="cartController?action=removeCartItem&cart_id=<c:out value="${cart.cartID}"/>">Remove</a></td>
+                            <td><a href="cartController?action=addWishList&film_id=<c:out value="${cart.filmID}"/>&title=<c:out value="${cart.title}"/>&price=<c:out value="${cart.price}"/>&rental_duration=<c:out value="${cart.rentalDuration}"/>">Add To Wish List</a></td>
+
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
     </body>
 </html>
