@@ -45,7 +45,7 @@ public class cartDAO
     
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("insert into cart(customer_id, film_id, title, price, rental_duration) values (?,?,?,?)");
+                    .prepareStatement("insert into cart(customer_id, film_id, title, price, rental_duration) values (?,?,?,?,?)");
 
             preparedStatement.setInt(1, Cust.customerID);
             preparedStatement.setInt(2, film_id);
