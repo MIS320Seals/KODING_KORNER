@@ -33,9 +33,10 @@ public class CustDAO {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("insert into sakila.customer"
-                            + "(store_id,first_name,last_name,email,address_id,active,create_date,"
-                            + "last_update,username,password) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                            + "(customer_id,store_id,first_name,last_name,email,address_id,active,create_date,"
+                            + "last_update,username,password) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
+            preparedStatement.setInt(1, cust.getCustomer_id());
             preparedStatement.setInt(1, cust.getStore_id());
             preparedStatement.setString(2, cust.getFirst_name());
             preparedStatement.setString(3, cust.getLast_name());
@@ -57,18 +58,18 @@ public class CustDAO {
     public void addCustAddress(Address custAdd) {
         try {
             PreparedStatement ps = connection.prepareStatement("insert into sakila.address"
-                + "(address,address2,district,city_id,postal_code,phone,last_update)"
-                + "values (?, ?, ?, ?, ?, ?, ?");
-            //ps.setInt(1, custAdd.getAddress_id());
-            ps.setString(1, custAdd.getAddress());
-            ps.setString(2, custAdd.getAddress2());
-            ps.setString(3, custAdd.getDistrict());
-            ps.setInt(4, custAdd.getCity_id());
-            ps.setString(5, custAdd.getPostal_code());
-            ps.setString(6, custAdd.getPhone());
+                + "(address_id,address,address2,district,city_id,postal_code,phone,last_update)"
+                + "values (?, ?, ?, ?, ?, ?, ?, ?");
+            ps.setInt(1, custAdd.getAddress_id());
+            ps.setString(2, custAdd.getAddress());
+            ps.setString(3, custAdd.getAddress2());
+            ps.setString(4, custAdd.getDistrict());
+            ps.setInt(5, custAdd.getCity_id());
+            ps.setString(6, custAdd.getPostal_code());
+            ps.setString(7, custAdd.getPhone());
             //I would like to drop this column from the table??
             //ps.setInt(7, custAdd.getLocation());
-            ps.setDate(7, new java.sql.Date(custAdd.getLast_update().getTime()));
+            ps.setDate(8, new java.sql.Date(custAdd.getLast_update().getTime()));
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -76,19 +77,42 @@ public class CustDAO {
     }
     
     //returns back the address id of the last address saved into the database
-    public int lastCustAddressID(Address custAdd)
+    public int lastCustAddressID()
     {
         int address_id = 0;
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT address_id FROM sakila.address "
+            //THIS LINE RIGHT HERE SIDNEY
+            ResultSet rs = statement.executeQuery("SELECT address_id FROM sakila.address"
                     + "ORDER BY address_id DESC LIMIT 1");
+            while(rs.next())
+            {
+                address_id = rs.getInt("address_id"); 
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return address_id; 
     }
 
+    //returns the last customer id that was saved to the database
+    public int lastCustID()
+    {
+        int cust_id = 0;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT customer_id FROM sakila.customer"
+                    + "ORDER BY customer_id DESC LIMIT 1");
+            while(rs.next())
+            {
+                cust_id = rs.getInt("customer_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cust_id; 
+    }
+    
 //    delete product / remove from database 
     public void deleteCust(int customer_id) {
         try {
