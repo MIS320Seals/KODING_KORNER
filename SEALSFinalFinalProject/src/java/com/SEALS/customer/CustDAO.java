@@ -263,6 +263,7 @@ public class CustDAO {
                         film.setDescription(rs.getString("description"));
                         film.setRating(rs.getString("rating"));
                         film.setRelease_year((rs.getDate("release_year")));
+                        film.setRental_duration((rs.getInt("rental_duration")));
                         films.add(film);
                     }
 
@@ -291,6 +292,7 @@ public class CustDAO {
                         film.setRental_rate(rs.getFloat("rental_rate"));
 
                         film.setRelease_year((rs.getDate("release_year")));
+                         film.setRental_duration((rs.getInt("rental_duration")));
                         films.add(film);
                     }
 

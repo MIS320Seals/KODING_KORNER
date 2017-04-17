@@ -91,6 +91,7 @@ public class cartController extends HttpServlet
             String x = request.getParameter("film_id");
             int film_id = Integer.parseInt(request.getParameter("film_id"));
             float price = Float.parseFloat(request.getParameter("price"));
+            
             cart.addCart(title, film_id, price);
             forward = CUST_HOME;
         }

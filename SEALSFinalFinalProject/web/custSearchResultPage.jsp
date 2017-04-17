@@ -40,6 +40,7 @@
                         <th>Price</th>
                         <th>Release Year</th>
                         <th>Rating</th>
+                        <th>Rental Duration</th>
                         <th colspan=2>Action</th>
                     </tr>
                 </thead>
@@ -52,8 +53,9 @@
                             <td><c:out value="${film.rental_rate}" /></td>
                             <td><c:out value="${film.release_year}" /></td>
                             <td><c:out value="${film.rating}" /></td>
+                            <td><c:out value="${film.rental_duration}" /></td>
 
-                            <td><a href="cartController?action=addCart&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>">Add To Cart</a></td>
+                            <td><a href="cartController?action=addCart&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>&rental_duration=<c:out value="${film.rental_duration}"/>">Add To Cart</a></td>
                             <td><a href="cartController?action=addWishList&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>">Add To Wish List</a></td>
 
                         </tr>
