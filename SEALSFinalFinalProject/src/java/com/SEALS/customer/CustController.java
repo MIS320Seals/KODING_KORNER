@@ -137,13 +137,14 @@ public class CustController extends HttpServlet {
             forward = CUST_SEARCH_RESULT;
         }
         //registers the customer in both the customer table AND address table
-        else //if (action.equalsIgnoreCase("custRegister"))
+        else if (action.equalsIgnoreCase("custRegister"))
         {
             forward = CUST_HOME;
             
             //sets initial needed values
             Cust cust = new Cust();
             Address custAddress = new Address();
+            //for now is just set to true no matter what
             boolean active = true;
             
             //sets the rest of the needed information
@@ -161,7 +162,6 @@ public class CustController extends HttpServlet {
             } catch (ParseException e){
                 e.printStackTrace();
             }
-            //Date create_date = SimpleDateFormat.parse(request.getParameter("create_date")); //will be the same date as last_update because its a NEW account
             String phone = request.getParameter("phone");
             //need help with this
 //            if(custCheckBox.isChecked()){
@@ -171,20 +171,8 @@ public class CustController extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password"); 
             
-            //adds in the customer
-            cust.setStore_id(store_id);
-            cust.setFirst_name(first_name);
-            cust.setLast_name(last_name);
-            cust.setEmail(email);
-            cust.setActive(active);
-            cust.setCreate_date(new java.sql.Date(create_date.getTime()));
-            cust.setLast_update(new java.sql.Date(create_date.getTime()));
-            cust.setUsername(username);
-            cust.setPassword(password);
-            custdao.addCust(cust);
-            
             //adds in the address
-            //skipped address_id
+            //custAddress.setAddress_id(null);
             custAddress.setAddress(address);
             custAddress.setAddress2(address2);
             custAddress.setDistrict(district);
@@ -194,6 +182,22 @@ public class CustController extends HttpServlet {
             //skipped location
             custAddress.setLast_update(create_date);
             custdao.addCustAddress(custAddress);
+            
+            //gets the address id of the address that was just saved into the database
+            int add_id = custdao.lastCustAddressID(custAddress);
+            
+            //adds in the customer
+            cust.setStore_id(store_id);
+            cust.setFirst_name(first_name);
+            cust.setLast_name(last_name);
+            cust.setEmail(email);
+            cust.setAddress_id(add_id);
+            cust.setActive(active);
+            cust.setCreate_date(new java.sql.Date(create_date.getTime()));
+            cust.setLast_update(new java.sql.Date(create_date.getTime()));
+            cust.setUsername(username);
+            cust.setPassword(password);
+            custdao.addCust(cust);
         }
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);

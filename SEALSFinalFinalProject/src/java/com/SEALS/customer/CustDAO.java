@@ -34,7 +34,7 @@ public class CustDAO {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("insert into sakila.customer"
                             + "(store_id,first_name,last_name,email,address_id,active,create_date,"
-                            + "last_update) values (?, ?, ?, ?, ?, ?, ?, ?)");
+                            + "last_update,username,password) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             preparedStatement.setInt(1, cust.getStore_id());
             preparedStatement.setString(2, cust.getFirst_name());
@@ -44,6 +44,8 @@ public class CustDAO {
             preparedStatement.setBoolean(6, cust.isActive());
             preparedStatement.setDate(7, new java.sql.Date(cust.getCreate_date().getTime()));
             preparedStatement.setDate(8, new java.sql.Date(cust.getLast_update().getTime()));
+            preparedStatement.setString(9, cust.getUsername());
+            preparedStatement.setString(10, cust.getPassword());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -55,23 +57,37 @@ public class CustDAO {
     public void addCustAddress(Address custAdd) {
         try {
             PreparedStatement ps = connection.prepareStatement("insert into sakila.address"
-                + "(address_id,address,address2,district,city_id,postal_code,phone,location,last_update)"
-                + "values (?, ?, ?, ?, ?, ?, ?, ?, ?");
+                + "(address_id, address,address2,district,city_id,postal_code,phone,last_update)"
+                + "values (null, ?, ?, ?, ?, ?, ?, ?");
             
             ps.setInt(1, custAdd.getAddress_id());
             ps.setString(2, custAdd.getAddress());
             ps.setString(3, custAdd.getAddress2());
-            ps.setString(3, custAdd.getDistrict());
+            ps.setString(4, custAdd.getDistrict());
             ps.setInt(5, custAdd.getCity_id());
             ps.setString(6, custAdd.getPostal_code());
             ps.setString(7, custAdd.getPhone());
             //I would like to drop this column from the table??
-            ps.setInt(8, custAdd.getLocation());
-            ps.setDate(9, new java.sql.Date(custAdd.getLast_update().getTime()));
+            //ps.setInt(7, custAdd.getLocation());
+            ps.setDate(8, new java.sql.Date(custAdd.getLast_update().getTime()));
+            ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+    }
+    
+    //returns back the address id of the last address saved into the database
+    public int lastCustAddressID(Address custAdd)
+    {
+        int address_id = 0;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT address_id FROM address "
+                    + "ORDER BY address_id DESC LIMIT 1");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return address_id; 
     }
 
 //    delete product / remove from database 
@@ -133,7 +149,6 @@ public class CustDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return customers;
     }
 //    display product if productid is certain number
@@ -245,7 +260,7 @@ public class CustDAO {
 
                 try {
                     PreparedStatement preparedStatement = connection
-                            .prepareStatement("select f.film_id, f.title,f.description,f.rating,f.rental_rate,f.release_year\n"
+                            .prepareStatement("select f.film_id, f.title,f.description,f.rating,f.rental_rate,f.release_year, f.rental_duration\n"
                                     + "from sakila.film as f \n"
                                     + "join sakila.film_actor as FA\n"
                                     + "on f.film_id = fa.film_id\n"
@@ -274,7 +289,7 @@ public class CustDAO {
             else if (category_id == -1 && actor_id != -1) {
                 try {
                     PreparedStatement preparedStatement = connection
-                            .prepareStatement("select f.film_id, f.title,f.description,f.rating,f.rental_rate,f.release_year\n"
+                            .prepareStatement("select f.rental_duration, f.film_id, f.title,f.description,f.rating,f.rental_rate,f.release_year\n"
                                     + "from sakila.film as f\n"
                                     + "join sakila.film_actor as FA\n"
                                     + "on f.film_id = FA.film_id\n"
@@ -292,7 +307,7 @@ public class CustDAO {
                         film.setRental_rate(rs.getFloat("rental_rate"));
 
                         film.setRelease_year((rs.getDate("release_year")));
-                         film.setRental_duration((rs.getInt("rental_duration")));
+                        film.setRental_duration((rs.getInt("rental_duration")));
                         films.add(film);
                     }
 
@@ -303,7 +318,7 @@ public class CustDAO {
             } //select all the films specified by BOTH category AND actor
             else {
                 PreparedStatement preparedStatement = connection
-                        .prepareStatement("select f.film_id, f.title,f.rental_rate, f.description,f.rating,f.release_year\n"
+                        .prepareStatement("select f.rental_duration, f.film_id, f.title,f.rental_rate, f.description,f.rating,f.release_year\n"
                                 + "from sakila.film as f\n"
                                 + "join sakila.film_actor as FA\n"
                                 + "on f.film_id = fa.film_id\n"
@@ -323,6 +338,8 @@ public class CustDAO {
                     film.setDescription(rs.getString("description"));
                     film.setRating(rs.getString("rating"));
                     film.setRelease_year((rs.getDate("release_year")));
+                    film.setRental_duration((rs.getInt("rental_duration")));
+
                     films.add(film);
                 }
             }

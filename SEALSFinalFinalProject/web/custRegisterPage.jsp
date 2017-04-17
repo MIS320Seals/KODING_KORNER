@@ -20,7 +20,7 @@
             <h3>Please fill out the following information to join the Crimson Video family</h3>
         </div
         <div class = "frmRegDiv">
-            <form action="custController" method="POST">
+            <form action="CustController" method="POST">
             <table border="0">
                 <tbody>
                     <!--not something the user should have to enter themselves-->
@@ -60,8 +60,8 @@
                         <td>Store ID number:</td>
                         <!--i want this to be a drop down box with the potential store ids, the customer shouldn't really know this-->
                         <td><select name="store_id">
-                                <option>1, your current site</option>
-                                <option>2, still in beta mode</option>
+                                <option>1</option>
+                                <option>2</option>
                             </select></td>
                     </tr>
                     <tr>
@@ -97,6 +97,9 @@
                     <tr>
                         <td></td>
                         <td><input type="submit" value="Enter" name="custRegister" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="hidden" name="action" value="custRegister"/></td></td>
                     </tr>
                 </tbody>
             </table>
