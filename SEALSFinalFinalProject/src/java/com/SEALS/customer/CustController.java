@@ -152,7 +152,7 @@ public class CustController extends HttpServlet {
             String first_name = request.getParameter("first_name");
             String last_name = request.getParameter("last_name");
             String email = request.getParameter("email");
-            //int address_id = ;
+            //String address_id = null;
             String address = request.getParameter("address"); //for the address table
             String address2 = request.getParameter("address2"); //for address table
             String district = request.getParameter("district"); //for address table
@@ -172,7 +172,7 @@ public class CustController extends HttpServlet {
             String password = request.getParameter("password"); 
             
             //adds in the address
-            //custAddress.setAddress_id(null);
+            //custAddress.setAddress_id(Integer.parseInt(address_id));
             custAddress.setAddress(address);
             custAddress.setAddress2(address2);
             custAddress.setDistrict(district);

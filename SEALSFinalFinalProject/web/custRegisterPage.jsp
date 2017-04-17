@@ -29,6 +29,10 @@
                         <td><input type="text" name="customer_id" value="" readonly="readonly" /></td>
                     </tr>-->
                     <tr>
+                        <td bgcolor="#cc0000"><font color="white">Profile Information</font></td>
+                        <td bgcolor="#cc0000"></td>
+                    </tr>
+                    <tr>
                         <td>First name:</td>
                         <td><input type="text" name="first_name" value="" /></td>
                     </tr>
@@ -49,6 +53,10 @@
                         <td><input type="password" name="password2" value="" /></td>
                     </tr>
                     <tr>
+                        <td bgcolor="#cc0000"><font color="white">Contact Information</font></td>
+                        <td bgcolor="#cc0000"></td>
+                    </tr>
+                    <tr>
                         <td>Email:</td>
                         <td><input type="text" name="email" value="" /></td>
                     </tr>
@@ -63,6 +71,10 @@
                                 <option>1</option>
                                 <option>2</option>
                             </select></td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#cc0000"><font color="white">Mailing Address</font></td>
+                        <td bgcolor="#cc0000"></td>
                     </tr>
                     <tr>
                         <!--goes into the address table of the database-->
@@ -84,6 +96,10 @@
                         <!--goes into the address table of the database-->
                         <td>State:</td>
                         <td><input type="text" name="district" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#cc0000"><font color="white">Information for us</font></td>
+                        <td bgcolor="#cc0000"></td>
                     </tr>
                     <tr>
                         <td>Check box if active:</td>

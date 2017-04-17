@@ -57,22 +57,21 @@ public class CustDAO {
     public void addCustAddress(Address custAdd) {
         try {
             PreparedStatement ps = connection.prepareStatement("insert into sakila.address"
-                + "(address_id, address,address2,district,city_id,postal_code,phone,last_update)"
-                + "values (null, ?, ?, ?, ?, ?, ?, ?");
-            ps.setInt(1, custAdd.getAddress_id());
-            ps.setString(2, custAdd.getAddress());
-            ps.setString(3, custAdd.getAddress2());
-            ps.setString(4, custAdd.getDistrict());
-            ps.setInt(5, custAdd.getCity_id());
-            ps.setString(6, custAdd.getPostal_code());
-            ps.setString(7, custAdd.getPhone());
+                + "(address,address2,district,city_id,postal_code,phone,last_update)"
+                + "values (?, ?, ?, ?, ?, ?, ?");
+            //ps.setInt(1, custAdd.getAddress_id());
+            ps.setString(1, custAdd.getAddress());
+            ps.setString(2, custAdd.getAddress2());
+            ps.setString(3, custAdd.getDistrict());
+            ps.setInt(4, custAdd.getCity_id());
+            ps.setString(5, custAdd.getPostal_code());
+            ps.setString(6, custAdd.getPhone());
             //I would like to drop this column from the table??
             //ps.setInt(7, custAdd.getLocation());
-            ps.setDate(8, new java.sql.Date(custAdd.getLast_update().getTime()));
+            ps.setDate(7, new java.sql.Date(custAdd.getLast_update().getTime()));
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            
         }
     }
     
@@ -82,7 +81,7 @@ public class CustDAO {
         int address_id = 0;
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT address_id FROM address "
+            ResultSet rs = statement.executeQuery("SELECT address_id FROM sakila.address "
                     + "ORDER BY address_id DESC LIMIT 1");
         } catch (SQLException e) {
             e.printStackTrace();
