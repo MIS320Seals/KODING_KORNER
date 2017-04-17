@@ -50,14 +50,14 @@ public class CustDAO {
             e.printStackTrace();
         }
     }
-    
+
     //adds a new address entry
     public void addCustAddress(Address custAdd) {
         try {
             PreparedStatement ps = connection.prepareStatement("insert into sakila.address"
-                + "(address_id,address,address2,district,city_id,postal_code,phone,location,last_update)"
-                + "values (?, ?, ?, ?, ?, ?, ?, ?, ?");
-            
+                    + "(address_id,address,address2,district,city_id,postal_code,phone,location,last_update)"
+                    + "values (?, ?, ?, ?, ?, ?, ?, ?, ?");
+
             ps.setInt(1, custAdd.getAddress_id());
             ps.setString(2, custAdd.getAddress());
             ps.setString(3, custAdd.getAddress2());
@@ -71,7 +71,7 @@ public class CustDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
     }
 
 //    delete product / remove from database 
@@ -245,7 +245,7 @@ public class CustDAO {
 
                 try {
                     PreparedStatement preparedStatement = connection
-                            .prepareStatement("select f.film_id, f.title,f.description,f.rating,f.rental_rate,f.release_year\n"
+                            .prepareStatement("select f.film_id, f.title,f.description,f.rating,f.rental_rate,f.release_year, f.rental_duration\n"
                                     + "from sakila.film as f \n"
                                     + "join sakila.film_actor as FA\n"
                                     + "on f.film_id = fa.film_id\n"
@@ -274,7 +274,7 @@ public class CustDAO {
             else if (category_id == -1 && actor_id != -1) {
                 try {
                     PreparedStatement preparedStatement = connection
-                            .prepareStatement("select f.film_id, f.title,f.description,f.rating,f.rental_rate,f.release_year\n"
+                            .prepareStatement("select f.rental_duration, f.film_id, f.title,f.description,f.rating,f.rental_rate,f.release_year\n"
                                     + "from sakila.film as f\n"
                                     + "join sakila.film_actor as FA\n"
                                     + "on f.film_id = FA.film_id\n"
@@ -292,7 +292,7 @@ public class CustDAO {
                         film.setRental_rate(rs.getFloat("rental_rate"));
 
                         film.setRelease_year((rs.getDate("release_year")));
-                         film.setRental_duration((rs.getInt("rental_duration")));
+                        film.setRental_duration((rs.getInt("rental_duration")));
                         films.add(film);
                     }
 
@@ -303,7 +303,7 @@ public class CustDAO {
             } //select all the films specified by BOTH category AND actor
             else {
                 PreparedStatement preparedStatement = connection
-                        .prepareStatement("select f.film_id, f.title,f.rental_rate, f.description,f.rating,f.release_year\n"
+                        .prepareStatement("select f.rental_duration, f.film_id, f.title,f.rental_rate, f.description,f.rating,f.release_year\n"
                                 + "from sakila.film as f\n"
                                 + "join sakila.film_actor as FA\n"
                                 + "on f.film_id = fa.film_id\n"
@@ -323,6 +323,8 @@ public class CustDAO {
                     film.setDescription(rs.getString("description"));
                     film.setRating(rs.getString("rating"));
                     film.setRelease_year((rs.getDate("release_year")));
+                    film.setRental_duration((rs.getInt("rental_duration")));
+
                     films.add(film);
                 }
             }

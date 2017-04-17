@@ -36,6 +36,7 @@ film_id SMALLINT,
 title VARCHAR(255),
 price DECIMAL(3,2),
 date_added TIMESTAMP Default CURRENT_TIMESTAMP,
+rental_duration SMALLINT,
 PRIMARY KEY (cart_id))
 
 create Table wishlist(
@@ -44,5 +45,6 @@ customer_id SMALLINT,
 film_id SMALLINT,
 title VARCHAR(255),
 price DECIMAL(3,2),
+rental_duration SMALLINT,
 date_added TIMESTAMP Default CURRENT_TIMESTAMP,
 PRIMARY KEY (cart_id))

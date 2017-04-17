@@ -29,14 +29,12 @@ import org.apache.derby.client.am.Decimal;
 //{
 //    "/loginController"
 //})
-public class cartController extends HttpServlet
-{
-    
+public class cartController extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
     private static String ADMIN_HOME = "/adminActionPage.jsp";
-    private static String CUST_HOME =  "/custActionPage.jsp";
+    private static String CUST_HOME = "/custActionPage.jsp";
 
-    
     private loginDAO dao = new loginDAO();
 
     /**
@@ -49,11 +47,9 @@ public class cartController extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter())
-        {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -78,32 +74,33 @@ public class cartController extends HttpServlet
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-      String forward = "";
-      
-      cartDAO cart = new cartDAO();
-        
+            throws ServletException, IOException {
+        String forward = "";
+
+        cartDAO cart = new cartDAO();
+
         String action = request.getParameter("action");
-        
-        if(action.equals("addCart")){
+
+        if (action.equals("addCart")) {
             String title = request.getParameter("title");
             String x = request.getParameter("film_id");
             int film_id = Integer.parseInt(request.getParameter("film_id"));
             float price = Float.parseFloat(request.getParameter("price"));
-            
-            cart.addCart(title, film_id, price);
+            int rental_duration = Integer.parseInt(request.getParameter("rental_duration"));
+
+            cart.addCart(title, film_id, price, rental_duration);
             forward = CUST_HOME;
-        }
-        else if(action.equals("addWishList")){
+        } else if (action.equals("addWishList")) {
             String title = request.getParameter("title");
             String x = request.getParameter("film_id");
             int film_id = Integer.parseInt(request.getParameter("film_id"));
             float price = Float.parseFloat(request.getParameter("price"));
-            cart.addWish(title, film_id, price);
+            int rental_duration = Integer.parseInt(request.getParameter("rental_duration"));
+
+            cart.addWish(title, film_id, price, rental_duration);
             forward = CUST_HOME;
         }
-        
+
         RequestDispatcher view = request.getRequestDispatcher(forward);
 
         view.forward(request, response);
@@ -120,26 +117,24 @@ public class cartController extends HttpServlet
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
         String forward = "";
         Admin admin = new Admin();
         Cust customer = new Cust();
         Film film = new Film();
         cartDAO cartdao = new cartDAO();
 
-
         // String action = request.getParameter("action");
         // String passKey = request.getParameter("passKey");
         // String forward="";
         String action = request.getParameter("action");
 
-        if(action.equals("addToCart")){
+        if (action.equals("addToCart")) {
             int film_id = Integer.parseInt(request.getParameter("film_id"));
             int customer_id = Integer.parseInt(request.getParameter("customer_id"));
             cartdao.addToCart(film_id, customer_id);
             forward = "myMovies.jsp";
-            Cust.customerID=customer_id;
+            Cust.customerID = customer_id;
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -154,8 +149,7 @@ public class cartController extends HttpServlet
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo()
-    {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
