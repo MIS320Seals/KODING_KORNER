@@ -146,10 +146,6 @@ public class CustController extends HttpServlet {
             Address custAddress = new Address();
             //for now is just set to true no matter what
             boolean active = true;
-            //gets the address id of the address that was just saved into the database
-            int add_id = custdao.lastCustAddressID() + 1;
-            //gets the customer id of the last customer added to the database
-            int customer_id = custdao.lastCustID() + 1;
             
             //sets the rest of the needed information
             int store_id = Integer.parseInt(request.getParameter("store_id"));
@@ -176,7 +172,7 @@ public class CustController extends HttpServlet {
             String password = request.getParameter("password"); 
             
             //adds in the address
-            custAddress.setAddress_id(add_id);
+            //custAddress.setAddress_id(Integer.parseInt(address_id));
             custAddress.setAddress(address);
             custAddress.setAddress2(address2);
             custAddress.setDistrict(district);
@@ -187,8 +183,10 @@ public class CustController extends HttpServlet {
             custAddress.setLast_update(create_date);
             custdao.addCustAddress(custAddress);
             
+            //gets the address id of the address that was just saved into the database
+            int add_id = custdao.lastCustAddressID(custAddress);
+            
             //adds in the customer
-            cust.setCustomer_id(customer_id);
             cust.setStore_id(store_id);
             cust.setFirst_name(first_name);
             cust.setLast_name(last_name);
