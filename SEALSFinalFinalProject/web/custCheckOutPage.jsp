@@ -42,13 +42,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach end="300" step="7" items="${carts}" var="cart">
+                    <c:forEach end="300" items="${carts}" var="cart">
                         <tr>
                             <td><c:out value="${cart.filmID}" /></td>
                             <td><c:out value="${cart.title}" /></td>
                             <td><c:out value="${cart.price}" /></td>
-                            <td><c:out value="${film.dateAdded}" /></td>
-                            <td><c:out value="${film.rentalDuration}" /></td>
+                            <td><c:out value="${cart.dateAdded}" /></td>
+                            <td><c:out value="${cart.rentalDuration}" /></td>
 
                             <td><a href="cartController?action=removeCartItem&cart_id=<c:out value="${cart.cartID}"/>">Remove</a></td>
                             <td><a href="cartController?action=addWishList&film_id=<c:out value="${cart.filmID}"/>&title=<c:out value="${cart.title}"/>&price=<c:out value="${cart.price}"/>&rental_duration=<c:out value="${cart.rentalDuration}"/>">Add To Wish List</a></td>
@@ -57,5 +57,10 @@
                     </c:forEach>
                 </tbody>
             </table>
+        
+        <form action="cartController" >
+            <input type="submit" value="Check Out" name="payment" />
+            <input type="hidden" name="action" value="payment"/>
+        </form>
     </body>
 </html>

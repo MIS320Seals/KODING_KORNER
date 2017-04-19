@@ -109,20 +109,106 @@ public class cartDAO {
     }
 
     void removeCart(int cartID) {
-        
-    try {
+
+        try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("delete from cart where cart_id=?");
 
             preparedStatement.setInt(1, cartID);
 
-            preparedStatement.executeQuery();
-
-            
+            preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    int getInventoryID(int filmID) {
+        int x = -1;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("Select Distinct I.inventory_id \n"
+                    + "From inventory as I\n"
+                    + "Join rental as R \n"
+                    + "where I.film_id = ? and R.return_date is not null\n");
+
+            preparedStatement.setInt(1, filmID);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                x = rs.getInt("inventory_id");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return x;
+    }
+    
+    int getStoreID(int inventoryID) {
+        int x = -1;
+        try {
+            PreparedStatement preparedStatement = 
+                    connection.prepareStatement("select store_id from inventory where inventory_id = ? ");
+
+            preparedStatement.setInt(1, inventoryID);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                x = rs.getInt("store_id");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return x;
+    }
+
+    int getStaffID(int storeID) {
+        int x = -1;
+        try {
+            PreparedStatement preparedStatement = 
+                    connection.prepareStatement("select manager_staff_id from store where store_id =?");
+
+            preparedStatement.setInt(1, storeID);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                x = rs.getInt("manager_staff_id");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return x;
+    }
+    
+    void checkOut() {
+
+        List<Cart> carts = ListCart(Cust.customerID);
+        
+        int count = 0;
+        while (count < carts.size()) {
+            try {
+                PreparedStatement preparedStatement = connection
+                        .prepareStatement("insert into rental(inventory_id, customer_id, staff_id) values (?,?,?)");
+                int i = getInventoryID(carts.get(count).getFilmID());
+                int s = getStoreID(i);
+                int staffID = getStaffID(s);
+                preparedStatement.setInt(1, i);
+                preparedStatement.setInt(2, Cust.customerID);
+                preparedStatement.setInt(3, staffID);
+
+                preparedStatement.executeUpdate();
+                count++;
+
+                
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        
+
     }
 
 }

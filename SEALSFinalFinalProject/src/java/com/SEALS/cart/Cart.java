@@ -19,7 +19,17 @@ public class Cart {
     private float price;
     private Date dateAdded;
     private int rentalDuration;
+    private String cardNumber;
 
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        cardNumber = cardNumber;
+    }
+
+    
     public Cart() {
     }
 
