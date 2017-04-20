@@ -15,10 +15,13 @@
     </head>
     <body>
 
-        <h1>Crimson Video Store</h1>
+        <div style="text-height: auto; background-color: #cc0000">
+            <img src="rex/Logo.PNG" Style = " height: 100px;width: 100px;padding: 10px; margin: 0; "/>
+            <h1 style="float: right; text-align: justify;">Crimson Video Store</h1>
+        </div>
 
-
-        <div class="loginTable">
+        <br>
+        <div class="loginTable" >
             <form action="LoginController" method="POST">
                 <table border="0">
                     <tbody>
