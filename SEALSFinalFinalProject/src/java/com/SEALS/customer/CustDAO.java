@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /*
@@ -37,16 +37,16 @@ public class CustDAO {
                             + "last_update,username,password) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             preparedStatement.setInt(1, cust.getCustomer_id());
-            preparedStatement.setInt(1, cust.getStore_id());
-            preparedStatement.setString(2, cust.getFirst_name());
-            preparedStatement.setString(3, cust.getLast_name());
-            preparedStatement.setString(4, cust.getEmail());
-            preparedStatement.setInt(5, cust.getAddress_id());
-            preparedStatement.setBoolean(6, cust.isActive());
-            preparedStatement.setDate(7, new java.sql.Date(cust.getCreate_date().getTime()));
-            preparedStatement.setDate(8, new java.sql.Date(cust.getLast_update().getTime()));
-            preparedStatement.setString(9, cust.getUsername());
-            preparedStatement.setString(10, cust.getPassword());
+            preparedStatement.setInt(2, cust.getStore_id());
+            preparedStatement.setString(3, cust.getFirst_name());
+            preparedStatement.setString(4, cust.getLast_name());
+            preparedStatement.setString(5, cust.getEmail());
+            preparedStatement.setInt(6, cust.getAddress_id());
+            preparedStatement.setBoolean(7, cust.isActive());
+            preparedStatement.setDate(8, new java.sql.Date(cust.getCreate_date().getTime()));
+            preparedStatement.setDate(9, new java.sql.Date(cust.getLast_update().getTime()));
+            preparedStatement.setString(10, cust.getUsername());
+            preparedStatement.setString(11, cust.getPassword());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -59,7 +59,7 @@ public class CustDAO {
         try {
             PreparedStatement ps = connection.prepareStatement("insert into sakila.address"
                 + "(address_id,address,address2,district,city_id,postal_code,phone,last_update)"
-                + "values (?, ?, ?, ?, ?, ?, ?, ?");
+                + "values (?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setInt(1, custAdd.getAddress_id());
             ps.setString(2, custAdd.getAddress());
             ps.setString(3, custAdd.getAddress2());
@@ -76,16 +76,32 @@ public class CustDAO {
         }
     }
     
+    //adds a new city
+    public void addCity(City custCity)
+    {
+        try{
+            PreparedStatement ps = connection.prepareStatement("insert into sakila.city"
+                    + "(city_id,city,country_id,last_update)"
+                    + "values (?, ?, ?, ?)");
+            ps.setInt(1, custCity.getCityID());
+            ps.setString(2, custCity.getCity());
+            ps.setInt(3, custCity.getCountry_id());
+            ps.setDate(4, new java.sql.Date(custCity.getLast_update().getTime()));
+            ps.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     //returns back the address id of the last address saved into the database
     public int lastCustAddressID()
     {
         int address_id = 0;
         try {
             Statement statement = connection.createStatement();
-            //THIS LINE RIGHT HERE SIDNEY
-            ResultSet rs = statement.executeQuery("SELECT address_id FROM sakila.address"
-                    + "ORDER BY address_id DESC LIMIT 1");
-            while(rs.next())
+            ResultSet rs = statement.executeQuery("select address_id from sakila.address order by address_id desc");
+            if(rs.next())
             {
                 address_id = rs.getInt("address_id"); 
             }
@@ -101,9 +117,8 @@ public class CustDAO {
         int cust_id = 0;
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT customer_id FROM sakila.customer"
-                    + "ORDER BY customer_id DESC LIMIT 1");
-            while(rs.next())
+            ResultSet rs = statement.executeQuery("select customer_id from sakila.customer order by customer_id desc");
+            if(rs.next())
             {
                 cust_id = rs.getInt("customer_id");
             }
@@ -111,6 +126,61 @@ public class CustDAO {
             e.printStackTrace();
         }
         return cust_id; 
+    }
+    
+    //gets the last location
+//    public byte[] getLastLocation()
+//    {
+//        byte[] location = null; 
+//        try {
+//            Statement statement = connection.createStatement();
+//            ResultSet rs = statement.executeQuery("select location from sakila.address order by location desc");
+//            if(rs.next())
+//            {
+//                location = rs.getBytes("location"); 
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return location;
+//    }
+    
+    //gets the last country name based off of the id
+    public String getCustCountry(int countryID)
+    {
+        String country = null;
+        try {
+            PreparedStatement preparedStatement = connection.
+                    prepareStatement("select country from sakila.country where country_id=?");
+            preparedStatement.setInt(1, countryID);
+            ResultSet rs = preparedStatement.executeQuery();
+//            Statement statement = connection.createStatement();
+//            ResultSet rs = statement.executeQuery("select country_id from sakila.country where country_id=?");
+            if(rs.next())
+            {
+                country = rs.getString("country"); 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return country;
+    }
+    
+    //gets the last city id
+    public int getLastCityID()
+    {
+        int city_id = 0;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select city_id from sakila.city order by city_id desc");
+            if(rs.next())
+            {
+                city_id = rs.getInt("city_id"); 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return city_id;
     }
     
 //    delete product / remove from database 
@@ -150,7 +220,27 @@ public class CustDAO {
         }
     }
 
-//    method to display all products from database
+    //gets all the countrys
+    public List<Country> getAllCountries()
+    {
+        List<Country> countries = new ArrayList<Country>();
+        try{
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from sakila.country");
+            while (rs.next())
+            {
+                Country country = new Country();
+                country.setCountry_id(rs.getInt("country_id"));
+                country.setCountry(rs.getString("country"));
+                country.setLast_update(rs.getDate("last_update"));
+                countries.add(country);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return countries;
+    }
+    //method to display all products from database
     public List<Cust> getAllCustomers() {
         List<Cust> customers = new ArrayList<Cust>();
         try {
@@ -248,7 +338,6 @@ public class CustDAO {
         if (!act_name.equalsIgnoreCase("Select Actor")) {
             actor_id = Integer.parseInt(act_name);
             //get films with actor
-
         }
         //if they searched by category
         if (!cat_name.equalsIgnoreCase("Select Category")) {

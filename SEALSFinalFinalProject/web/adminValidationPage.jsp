@@ -27,8 +27,6 @@
                             <td><input type="password" name="password" value="${adminBean.password}" /></td>
                         </tr>
                         <tr> 
-
-                            
                             <td>
                                 <form action="loginReturn">
                                     <input type="submit" value="Back" name="returnToLogin" />
@@ -43,7 +41,9 @@
                     </tbody>
                 </table>
             </form>
-
+                        <form action="AdminController" method="GET">
+                            <input type="submit" value="Add New Staff Member" name="action" /> 
+                        </form>
         </div>
     </body>
 </html>

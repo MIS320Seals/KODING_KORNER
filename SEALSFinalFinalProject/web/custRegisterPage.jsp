@@ -3,7 +3,8 @@
     Created on : Mar 31, 2017, 3:32:17 PM
     Author     : ering
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -88,6 +89,11 @@
                         <td><input type="text" name="address2" value="" /></td>
                     </tr>
                     <tr>
+                        <!--goes into the city table of the database-->
+                        <td>City:</td>
+                        <td><input type="text" name="city" value="" /></td>
+                    </tr>
+                    <tr>
                         <!--goes into the address table of the database-->
                         <td>Zip Code:</td>
                         <td><input type="text" name="postal_code" value="" /></td>
@@ -96,6 +102,17 @@
                         <!--goes into the address table of the database-->
                         <td>State:</td>
                         <td><input type="text" name="district" value="" /></td>
+                    </tr>
+                    <tr>
+                        <!--goes into the country table of the database-->
+                        <td>Country:</td>
+                        <td><select name="countries" >
+                                <option>Select Your Country</option>
+                                <c:forEach items="${countries}" var="country">
+                                    <option value="${country.country_id}"><c:out value="${country.country}"/></option>
+                                </c:forEach>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td bgcolor="#cc0000"><font color="white">Information for us</font></td>
@@ -107,7 +124,7 @@
                     </tr>
                     <tr>
                         <!--I would like to get the calendar implementation on this as well-->
-                        <td>Today's date:</td>
+                        <td>Today's date (YYYY-MM-DD):</td>
                         <td><input type="text" name="create_date" value="" /></td>
                     </tr>
                     <tr>

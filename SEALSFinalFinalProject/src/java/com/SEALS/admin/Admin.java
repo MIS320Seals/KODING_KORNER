@@ -1,6 +1,6 @@
 package com.SEALS.admin;
 
-import java.sql.Date;
+import java.util.Date;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -164,9 +164,5 @@ public class Admin {
     public void setLast_update(Date last_update) {
         this.last_update = last_update;
     }
-    
-    
-    
-    
 }
 

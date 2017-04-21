@@ -25,9 +25,6 @@ public class AdminDAO {
     //delete admin
     //get all admin
     //get admin by id
-
-   
-
     private Connection connection;
 
     public AdminDAO() {
@@ -39,19 +36,27 @@ public class AdminDAO {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("insert into sakila.staff"
-                            + "(first_name,last_name,address_id,email,store_id"
-                            + "active,username,password,last_update) "
-                            + "values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                            + "(staff_id,"
+                            + "first_name,"
+                            + "last_name,"
+                            + "address_id,"
+                            + "email,"
+                            + "store_id,"
+                            + "active,"
+                            + "username,"
+                            + "password,"
+                            + "last_update) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-            preparedStatement.setString(1, admin.getFirst_name());
-            preparedStatement.setString(2, admin.getLast_name());
-            preparedStatement.setInt(3, admin.getAddress_id());
-            preparedStatement.setString(4, admin.getEmail());
-            preparedStatement.setInt(5, admin.getStore_id());
-            preparedStatement.setBoolean(6, admin.isActive());
-            preparedStatement.setString(7, admin.getUsername());
-            preparedStatement.setString(8, admin.getPassword());
-            preparedStatement.setDate(9, new java.sql.Date(admin.getLast_update().getTime()));
+            preparedStatement.setInt(1, admin.getStaff_id());
+            preparedStatement.setString(2, admin.getFirst_name());
+            preparedStatement.setString(3, admin.getLast_name());
+            preparedStatement.setInt(4, admin.getAddress_id());
+            preparedStatement.setString(5, admin.getEmail());
+            preparedStatement.setInt(6, admin.getStore_id());
+            preparedStatement.setBoolean(7, admin.isActive());
+            preparedStatement.setString(8, admin.getUsername());
+            preparedStatement.setString(9, admin.getPassword());
+            preparedStatement.setDate(10, new java.sql.Date(admin.getLast_update().getTime()));
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -94,6 +99,23 @@ public class AdminDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    //returns the last admin id that was saved to the database
+    public int lastAdminID()
+    {
+        int admin_id = 0;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select staff_id from sakila.staff order by staff_id desc");
+            if(rs.next())
+            {
+                admin_id = rs.getInt("staff_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return admin_id; 
     }
     
 //    method to display all products from database
@@ -239,8 +261,6 @@ public class AdminDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
-        
         return s;
     }
 }

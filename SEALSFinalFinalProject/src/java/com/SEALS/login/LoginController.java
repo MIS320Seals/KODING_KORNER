@@ -8,11 +8,14 @@ package com.SEALS.login;
 
 
 import com.SEALS.admin.Admin;
+import com.SEALS.customer.Country;
 
 import com.SEALS.customer.Cust;
+import com.SEALS.customer.CustDAO;
 import com.SEALS.login.loginDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,6 +40,7 @@ public class LoginController extends HttpServlet
 
     private static String ADMIN_RELOGIN =  "/adminValidationPageError.jsp";
     private static String CUST_RELOGIN =  "/loginPageError.jsp";
+    private static String CUST_REGISTER = "/custRegisterPage.jsp";
     
    
 
@@ -101,6 +105,7 @@ public class LoginController extends HttpServlet
         Cust customer = new Cust();
 
         loginDAO dao = new loginDAO();
+        CustDAO custdao = new CustDAO(); 
 
         // String action = request.getParameter("action");
         // String passKey = request.getParameter("passKey");
