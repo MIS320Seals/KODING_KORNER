@@ -194,7 +194,7 @@ public class AdminController extends HttpServlet
             //real problem is that country is null here
             int country_id = Integer.parseInt(request.getParameter("countries"));
             Date create_date = null;
-            try { create_date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("create_date"));
+            try { create_date = (java.sql.Date) new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("create_date"));
             } catch (ParseException e){
                 e.printStackTrace();
             }
