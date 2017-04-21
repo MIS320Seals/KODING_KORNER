@@ -20,7 +20,6 @@ public class Address {
     private int city_id;
     private String postal_code;
     private String phone;
-    private Byte location;
     private Date last_update;
     
     public Address(){}
@@ -87,14 +86,6 @@ public class Address {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public Byte getLocation() {
-        return location;
-    }
-
-    public void setLocation(Byte location) {
-        this.location = location;
     }
 
     public Date getLast_update() {
