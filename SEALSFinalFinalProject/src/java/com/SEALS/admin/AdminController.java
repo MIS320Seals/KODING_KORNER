@@ -108,6 +108,22 @@ public class AdminController extends HttpServlet
             request.setAttribute("sale", dao.getSalesByGenre());
             request.setAttribute("revenue", dao.getSalesByStore());
 
+        } else if (action.equals("empinfo"))
+        {
+
+            forward = "/adminEmployeeView.jsp";
+            //request.setAttribute("emp", dao.getAllAdmins());
+            request.setAttribute("emp", dao.getAdminById(Integer.parseInt(request.getParameter("empid"))));
+
+        } else if (action.equals("emplist"))
+        {
+
+            forward = "/adminEmployees.jsp";
+            request.setAttribute("emps", dao.getAllAdmins());
+
+        } else if (action.equals("addemp"))
+        {
+            forward = "/adminRegisterPage.jsp";
         } else
         {
             forward = "/adminCustomers.jsp";
