@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -175,7 +175,7 @@ public class CustController extends HttpServlet {
             //real problem is that country is null here
             int country_id = Integer.parseInt(request.getParameter("countries"));
             Date create_date = null;
-            try { create_date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("create_date"));
+            try { create_date = (java.sql.Date) new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("create_date"));
             } catch (ParseException e){
                 e.printStackTrace();
             }
@@ -221,7 +221,7 @@ public class CustController extends HttpServlet {
             cust.setLast_name(last_name);
             cust.setEmail(email);
             cust.setAddress_id(add_id);
-            cust.setActive(active);
+            cust.setActive(true);
             cust.setCreate_date(new java.sql.Date(create_date.getTime()));
             cust.setLast_update(new java.sql.Date(create_date.getTime()));
             cust.setUsername(username);
