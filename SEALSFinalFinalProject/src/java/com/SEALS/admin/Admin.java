@@ -164,9 +164,5 @@ public class Admin {
     public void setLast_update(Date last_update) {
         this.last_update = last_update;
     }
-    
-    
-    
-    
 }
 

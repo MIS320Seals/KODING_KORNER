@@ -32,7 +32,13 @@
                         </tr>
                         <tr>
                             <td><input type="submit" value="Enter" name="custLogin" /></td>
-                            <td><a href="custRegisterPage.jsp">New User</a></td>
+<!--                            <td>
+                                <form action="CustController" method="GET">
+                                    <input type="submit" value="New User" name="action" /> 
+                                </form>
+                            </td>
+                    -->
+                            <!--<td><a href="custRegisterPage.jsp">New User</a></td>-->
                         </tr>
                         <tr>
                             <td><input type="hidden" name="action" value="custLogin"/></td></td>
@@ -42,7 +48,11 @@
                 </table>
 
             </form>
+                        <form action="CustController" method="GET">
+                            <input type="submit" value="New User" name="action" /> 
+                        </form>
             <td><a href="adminValidationPage.jsp">Admin Portal</a></td>
+            
         </div>
     </body>
 </html>

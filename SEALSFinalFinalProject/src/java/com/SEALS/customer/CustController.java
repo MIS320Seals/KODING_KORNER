@@ -30,6 +30,7 @@ public class CustController extends HttpServlet {
     private static String ADD_TO_CART = "/myMovies.jsp";
     private static String CUST_HOME =  "/custActionPage.jsp";
     private static String CUST_SEARCH_RESULT =  "/custSearchResultPage.jsp";
+    private static String CUST_REGISTER = "/custRegisterPage.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -83,11 +84,17 @@ public class CustController extends HttpServlet {
             List<Category> categories = dao.getAllCategories();
             request.setAttribute("categories", dao.getAllCategories());
         }
-        else if(action.equals("TestAddToCart")){
+        if(action.equals("TestAddToCart")){
             forward = ADD_TO_CART;
             int customer_id = Integer.parseInt(request.getParameter("customer_id"));
             cust.setCustomer_id(customer_id);
             request.setAttribute("custBean", cust);  
+        }
+        else if(action.equals("New User"))
+        {
+            forward = CUST_REGISTER;
+            List<Country> countries = dao.getAllCountries();
+            request.setAttribute("countries", dao.getAllCountries());
         }
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
@@ -144,8 +151,15 @@ public class CustController extends HttpServlet {
             //sets initial needed values
             Cust cust = new Cust();
             Address custAddress = new Address();
-            //for now is just set to true no matter what
-            boolean active = true;
+            Country custCountry = new Country();
+            City custCity = new City();
+            
+            boolean active = true;                              //for now is just set to true no matter what
+            int add_id = custdao.lastCustAddressID() + 1;       //gets the address id of the address that was just saved into the database
+            int customer_id = custdao.lastCustID() + 1;         //gets the customer id of the last customer added to the database
+            //byte[] location = custdao.getLastLocation();          //sets a bs location
+            //int country_id = custdao.getLastCountryID() + 1;    //sets the country id
+            int city_id = custdao.getLastCityID() + 1;          //sets the city id
             
             //sets the rest of the needed information
             int store_id = Integer.parseInt(request.getParameter("store_id"));
@@ -153,12 +167,15 @@ public class CustController extends HttpServlet {
             String last_name = request.getParameter("last_name");
             String email = request.getParameter("email");
             //String address_id = null;
-            String address = request.getParameter("address"); //for the address table
-            String address2 = request.getParameter("address2"); //for address table
-            String district = request.getParameter("district"); //for address table
-            String postal_code = request.getParameter("postal_code"); //for address table
+            String address = request.getParameter("address");           //for the address table
+            String address2 = request.getParameter("address2");         //for address table
+            String district = request.getParameter("district");         //for address table
+            String city = request.getParameter("city");                 //for the city table
+            String postal_code = request.getParameter("postal_code");   //for address table
+            //real problem is that country is null here
+            int country_id = Integer.parseInt(request.getParameter("countries"));
             Date create_date = null;
-            try { create_date = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("create_date"));
+            try { create_date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("create_date"));
             } catch (ParseException e){
                 e.printStackTrace();
             }
@@ -171,22 +188,34 @@ public class CustController extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password"); 
             
+            //adds in the country
+            String country = custdao.getCustCountry(country_id);
+            custCountry.setCountry_id(country_id);
+            custCountry.setCountry(country);
+            custCountry.setLast_update(create_date);
+            //doesnt actually add the country because it doesn't need to
+            
+            //adds in the city
+            custCity.setCityID(city_id);
+            custCity.setCity(city);
+            custCity.setCountry_id(country_id);
+            custCity.setLast_update(create_date);
+            custdao.addCity(custCity);
+            
             //adds in the address
-            //custAddress.setAddress_id(Integer.parseInt(address_id));
+            custAddress.setAddress_id(add_id);
             custAddress.setAddress(address);
             custAddress.setAddress2(address2);
             custAddress.setDistrict(district);
-            custAddress.setCity_id(100);    //we dont know how this is determined so just made it up
+            custAddress.setCity_id(city_id);    
             custAddress.setPostal_code(postal_code);
             custAddress.setPhone(phone);
-            //skipped location
+            //custAddress.setLocation(location); //lets see if this works
             custAddress.setLast_update(create_date);
             custdao.addCustAddress(custAddress);
             
-            //gets the address id of the address that was just saved into the database
-            int add_id = custdao.lastCustAddressID(custAddress);
-            
             //adds in the customer
+            cust.setCustomer_id(customer_id);
             cust.setStore_id(store_id);
             cust.setFirst_name(first_name);
             cust.setLast_name(last_name);

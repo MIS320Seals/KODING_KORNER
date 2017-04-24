@@ -35,46 +35,45 @@
                     <td><img src="rex/sidney.jpg" alt=""/></td>
                     <td>Sidney Bomeke</td>
                     <td>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
-                        Fusce condimentum massa sed ex luctus fringilla. Praesent<br>
-                        ullamcorper ante nec odio tincidunt scelerisque. Nam elementum,<br> 
-                        purus sit amet ultrices scelerisque, magna quam molestie tortor,<br>
-                        sed feugiat purus quam vel libero. Nulla in viverra justo.
+                        Is a 330 TA working for the eternally cheerful Richard Doherty.<br>
+                        With her extensive background in database programming Sidney<br>
+                        was an easy choice for CDO, Chief Database Officer, and has<br> 
+                        been enjoying her role. During the development process she<br>
+                        was instrumental in database design and documentation.
                     </td>
                 </tr>
                 <tr>
                     <td><img src="rex/lauren.jpg" alt=""/></td>
                     <td>Lauren Wright</td>
                     <td>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
-                        Fusce condimentum massa sed ex luctus fringilla. Praesent<br>
-                        ullamcorper ante nec odio tincidunt scelerisque. Nam elementum,<br> 
-                        purus sit amet ultrices scelerisque, magna quam molestie tortor,<br>
-                        sed feugiat purus quam vel libero. Nulla in viverra justo.
+                        Is a 120 TA working for the fabulous Jeff Lucas.<br>
+                        Coming from a strong coding background she was assigned<br>
+                        to develop the logic for the business layer of this program.<br> 
+                        Her official role is CLO, or Chief Logic Officer, and has<br>
+                        met every challenge with graceful determination.
                     </td>
                 </tr>
                 <tr>
                     <td><img src="rex/Austin.jpg" alt=""/></td>
                     <td>Austin Lucas</td>
                     <td>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
-                        Fusce condimentum massa sed ex luctus fringilla. Praesent<br>
-                        ullamcorper ante nec odio tincidunt scelerisque. Nam elementum,<br> 
-                        purus sit amet ultrices scelerisque, magna quam molestie tortor,<br>
-                        sed feugiat purus quam vel libero. Nulla in viverra justo.
+                        Is a 220 TA working for coding genius Josh Perdue.<br>
+                        He comes from a long history of strong coders, and is our<br>
+                        most talented debugger. He is also has an eye for aesthetically <br> 
+                        pleasing web page layouts. Drawing on these talents he was,<br>
+                        promoted to CSO, or Chief Style Officer.
                     </td>
                 </tr>
                 <tr>
                     <td><img src="rex/erin.jpg" alt=""/></td>
                     <td>Erin Gronewald</td>
                     <td>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
-                        Fusce condimentum massa sed ex luctus fringilla. Praesent<br>
-                        ullamcorper ante nec odio tincidunt scelerisque. Nam elementum,<br> 
-                        purus sit amet ultrices scelerisque, magna quam molestie tortor,<br>
-                        sed feugiat purus quam vel libero. Nulla in viverra justo.
+                        Is not a TA for anyone currently. She needed a much deserved<br>
+                        calmer semester after managing a house of 67 women for a full year.<br>
+                        During her off time she has taken up ceramics and napping. She was<br> 
+                        the head developer of the basic user interfaces for this program,<br>
+                        and holds the coveted CIO, or Chief Interface Officer, position.
                     </td>
-
                 </tr>
             </table>
 
