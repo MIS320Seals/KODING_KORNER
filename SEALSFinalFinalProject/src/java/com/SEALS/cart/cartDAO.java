@@ -216,13 +216,13 @@ public class cartDAO {
       
             try {
                 PreparedStatement preparedStatement = connection
-                        .prepareStatement("delete from cart where inventor_id = ? and customer_id =?");
+                        .prepareStatement("delete from cart where customer_id =?");
               
-                preparedStatement.setInt(1, inID);
-                preparedStatement.setInt(2, Cust.customerID);
+              //  preparedStatement.setInt(1, inID);
+                preparedStatement.setInt(1, Cust.customerID);
      
 
-                preparedStatement.executeQuery();
+                preparedStatement.executeUpdate();
                 
 
                
