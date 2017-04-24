@@ -26,18 +26,13 @@
        
         <div>
             <p><a href="custRegisterPage.jsp" style="text-decoration: none; margin-left: 5%;">Add Customer</a></p>
-            <table>
+            <table style="text-align: center">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Address</th>
-                        <th>Zip</th>
                         <th>Phone</th>
-                        <th>City</th>
-                        <th>Country</th>
                         <th>Notes</th>
-                        <th>Store ID</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -46,13 +41,8 @@
                     <tr>
                         <td><c:out value="${a.id}" /></td>
                         <td><c:out value="${a.name}" /></td>
-                        <td><c:out value="${a.address}" /></td>
-                        <td><c:out value="${a.zip}" /></td>
                         <td><c:out value="${a.phoneNumber}" /></td>
-                        <td><c:out value="${a.city}" /></td>
-                        <td><c:out value="${a.country}" /></td>
                         <td><c:out value="${a.notes}" /></td>
-                        <td><c:out value="${a.storeId}" /></td>
                         <td><a href="AdminController?action=custinfo&filmId=${a.id}">View</a></td>
                     </tr>
                 </c:forEach>

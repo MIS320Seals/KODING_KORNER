@@ -23,7 +23,8 @@
             <li><a href = "AdminController?action=viewSales">Sales</a></li>
             <li><a href="loginPage.jsp">Log-out</a></li>
         </ul>
-        <br>
+        
+        
         <table>
             <thead>
                 <tr>
@@ -35,16 +36,16 @@
                 </tr>
             </thead>
             <tbody>
-            <c:forEach items="${emps}" var="e">
-                <tr>
-                    <td><c:out value="${e.staff_id}" /></td>
-                    <td><c:out value="${e.first_name}" /></td>
-                    <td><c:out value="${e.last_name}" /></td>
-                    <td><c:out value="${e.email}" /></td>
-                    <td><a href="AdminController?action=empinfo&empid=${e.staff_id}">View</a></td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-</body>
+                <c:forEach items="${emps}" var="e">
+                    <tr>
+                        <td><c:out value="${e.staff_id}" /></td>
+                        <td><c:out value="${e.first_name}" /></td>
+                        <td><c:out value="${e.last_name}" /></td>
+                        <td><c:out value="${e.email}" /></td>
+                        <td><a href="AdminController?action=empinfo&empid=${e.staff_id}">View</a></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </body>
 </html>
