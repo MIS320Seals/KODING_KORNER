@@ -4,6 +4,8 @@
     Author     : Austin
 --%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,13 +17,34 @@
     <body>
         <ul>
             <li ><a href="adminActionPage.jsp">Home</a></li>
-            <li class="active"><a href="adminEmployees.jsp">Employees</a></li>
+            <li class="active"><a href="AdminController?action=emplist">Employees</a></li>
             <li><a href="FilmController?action=list">Films</a></li>
             <li><a href="AdminController?action=custlist">Customers</a></li>
             <li><a href = "AdminController?action=viewSales">Sales</a></li>
             <li><a href="loginPage.jsp">Log-out</a></li>
         </ul>
         <br>
-        <h1>Admin Employees</h1>
-    </body>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${emps}" var="e">
+                <tr>
+                    <td><c:out value="${e.staff_id}" /></td>
+                    <td><c:out value="${e.first_name}" /></td>
+                    <td><c:out value="${e.last_name}" /></td>
+                    <td><c:out value="${e.email}" /></td>
+                    <td><a href="AdminController?action=empinfo&empid=${e.staff_id}">View</a></td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</body>
 </html>

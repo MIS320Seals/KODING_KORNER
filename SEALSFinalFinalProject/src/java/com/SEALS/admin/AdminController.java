@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -108,6 +108,22 @@ public class AdminController extends HttpServlet
             request.setAttribute("sale", dao.getSalesByGenre());
             request.setAttribute("revenue", dao.getSalesByStore());
 
+        } else if (action.equals("empinfo"))
+        {
+
+            forward = "/adminEmployeeView.jsp";
+            //request.setAttribute("emp", dao.getAllAdmins());
+            request.setAttribute("emp", dao.getAdminById(Integer.parseInt(request.getParameter("empid"))));
+
+        } else if (action.equals("emplist"))
+        {
+
+            forward = "/adminEmployees.jsp";
+            request.setAttribute("emps", dao.getAllAdmins());
+
+        } else if (action.equals("addemp"))
+        {
+            forward = "/adminRegisterPage.jsp";
         } else
         {
             forward = "/adminCustomers.jsp";
@@ -194,7 +210,7 @@ public class AdminController extends HttpServlet
             //real problem is that country is null here
             int country_id = Integer.parseInt(request.getParameter("countries"));
             Date create_date = null;
-            try { create_date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("create_date"));
+            try { create_date = (java.sql.Date) new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("create_date"));
             } catch (ParseException e){
                 e.printStackTrace();
             }

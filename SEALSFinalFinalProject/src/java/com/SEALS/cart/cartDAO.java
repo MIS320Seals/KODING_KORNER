@@ -201,6 +201,7 @@ public class cartDAO {
                 preparedStatement.executeUpdate();
                 count++;
 
+                removeFromCart(i);
                 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -209,6 +210,27 @@ public class cartDAO {
 
         
 
+    }
+    
+    void removeFromCart(int inID){
+      
+            try {
+                PreparedStatement preparedStatement = connection
+                        .prepareStatement("delete from cart where inventor_id = ? and customer_id =?");
+              
+                preparedStatement.setInt(1, inID);
+                preparedStatement.setInt(2, Cust.customerID);
+     
+
+                preparedStatement.executeQuery();
+                
+
+               
+                
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        
     }
 
 }
