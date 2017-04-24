@@ -129,7 +129,7 @@ public class cartController extends HttpServlet {
             if (isValid == true) {
                 forward = CUST_RECEIPT;
                 cart.checkOut();
-
+ 
             } else {
                 forward = REPAYMENT;
             }
