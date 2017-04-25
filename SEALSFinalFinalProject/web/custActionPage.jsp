@@ -1,12 +1,12 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%-- 
-    Document   : custActionPage
-    Created on : Mar 31, 2017, 3:32:46 PM
+    Document   : custSearchResultPage
+    Created on : Mar 31, 2017, 3:33:45 PM
     Author     : ering
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,7 +18,7 @@
         <%-- NAV BAR --%>
         <div class = "loginBar">
             <ul> 
-                <li class = "active"><a href="custActionPage.jsp">Home</a></li>
+                <li class = "active"><a href="LoginController?action=returnHome">Home</a></li>
                 <li><a>My Movies</a>
                         <div class="dropdown-content">
                         <a href="#">Checked Out</a>

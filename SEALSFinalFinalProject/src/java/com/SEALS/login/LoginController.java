@@ -38,13 +38,10 @@ public class LoginController extends HttpServlet
     private static final long serialVersionUID = 1L;
     private static String ADMIN_HOME = "/adminActionPage.jsp";
     private static String CUST_HOME =  "/custActionPage.jsp";
-
     private static String ADMIN_RELOGIN =  "/adminValidationPageError.jsp";
     private static String CUST_RELOGIN =  "/loginPageError.jsp";
     private static String CUST_REGISTER = "/custRegisterPage.jsp";
     
-   
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -146,11 +143,12 @@ public class LoginController extends HttpServlet
                 forward = CUST_RELOGIN;//check customer
             }
         }
-//        else if(action.equals("reHome"))
-//        {
-//            
-//        }
-
+        else //if(action.equalsIgnoreCase("returnHome"))
+        {
+            List<Film> films = custdao.getStaffMovies();
+            request.setAttribute("films", films);
+            forward = CUST_HOME;
+        }
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
         processRequest(request, response);

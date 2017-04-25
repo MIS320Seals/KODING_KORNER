@@ -18,7 +18,7 @@
         <%-- NAV BAR --%>
         <div class = "loginBar">
             <ul> 
-                <li><a href="custActionPage.jsp">Home</a></li>
+                <li><a href="LoginController?action=returnHome">Home</a></li>
                 <li><a href="myMovies.jsp">My Movies</a>
                                     <div class="dropdown-content">
                         <a href="#">Checked Out</a>
