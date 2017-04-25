@@ -9,9 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Payment Page - Error Please Re Input Information</title>
+        <title>Payment Page</title>
     </head>
     <body>
+        <h2> Error - Invalid Card Information</h2>
+        
+        <h4> Please enter valid card information </h4>
         <form action="cartController" >
             <table border="0">
                 <tbody>

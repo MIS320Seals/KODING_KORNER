@@ -29,6 +29,9 @@
                 <li class = "active" ><a href="custCheckOutPage.jsp">Check Out</a></li>
                 <li><a href="loginPage.jsp">Log-out</a></li>
             </ul>
+            
+            <h3 style="color:red;"> ERROR: You have exceeded the 5 movie check out limit. </h3>
+            <h3 style="color:red;"> Please remove items from your cart or return movies to proceed </h3>
         </div>
          <table>
                 <thead>
