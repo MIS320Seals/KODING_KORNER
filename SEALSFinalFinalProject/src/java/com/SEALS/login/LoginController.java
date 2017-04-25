@@ -12,6 +12,7 @@ import com.SEALS.customer.Country;
 
 import com.SEALS.customer.Cust;
 import com.SEALS.customer.CustDAO;
+import com.SEALS.film.Film;
 import com.SEALS.login.loginDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -122,7 +123,7 @@ public class LoginController extends HttpServlet
             if(x != -1 ){
                 admin = dao.getAdminLoginWID(x);
                 request.setAttribute("adminBean", admin);
-                forward = ADMIN_HOME;
+                forward = ADMIN_HOME; //have to add LoginController=? for the home action 
             }
             else{
                 forward= ADMIN_RELOGIN;//check customer
@@ -136,6 +137,8 @@ public class LoginController extends HttpServlet
             if(x != -1 ){
                 customer = dao.getCustomerWID(x);
                 request.setAttribute("custBean", customer);
+                List<Film> films = custdao.getStaffMovies();
+                request.setAttribute("films", films);
                 forward = CUST_HOME;
                 Cust.customerID = customer.getCustomer_id();
             }
@@ -143,9 +146,12 @@ public class LoginController extends HttpServlet
                 forward = CUST_RELOGIN;//check customer
             }
         }
+//        else if(action.equals("reHome"))
+//        {
+//            
+//        }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
-
         view.forward(request, response);
         processRequest(request, response);
     }

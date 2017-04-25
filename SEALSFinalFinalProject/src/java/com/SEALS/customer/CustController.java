@@ -154,12 +154,10 @@ public class CustController extends HttpServlet {
             Country custCountry = new Country();
             City custCity = new City();
             
-            boolean active = true;                              //for now is just set to true no matter what
-            int add_id = custdao.lastCustAddressID() + 1;       //gets the address id of the address that was just saved into the database
-            int customer_id = custdao.lastCustID() + 1;         //gets the customer id of the last customer added to the database
-            //byte[] location = custdao.getLastLocation();          //sets a bs location
-            //int country_id = custdao.getLastCountryID() + 1;    //sets the country id
-            int city_id = custdao.getLastCityID() + 1;          //sets the city id
+            boolean active = true;                                          //for now is just set to true no matter what
+            int add_id = custdao.lastCustAddressID() + 1;                   //gets the address id of the address that was just saved into the database
+            int customer_id = custdao.lastCustID() + 1;                     //gets the customer id of the last customer added to the database
+            int city_id = custdao.getLastCityID() + 1;                      //sets the city id
             
             //sets the rest of the needed information
             int store_id = Integer.parseInt(request.getParameter("store_id"));
@@ -167,11 +165,11 @@ public class CustController extends HttpServlet {
             String last_name = request.getParameter("last_name");
             String email = request.getParameter("email");
             //String address_id = null;
-            String address = request.getParameter("address");           //for the address table
-            String address2 = request.getParameter("address2");         //for address table
-            String district = request.getParameter("district");         //for address table
-            String city = request.getParameter("city");                 //for the city table
-            String postal_code = request.getParameter("postal_code");   //for address table
+            String address = request.getParameter("address");               //for the address table
+            String address2 = request.getParameter("address2");             //for address table
+            String district = request.getParameter("district");             //for address table
+            String city = request.getParameter("city");                     //for the city table
+            String postal_code = request.getParameter("postal_code");       //for address table
             //real problem is that country is null here
             int country_id = Integer.parseInt(request.getParameter("countries"));
             Date create_date = null;
