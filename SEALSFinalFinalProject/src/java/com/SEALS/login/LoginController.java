@@ -9,7 +9,6 @@ package com.SEALS.login;
 
 import com.SEALS.admin.Admin;
 import com.SEALS.customer.Country;
-
 import com.SEALS.customer.Cust;
 import com.SEALS.customer.CustDAO;
 import com.SEALS.film.Film;
@@ -83,6 +82,18 @@ public class LoginController extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        String forward = "";
+        
+        CustDAO custdao = new CustDAO(); 
+        String action = request.getParameter("action");
+        if(action.equalsIgnoreCase("returnHome"))
+        {
+            List<Film> films = custdao.getStaffMovies();
+            request.setAttribute("films", films);
+            forward = CUST_HOME;
+        }
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+        view.forward(request, response);
         processRequest(request, response);
     }
 
@@ -143,7 +154,7 @@ public class LoginController extends HttpServlet
                 forward = CUST_RELOGIN;//check customer
             }
         }
-        else //if(action.equalsIgnoreCase("returnHome"))
+        else if(action.equalsIgnoreCase("returnHome"))
         {
             List<Film> films = custdao.getStaffMovies();
             request.setAttribute("films", films);
