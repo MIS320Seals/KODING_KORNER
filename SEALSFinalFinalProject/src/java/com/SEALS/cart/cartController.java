@@ -39,10 +39,12 @@ public class cartController extends HttpServlet {
     private static String REPAYMENT = "/paymentPageRedo.jsp";
 
     private static String CUST_CHECK_OUT = "/custCheckOutPage.jsp";
+    
+    private static String CUST_CHECK_OUT_REDO = "/custCheckOutPageREDO.jsp";
 
     private static String CUST_RECEIPT = "/custReceipt.jsp";
 
-    private loginDAO dao = new loginDAO();
+    private cartDAO dao = new cartDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -120,7 +122,24 @@ public class cartController extends HttpServlet {
         } else if (action.equals("payment")) {
             //do the checkout actions
             //PAYMENt
-            forward = PAYMENT;
+            
+            //check to see if they have more than 5 dvds already checked out
+            //if 
+            int rentalNum = dao.checkCheckedOut();
+            int cartNum = dao.checkCartCount();
+                    
+            int x = rentalNum + cartNum;
+            
+            if (x > 5){
+                  List<Cart> carts = cart.ListCart(Cust.customerID);
+          //  forward = CUST_CHECK_OUT;
+            request.setAttribute("carts", carts);
+                forward = CUST_CHECK_OUT_REDO;
+            }
+            
+            else {
+                forward = PAYMENT; 
+            }
 
         } else if (action.equals("paymentValidation")) {
             boolean isValid = false;
@@ -245,6 +264,9 @@ public class cartController extends HttpServlet {
             return false;
         }
     }
+    
+    
+    
     //}
 
     // }
