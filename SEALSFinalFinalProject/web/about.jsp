@@ -16,7 +16,7 @@
         <%-- NAV BAR --%>
         <div class = "loginBar">
             <ul> 
-                <li><a href="custActionPage.jsp">Home</a></li>
+                <li><a href="LoginController?action=returnHome">Home</a></li>
                 <li><a href="myMovies.jsp">My Movies</a></li>
                 <li class = "active"><a href="about.jsp">About</a></li>
                 <li><a href="CustController?action=search">Search</a></li>
@@ -58,7 +58,7 @@
                     <td>Austin Lucas</td>
                     <td>
                         Is a 220 TA working for coding genius Josh Perdue.<br>
-                        He comes from a long history of strong coders, and is our<br>
+                        He comes from a long dynasty of strong coders, and is our<br>
                         most talented debugger. He is also has an eye for aesthetically <br> 
                         pleasing web page layouts. Drawing on these talents he was,<br>
                         promoted to CSO, or Chief Style Officer.

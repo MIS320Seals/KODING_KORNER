@@ -1,24 +1,16 @@
 package com.SEALS.admin;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-import com.SEALS.admin.Admin;
 import com.SEALS.customer.Address;
 import com.SEALS.customer.City;
 import com.SEALS.customer.Country;
 import com.SEALS.customer.CustDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -209,7 +201,7 @@ public class AdminController extends HttpServlet
             String postal_code = request.getParameter("postal_code");   //for address table
             //real problem is that country is null here
             int country_id = Integer.parseInt(request.getParameter("countries"));
-            Date create_date = null;
+            java.sql.Date create_date = null;
             try { create_date = (java.sql.Date) new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("create_date"));
             } catch (ParseException e){
                 e.printStackTrace();
@@ -255,7 +247,7 @@ public class AdminController extends HttpServlet
             //picture is currently being ignored
             admin.setEmail(email);
             admin.setStore_id(store_id);
-            admin.setActive(active);
+            admin.setActive(true);
             admin.setUsername(username);
             admin.setPassword(password);
             admin.setLast_update(create_date);

@@ -9,9 +9,9 @@ package com.SEALS.login;
 
 import com.SEALS.admin.Admin;
 import com.SEALS.customer.Country;
-
 import com.SEALS.customer.Cust;
 import com.SEALS.customer.CustDAO;
+import com.SEALS.film.Film;
 import com.SEALS.login.loginDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,13 +37,10 @@ public class LoginController extends HttpServlet
     private static final long serialVersionUID = 1L;
     private static String ADMIN_HOME = "/adminActionPage.jsp";
     private static String CUST_HOME =  "/custActionPage.jsp";
-
     private static String ADMIN_RELOGIN =  "/adminValidationPageError.jsp";
     private static String CUST_RELOGIN =  "/loginPageError.jsp";
     private static String CUST_REGISTER = "/custRegisterPage.jsp";
     
-   
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -85,6 +82,18 @@ public class LoginController extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        String forward = "";
+        
+        CustDAO custdao = new CustDAO(); 
+        String action = request.getParameter("action");
+        if(action.equalsIgnoreCase("returnHome"))
+        {
+            List<Film> films = custdao.getStaffMovies();
+            request.setAttribute("films", films);
+            forward = CUST_HOME;
+        }
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+        view.forward(request, response);
         processRequest(request, response);
     }
 
@@ -122,7 +131,7 @@ public class LoginController extends HttpServlet
             if(x != -1 ){
                 admin = dao.getAdminLoginWID(x);
                 request.setAttribute("adminBean", admin);
-                forward = ADMIN_HOME;
+                forward = ADMIN_HOME; //have to add LoginController=? for the home action 
             }
             else{
                 forward= ADMIN_RELOGIN;//check customer
@@ -136,6 +145,8 @@ public class LoginController extends HttpServlet
             if(x != -1 ){
                 customer = dao.getCustomerWID(x);
                 request.setAttribute("custBean", customer);
+                List<Film> films = custdao.getStaffMovies();
+                request.setAttribute("films", films);
                 forward = CUST_HOME;
                 Cust.customerID = customer.getCustomer_id();
             }
@@ -143,9 +154,13 @@ public class LoginController extends HttpServlet
                 forward = CUST_RELOGIN;//check customer
             }
         }
-
+        else if(action.equalsIgnoreCase("returnHome"))
+        {
+            List<Film> films = custdao.getStaffMovies();
+            request.setAttribute("films", films);
+            forward = CUST_HOME;
+        }
         RequestDispatcher view = request.getRequestDispatcher(forward);
-
         view.forward(request, response);
         processRequest(request, response);
     }

@@ -23,7 +23,11 @@
             <li><a href = "AdminController?action=viewSales">Sales</a></li>
             <li><a href="loginPage.jsp">Log-out</a></li>
         </ul>
-        <br>
+
+        <form action="AdminController" method="GET">
+            <input type="submit" value="Add New Staff Member" name="action" /> 
+        </form>
+
         <table>
             <thead>
                 <tr>
@@ -31,20 +35,18 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-            <c:forEach items="${emps}" var="e">
-                <tr>
-                    <td><c:out value="${e.staff_id}" /></td>
-                    <td><c:out value="${e.first_name}" /></td>
-                    <td><c:out value="${e.last_name}" /></td>
-                    <td><c:out value="${e.email}" /></td>
-                    <td><a href="AdminController?action=empinfo&empid=${e.staff_id}">View</a></td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-</body>
+                <c:forEach items="${emps}" var="e">
+                    <tr>
+                        <td><c:out value="${e.staff_id}" /></td>
+                        <td><c:out value="${e.first_name}" /></td>
+                        <td><c:out value="${e.last_name}" /></td>
+                        <td><c:out value="${e.email}" /></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </body>
 </html>
