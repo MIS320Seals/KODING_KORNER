@@ -50,7 +50,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach end="300" step="7" items="${films}" var="film">
+                    <c:forEach end="300" items="${films}" var="film">
                         <tr>
                             <!--<td><c:out value="${film.film_id}" /></td>-->
                             <td><c:out value="${film.title}" /></td>
