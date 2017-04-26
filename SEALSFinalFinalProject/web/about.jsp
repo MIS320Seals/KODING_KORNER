@@ -17,7 +17,7 @@
         <div class = "loginBar">
             <ul> 
                 <li><a href="LoginController?action=returnHome">Home</a></li>
-                <li><a href="myMovies.jsp">My Movies</a></li>
+                <li><a href="LoginController?action=userFilms">My Movies</a></li>
                 <li class = "active"><a href="about.jsp">About</a></li>
                 <li><a href="CustController?action=search">Search</a></li>
                 <li><a href="custCheckOutPage.jsp">Check Out</a></li>

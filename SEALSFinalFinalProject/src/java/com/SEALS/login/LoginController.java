@@ -12,6 +12,7 @@ import com.SEALS.customer.Country;
 import com.SEALS.customer.Cust;
 import com.SEALS.customer.CustDAO;
 import com.SEALS.film.Film;
+import com.SEALS.film.FilmDAO;
 import com.SEALS.login.loginDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,6 +41,7 @@ public class LoginController extends HttpServlet
     private static String ADMIN_RELOGIN =  "/adminValidationPageError.jsp";
     private static String CUST_RELOGIN =  "/loginPageError.jsp";
     private static String CUST_REGISTER = "/custRegisterPage.jsp";
+    //Cust cust = new Cust();
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -85,12 +87,28 @@ public class LoginController extends HttpServlet
         String forward = "";
         
         CustDAO custdao = new CustDAO(); 
+        FilmDAO filmdao = new FilmDAO();
         String action = request.getParameter("action");
         if(action.equalsIgnoreCase("returnHome"))
         {
             List<Film> films = custdao.getStaffMovies();
             request.setAttribute("films", films);
             forward = CUST_HOME;
+        }
+        else if (action.equalsIgnoreCase("userFilms"))
+        {
+            //needs to provide the customerID
+            request.setAttribute("CRfilms", filmdao.currentlyRentedFilms(Cust.customerID));
+            request.setAttribute("WLfilms", filmdao.customerWishListItems(Cust.customerID));
+            request.setAttribute("PRfilms", filmdao.previouslyRentedFilms(Cust.customerID));
+        }
+        else if (action.equalsIgnoreCase("deleteWishItem"))
+        {
+            
+        }
+        else if (action.equalsIgnoreCase("returnFilm"))
+        {
+            //code that Lauren is working on
         }
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);

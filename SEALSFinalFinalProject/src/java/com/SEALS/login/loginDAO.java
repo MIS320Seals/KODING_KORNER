@@ -20,7 +20,8 @@ import java.sql.SQLException;
 public class loginDAO
 {
      private Connection connection;
-
+    Cust cust = new Cust();
+    
     public loginDAO() {
         connection = com.SEALS.db.DBConnectionUtil.getConnection();
     }
@@ -78,14 +79,11 @@ public class loginDAO
             e.printStackTrace();
         }
         return x;
-
-    
-    
     }
     
      public int confirmCustomerLogin(String username, String password){
         //Select staff_id From staff where username ='Jon' and password is null
-        
+        //Cust cust = new Cust();
         int x = -1;
         try {
             PreparedStatement preparedStatement = connection.
@@ -98,19 +96,17 @@ public class loginDAO
             if (rs.next()) {
              
                 x = (rs.getInt("customer_id"));
-                
+                cust.customerID = x; 
               
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return x;
-
-   
     }
      
      public Cust getCustomerWID(int custID){
-        Cust cust = new Cust();
+        //Cust cust = new Cust();
         
          try {
             PreparedStatement preparedStatement = connection.
@@ -129,9 +125,6 @@ public class loginDAO
                cust.setActive(rs.getBoolean("active"));
                cust.setCreate_date(rs.getDate("create_date"));
                cust.setLast_update(rs.getDate("last_update"));
-               
-               
-              
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package com.SEALS.film;
 
+import com.SEALS.customer.Cust;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -40,6 +41,7 @@ public class FilmController extends HttpServlet
         dao = new FilmDAO();
         String forward = "/adminMovieUpdate.jsp";
         Film film = new Film();
+        Cust customer = new Cust();
 
          String action = request.getParameter("action");
         // String user = request.getParameter("user");
@@ -62,7 +64,22 @@ public class FilmController extends HttpServlet
             forward = "/adminMovie.jsp";
             //List<Film> films = dao.getAllFilms();
             request.setAttribute("films", dao.getAllFilms());
-        } 
+        }
+//        if (action.equalsIgnoreCase("userFilms"))
+//        {
+//            //needs to provide the customerID
+//            request.setAttribute("CRfilms", dao.currentlyRentedFilms());
+//            request.setAttribute("WLfilms", dao.customerWishListItems());
+//            request.setAttribute("PRfilms", dao.previouslyRentedFilms());
+//        }
+//        if (action.equalsIgnoreCase("deleteWishItem"))
+//        {
+//            
+//        }
+//        if (action.equalsIgnoreCase("returnFilm"))
+//        {
+//            //code that Lauren is working on
+//        }
         
         
         //fowards it to the specific page
