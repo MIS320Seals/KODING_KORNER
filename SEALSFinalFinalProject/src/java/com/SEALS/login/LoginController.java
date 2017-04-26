@@ -9,9 +9,10 @@ package com.SEALS.login;
 
 import com.SEALS.admin.Admin;
 import com.SEALS.customer.Country;
-
 import com.SEALS.customer.Cust;
 import com.SEALS.customer.CustDAO;
+import com.SEALS.film.Film;
+import com.SEALS.film.FilmDAO;
 import com.SEALS.login.loginDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,13 +38,11 @@ public class LoginController extends HttpServlet
     private static final long serialVersionUID = 1L;
     private static String ADMIN_HOME = "/adminActionPage.jsp";
     private static String CUST_HOME =  "/custActionPage.jsp";
-
     private static String ADMIN_RELOGIN =  "/adminValidationPageError.jsp";
     private static String CUST_RELOGIN =  "/loginPageError.jsp";
     private static String CUST_REGISTER = "/custRegisterPage.jsp";
+    //Cust cust = new Cust();
     
-   
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -85,6 +84,38 @@ public class LoginController extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        String forward = "";
+        
+        CustDAO custdao = new CustDAO(); 
+        FilmDAO filmdao = new FilmDAO();
+        String action = request.getParameter("action");
+        if(action.equalsIgnoreCase("returnHome"))
+        {
+            List<Film> films = custdao.getStaffMovies();
+            request.setAttribute("films", films);
+            forward = CUST_HOME;
+        }
+        //fills out the three tables on the movies page
+        else if (action.equalsIgnoreCase("userFilms"))
+        {
+            //needs to provide the customerID
+            request.setAttribute("CRfilms", filmdao.currentlyRentedFilms(Cust.customerID));     //code being done by lauren
+            request.setAttribute("WLfilms", filmdao.customerWishListItems(Cust.customerID));
+            request.setAttribute("PRfilms", filmdao.previouslyRentedFilms(Cust.customerID));    //need to create a whole new table for this, should see if people still want to do this or nah
+        }
+        //deletes the item from the wishlist
+        else if (action.equalsIgnoreCase("deleteWishItem"))
+        {
+            int film_id = Integer.parseInt(request.getParameter("film_id"));
+            filmdao.removeFromWishlist(Cust.customerID, film_id);
+        }
+        //will return a film so it so no longer currently rented
+        else if (action.equalsIgnoreCase("returnFilm"))
+        {
+            //code that Lauren is working on
+        }
+        RequestDispatcher view = request.getRequestDispatcher(forward);
+        view.forward(request, response);
         processRequest(request, response);
     }
 
@@ -122,7 +153,7 @@ public class LoginController extends HttpServlet
             if(x != -1 ){
                 admin = dao.getAdminLoginWID(x);
                 request.setAttribute("adminBean", admin);
-                forward = ADMIN_HOME;
+                forward = ADMIN_HOME; //have to add LoginController=? for the home action 
             }
             else{
                 forward= ADMIN_RELOGIN;//check customer
@@ -136,6 +167,8 @@ public class LoginController extends HttpServlet
             if(x != -1 ){
                 customer = dao.getCustomerWID(x);
                 request.setAttribute("custBean", customer);
+                List<Film> films = custdao.getStaffMovies();
+                request.setAttribute("films", films);
                 forward = CUST_HOME;
                 Cust.customerID = customer.getCustomer_id();
             }
@@ -143,9 +176,13 @@ public class LoginController extends HttpServlet
                 forward = CUST_RELOGIN;//check customer
             }
         }
-
+        else if(action.equalsIgnoreCase("returnHome"))
+        {
+            List<Film> films = custdao.getStaffMovies();
+            request.setAttribute("films", films);
+            forward = CUST_HOME;
+        }
         RequestDispatcher view = request.getRequestDispatcher(forward);
-
         view.forward(request, response);
         processRequest(request, response);
     }

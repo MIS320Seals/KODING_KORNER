@@ -128,23 +128,6 @@ public class CustDAO {
         return cust_id; 
     }
     
-    //gets the last location
-//    public byte[] getLastLocation()
-//    {
-//        byte[] location = null; 
-//        try {
-//            Statement statement = connection.createStatement();
-//            ResultSet rs = statement.executeQuery("select location from sakila.address order by location desc");
-//            if(rs.next())
-//            {
-//                location = rs.getBytes("location"); 
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return location;
-//    }
-    
     //gets the last country name based off of the id
     public String getCustCountry(int countryID)
     {
@@ -220,6 +203,95 @@ public class CustDAO {
         }
     }
 
+    //creates a list of the movies we have chosen
+    public List<Film> getStaffMovies()
+    {
+        List<Film> selectedMovies = new ArrayList<Film>();
+        try {
+            Film film1 = new Film();
+            Film film2 = new Film();
+            Film film3 = new Film();
+            Film film4 = new Film();
+            
+            Statement statement = connection.createStatement();
+            ResultSet rs1 = statement.executeQuery("select * from sakila.film where film_id=29");
+            if(rs1.next())
+            {
+                film1.setFilm_id(rs1.getInt("film_id"));
+                film1.setTitle(rs1.getString("title"));
+                film1.setDescription(rs1.getString("description"));
+                film1.setRelease_year(rs1.getDate("release_year"));
+                film1.setLanguage_id(rs1.getInt("language_id"));
+                film1.setOriginal_language_id(rs1.getInt("original_language_id"));
+                film1.setRental_duration(rs1.getInt("rental_duration"));
+                film1.setRental_rate(rs1.getFloat("rental_rate"));
+                film1.setLength(rs1.getInt("length"));
+                film1.setReplacement_cost(rs1.getFloat("replacement_cost"));
+                film1.setRating(rs1.getString("rating"));
+                film1.setSpecial_features(rs1.getString("special_features"));
+                film1.setLast_update(rs1.getDate("last_update"));
+                selectedMovies.add(film1);
+            }
+            ResultSet rs2 = statement.executeQuery("select * from sakila.film where film_id=133");
+            if(rs2.next())
+            {
+                film2.setFilm_id(rs2.getInt("film_id"));
+                film2.setTitle(rs2.getString("title"));
+                film2.setDescription(rs2.getString("description"));
+                film2.setRelease_year(rs2.getDate("release_year"));
+                film2.setLanguage_id(rs2.getInt("language_id"));
+                film2.setOriginal_language_id(rs2.getInt("original_language_id"));
+                film2.setRental_duration(rs2.getInt("rental_duration"));
+                film2.setRental_rate(rs2.getFloat("rental_rate"));
+                film2.setLength(rs2.getInt("length"));
+                film2.setReplacement_cost(rs2.getFloat("replacement_cost"));
+                film2.setRating(rs2.getString("rating"));
+                film2.setSpecial_features(rs2.getString("special_features"));
+                film2.setLast_update(rs2.getDate("last_update"));
+                selectedMovies.add(film2);
+            }
+            ResultSet rs3 = statement.executeQuery("select * from sakila.film where film_id=284");
+            if(rs3.next())
+            {
+                film3.setFilm_id(rs3.getInt("film_id"));
+                film3.setTitle(rs3.getString("title"));
+                film3.setDescription(rs3.getString("description"));
+                film3.setRelease_year(rs3.getDate("release_year"));
+                film3.setLanguage_id(rs3.getInt("language_id"));
+                film3.setOriginal_language_id(rs3.getInt("original_language_id"));
+                film3.setRental_duration(rs3.getInt("rental_duration"));
+                film3.setRental_rate(rs3.getFloat("rental_rate"));
+                film3.setLength(rs3.getInt("length"));
+                film3.setReplacement_cost(rs3.getFloat("replacement_cost"));
+                film3.setRating(rs3.getString("rating"));
+                film3.setSpecial_features(rs3.getString("special_features"));
+                film3.setLast_update(rs3.getDate("last_update"));
+                selectedMovies.add(film3);
+            }
+            ResultSet rs4 = statement.executeQuery("select * from sakila.film where film_id=662");
+            if(rs4.next())
+            {
+                film4.setFilm_id(rs4.getInt("film_id"));
+                film4.setTitle(rs4.getString("title"));
+                film4.setDescription(rs4.getString("description"));
+                film4.setRelease_year(rs4.getDate("release_year"));
+                film4.setLanguage_id(rs4.getInt("language_id"));
+                film4.setOriginal_language_id(rs4.getInt("original_language_id"));
+                film4.setRental_duration(rs4.getInt("rental_duration"));
+                film4.setRental_rate(rs4.getFloat("rental_rate"));
+                film4.setLength(rs4.getInt("length"));
+                film4.setReplacement_cost(rs4.getFloat("replacement_cost"));
+                film4.setRating(rs4.getString("rating"));
+                film4.setSpecial_features(rs4.getString("special_features"));
+                film4.setLast_update(rs4.getDate("last_update"));
+                selectedMovies.add(film4);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return selectedMovies;
+    }
+    
     //gets all the countrys
     public List<Country> getAllCountries()
     {
@@ -240,6 +312,7 @@ public class CustDAO {
         }
         return countries;
     }
+    
     //method to display all products from database
     public List<Cust> getAllCustomers() {
         List<Cust> customers = new ArrayList<Cust>();

@@ -41,9 +41,7 @@
                     </tbody>
                 </table>
             </form>
-                        <form action="AdminController" method="GET">
-                            <input type="submit" value="Add New Staff Member" name="action" /> 
-                        </form>
+                        
         </div>
     </body>
 </html>

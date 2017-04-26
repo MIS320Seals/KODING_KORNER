@@ -10,6 +10,7 @@ import java.sql.*;
 import com.SEALS.login.*;
 import com.SEALS.admin.Admin;
 import com.SEALS.customer.Cust;
+import com.SEALS.customer.CustDAO;
 import com.SEALS.film.Film;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,10 +40,12 @@ public class cartController extends HttpServlet {
     private static String REPAYMENT = "/paymentPageRedo.jsp";
 
     private static String CUST_CHECK_OUT = "/custCheckOutPage.jsp";
+    
+    private static String CUST_CHECK_OUT_REDO = "/custCheckOutPageREDO.jsp";
 
     private static String CUST_RECEIPT = "/custReceipt.jsp";
 
-    private loginDAO dao = new loginDAO();
+    private cartDAO dao = new cartDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -85,7 +88,7 @@ public class cartController extends HttpServlet {
         String forward = "";
 
         cartDAO cart = new cartDAO();
-
+        CustDAO custdao = new CustDAO();
         String action = request.getParameter("action");
 
         if (action.equals("addCart")) {
@@ -96,6 +99,8 @@ public class cartController extends HttpServlet {
             int rental_duration = Integer.parseInt(request.getParameter("rental_duration"));
 
             cart.addCart(title, film_id, price, rental_duration);
+            List<Film> films = custdao.getStaffMovies();
+            request.setAttribute("films", films);
             forward = CUST_HOME;
         } else if (action.equals("addWishList")) {
             String title = request.getParameter("title");
@@ -105,13 +110,14 @@ public class cartController extends HttpServlet {
             int rental_duration = Integer.parseInt(request.getParameter("rental_duration"));
 
             cart.addWish(title, film_id, price, rental_duration);
+            List<Film> films = custdao.getStaffMovies();
+            request.setAttribute("films", films);
             forward = CUST_HOME;
         } else if (action.equals("checkOutCart")) {
             List<Cart> carts = cart.ListCart(Cust.customerID);
             forward = CUST_CHECK_OUT;
             request.setAttribute("carts", carts);
         } else if (action.equals("removeCartItem")) {
-
             int cartID = Integer.parseInt(request.getParameter("cart_id"));
             cart.removeCart(cartID);
             List<Cart> carts = cart.ListCart(Cust.customerID);
@@ -120,7 +126,24 @@ public class cartController extends HttpServlet {
         } else if (action.equals("payment")) {
             //do the checkout actions
             //PAYMENt
-            forward = PAYMENT;
+            
+            //check to see if they have more than 5 dvds already checked out
+            //if 
+            int rentalNum = dao.checkCheckedOut();
+            int cartNum = dao.checkCartCount();
+                    
+            int x = rentalNum + cartNum;
+            
+            if (x > 5){
+                  List<Cart> carts = cart.ListCart(Cust.customerID);
+          //  forward = CUST_CHECK_OUT;
+            request.setAttribute("carts", carts);
+                forward = CUST_CHECK_OUT_REDO;
+            }
+            
+            else {
+                forward = PAYMENT; 
+            }
 
         } else if (action.equals("paymentValidation")) {
             boolean isValid = false;
@@ -245,6 +268,9 @@ public class cartController extends HttpServlet {
             return false;
         }
     }
+    
+    
+    
     //}
 
     // }

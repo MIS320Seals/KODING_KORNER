@@ -232,5 +232,43 @@ public class cartDAO {
             }
         
     }
+    
+    public int checkCheckedOut()
+    {
+        int x = 0;
+        try {
+             PreparedStatement preparedStatement = connection
+                        .prepareStatement("select count(*) as total from sakila.rental where "
+                    + "return_date is null AND customer_id=?");
+            
+            preparedStatement.setInt(1, Cust.customerID);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                x = rs.getInt("total");
+            } 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return x; 
+    }
+    
+    public int checkCartCount()
+    {
+        int x = 0;
+        try {
+             PreparedStatement preparedStatement = connection
+                        .prepareStatement("select count(*) as total from sakila.cart where "
+                    + "customer_id=?");
+            
+            preparedStatement.setInt(1, Cust.customerID);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                x = rs.getInt("total");
+            } 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return x; 
+    }
 
 }
