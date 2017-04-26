@@ -1,6 +1,5 @@
 package com.SEALS.film;
 
-
 import java.sql.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,12 +21,12 @@ import java.util.List;
  */
 public class FilmDAO {
 
-   Connection connection;
+    Connection connection;
 
     public FilmDAO() {
         connection = com.SEALS.db.DBConnectionUtil.getConnection();
     }
-    
+
 //    insert into statement / communication with database
     public void addFilm(Film film) {
         try {
@@ -60,15 +59,15 @@ public class FilmDAO {
 //    delete product / remove from database 
     public void deleteFilm(int film_id) {
         try {
-            PreparedStatement preparedStatement = 
-                    connection.prepareStatement("delete from sakila.film where film_id =" + film_id);
-           // preparedStatement.setInt(1, film_id);
+            PreparedStatement preparedStatement
+                    = connection.prepareStatement("delete from sakila.film where film_id =" + film_id);
+            // preparedStatement.setInt(1, film_id);
             preparedStatement.executeUpdate();
-        }
-        catch(SQLException e) {
+        } catch (SQLException e) {
         }
     }
-  //  update film and refresh from database
+    //  update film and refresh from database
+
     public void updateFilm(Film film) {
         try {
             PreparedStatement preparedStatement = connection
@@ -76,7 +75,7 @@ public class FilmDAO {
                             + "rental_rate=?, length=?, replacement_cost=?, rating=?, "
                             + "last_update=?"
                             + "where film_id=?");
-            
+
             //preparedStatement.setInt(1, film.getFilm_id());
             preparedStatement.setString(1, film.getTitle());
             preparedStatement.setString(2, film.getDescription());
@@ -96,7 +95,7 @@ public class FilmDAO {
             e.printStackTrace();
         }
     }
-    
+
 //    method to display all products from database
     public List<Film> getAllFilms() {
         List<Film> films = new ArrayList<>();
@@ -125,6 +124,7 @@ public class FilmDAO {
         return films;
     }
 //    display product if productid is certain number
+
     public Film getFilmById(int film_id) {
         Film film = new Film();
         try {
@@ -134,7 +134,7 @@ public class FilmDAO {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-             
+
                 film.setFilm_id(rs.getInt("film_id"));
                 film.setTitle(rs.getString("title"));
                 film.setDescription(rs.getString("description"));
@@ -148,7 +148,7 @@ public class FilmDAO {
                 film.setRating(rs.getString("rating"));
                 film.setSpecial_features(rs.getString("special_features"));
                 film.setLast_update(rs.getDate("last_update"));
-            
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -156,10 +156,6 @@ public class FilmDAO {
 
         return film;
     }
-    
-    
-    
-    //make method to display rentals for each customer
-    
+
     
 }

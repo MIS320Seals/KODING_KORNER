@@ -51,18 +51,19 @@ public class FilmController extends HttpServlet
             forward = "/adminMovie.jsp";
             request.setAttribute("films", dao.getAllFilms());
         }
-        if (action.equals("edit")){
+        else if (action.equals("edit")){
             forward = "/adminMovieUpdate.jsp";
             int filmId = Integer.parseInt(request.getParameter("filmId"));
             film = dao.getFilmById(filmId);
             request.setAttribute("film", film);
         }
-        if (action.equals("list"))
+        else if (action.equals("list"))
         {
             forward = "/adminMovie.jsp";
             //List<Film> films = dao.getAllFilms();
             request.setAttribute("films", dao.getAllFilms());
-        } 
+        }
+        
         
         
         //fowards it to the specific page

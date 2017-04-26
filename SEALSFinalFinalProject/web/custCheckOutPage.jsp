@@ -17,16 +17,18 @@
         <%-- NAV BAR --%>
         <div class = "loginBar">
             <ul> 
-                <li><a href="custActionPage.jsp">Home</a></li>
-                <li><a href="myMovies.jsp">My Movies</a>
-                                    <div class="dropdown-content">
+                <li class = "active"><a href="custActionPage.jsp">Home</a></li>
+                <li><a>My Movies</a>
+                        <div class="dropdown-content">
+                        <a href="RentalController?action=displayReturns">Return Movie</a>
                         <a href="#">Checked Out</a>
                         <a href="#">History</a>
-                        <a href="#">Wishlist</a>
+                        <a href="cartController?action=displayCart">Cart</a>
+                        <a href="CustController?action=TestAddToCart&customer_id=<c:out value="${custBean.customer_id}"/>">Test Checking Out</a>
                     </div></li></li>
                 <li><a href="about.jsp">About</a></li>
                 <li><a href="CustController?action=search">Search</a></li>
-                <li class = "active" ><a href="custCheckOutPage.jsp">Check Out</a></li>
+                <li><a href="cartController?action=checkOutCart">Check Out</a></li>
                 <li><a href="loginPage.jsp">Log-out</a></li>
             </ul>
         </div>
