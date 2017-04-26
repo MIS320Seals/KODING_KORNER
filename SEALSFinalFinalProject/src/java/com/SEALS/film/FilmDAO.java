@@ -193,32 +193,35 @@ public class FilmDAO {
     }
     
     //gets all the previously rented movies by customer
-    public List<Film> previouslyRentedFilms(int customer_id)
+    public List<Rental> previouslyRentedFilms(int customer_id)
     {
-        List<Film> films = new ArrayList<>();
-//        try {
-//            Statement statement = connection.createStatement();
-//            ResultSet rs = statement.executeQuery("select * from sakila.film");
-//            while (rs.next()) {
-//                Film film = new Film();
-//                film.setFilm_id(rs.getInt("film_id"));
-//                film.setTitle(rs.getString("title"));
-//                film.setDescription(rs.getString("description"));
-//                film.setRelease_year(rs.getDate("release_year"));
-//                film.setLanguage_id(rs.getInt("language_id"));
-//                film.setOriginal_language_id(rs.getInt("original_language_id"));
-//                film.setRental_duration(rs.getInt("rental_duration"));
-//                film.setRental_rate(rs.getFloat("rental_rate"));
-//                film.setLength(rs.getInt("length"));
-//                film.setReplacement_cost(rs.getFloat("replacement_cost"));
-//                film.setRating(rs.getString("rating"));
-//                film.setSpecial_features(rs.getString("special_features"));
-//                film.setLast_update(rs.getDate("last_update"));
-//                films.add(film);
-//            }
-//        } catch (Exception ex) {
-//        }
-        return films;
+        List<Rental> rentals = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select r.inventory_id, r.rental_id, r.rental_date, f.title, f.rental_rate, f.rental_duration,\n"
+                    + " DATEDIFF(CURRENT_TIMESTAMP, rental_date) as DaysRented\n"
+                    + "from rental as r\n"
+                    + "join inventory as i\n"
+                    + "on r.inventory_id = i.inventory_id\n"
+                    + "join film as f\n"
+                    + "on f.film_id = i.film_id\n"
+                    + "where customer_id =" + Cust.customerID);
+            while (rs.next()) {
+                Rental rental = new Rental();
+                rental.setInventoryID(rs.getInt("inventory_id"));
+                rental.setRentalID(rs.getInt("rental_id"));
+                rental.setRentalDate(rs.getDate("rental_date"));
+                rental.setMovieTitle(rs.getString("title"));
+                rental.setRentalRate(rs.getInt("rental_rate"));
+                rental.setRentalDuration(rs.getInt("rental_duration"));
+                rental.setDaysRented(rs.getInt("DaysRented"));
+                rental.setDaysLeft(rental.getRentalDuration() - rental.getDaysRented());
+                rentals.add(rental);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rentals;
     }
     
     //gets all the wishlist films

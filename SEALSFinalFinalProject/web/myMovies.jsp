@@ -40,30 +40,23 @@
             <table>
                 <thead>
                     <tr>
-                        <!--<th>Film ID</th>-->
                         <th>Title</th>
                         <th>Description</th>
                         <th>Price</th>
                         <th>Release Year</th>
                         <th>Rating</th>
-                        <!--<th>Rental Duration</th>-->
                         <th colspan=2>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach end="300" items="${CRfilms}" var="film">
                         <tr>
-                            <!--<td><c:out value="${film.film_id}" /></td>-->
                             <td><c:out value="${film.title}" /></td>
                             <td><c:out value="${film.description}" /></td>
                             <td><c:out value="${film.rental_rate}" /></td>
                             <td><c:out value="${film.release_year}" /></td>
                             <td><c:out value="${film.rating}" /></td>
-                            <!--<td><c:out value="${film.rental_duration}" /></td>-->
-
                             <td><a href="LoginController?action=returnFilm&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>&rental_duration=<c:out value="${film.rental_duration}"/>">Return</a></td>
-                            <!--<td><a href="cartController?action=addWishList&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>&rental_duration=<c:out value="${film.rental_duration}"/>">Add To Wish List</a></td>-->
-
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -74,28 +67,22 @@
             <table>
                 <thead>
                     <tr>
-                        <!--<th>Film ID</th>-->
                         <th>Title</th>
                         <th>Description</th>
                         <th>Price</th>
                         <th>Release Year</th>
                         <th>Rating</th>
-                        <!--<th>Rental Duration</th>-->
                         <th colspan=2>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach end="300" items="${WLfilms}" var="film">
                         <tr>
-                            <!--<td><c:out value="${film.film_id}" /></td>-->
                             <td><c:out value="${film.title}" /></td>
                             <td><c:out value="${film.description}" /></td>
                             <td><c:out value="${film.rental_rate}" /></td>
                             <td><c:out value="${film.release_year}" /></td>
                             <td><c:out value="${film.rating}" /></td>
-                            <!--<td><c:out value="${film.rental_duration}" /></td>-->
-
-                            <!--<td><a href="cartController?action=addCart&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>&rental_duration=<c:out value="${film.rental_duration}"/>">Add To Cart</a></td>-->
                             <td><a href="LoginController?action=deleteWishItem&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>&rental_duration=<c:out value="${film.rental_duration}"/>">Remove</a></td>
 
                         </tr>
@@ -108,30 +95,19 @@
             <table>
                 <thead>
                     <tr>
-                        <!--<th>Film ID</th>-->
+                        <th>Rental Date</th>
                         <th>Title</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Release Year</th>
-                        <th>Rating</th>
-                        <!--<th>Rental Duration</th>-->
-                        <!--<th colspan=2>Action</th>-->
+                        <th>Rental Rate</th>
+                        <th>Days Rented</th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach end="300" items="${PRfilms}" var="film">
                         <tr>
-                            <!--<td><c:out value="${film.film_id}" /></td>-->
-                            <td><c:out value="${film.title}" /></td>
-                            <td><c:out value="${film.description}" /></td>
-                            <td><c:out value="${film.rental_rate}" /></td>
-                            <td><c:out value="${film.release_year}" /></td>
-                            <td><c:out value="${film.rating}" /></td>
-                            <!--<td><c:out value="${film.rental_duration}" /></td>-->
-
-                            <!--<td><a href="cartController?action=addCart&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>&rental_duration=<c:out value="${film.rental_duration}"/>">Add To Cart</a></td>-->
-                            <!--<td><a href="cartController?action=addWishList&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>&rental_duration=<c:out value="${film.rental_duration}"/>">Add To Wish List</a></td>-->
-
+                            <td><c:out value="${rental.rental_date}" /></td>
+                            <td><c:out value="${rental.title}" /></td>
+                            <td><c:out value="${rental.rental_rate}" /></td>
+                            <td><c:out value="${rental.DaysRented}" /></td>
                         </tr>
                     </c:forEach>
                 </tbody>
