@@ -1,6 +1,7 @@
 package com.SEALS.film;
 
 
+import com.SEALS.customer.Cust;
 import java.sql.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -248,6 +249,19 @@ public class FilmDAO {
         return films;
     }
     
+    public void removeFromWishlist(int customer_id, int film_id){
+      
+            try {
+                PreparedStatement preparedStatement = connection
+                        .prepareStatement("delete from wishlist where customer_id =? AND film_id=?");
+                preparedStatement.setInt(1, customer_id);
+                preparedStatement.setInt(2, film_id);
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        
+    }
     //make method to display rentals for each customer
     
     

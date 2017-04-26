@@ -118,7 +118,6 @@ public class cartController extends HttpServlet {
             forward = CUST_CHECK_OUT;
             request.setAttribute("carts", carts);
         } else if (action.equals("removeCartItem")) {
-
             int cartID = Integer.parseInt(request.getParameter("cart_id"));
             cart.removeCart(cartID);
             List<Cart> carts = cart.ListCart(Cust.customerID);

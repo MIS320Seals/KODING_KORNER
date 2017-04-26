@@ -95,17 +95,21 @@ public class LoginController extends HttpServlet
             request.setAttribute("films", films);
             forward = CUST_HOME;
         }
+        //fills out the three tables on the movies page
         else if (action.equalsIgnoreCase("userFilms"))
         {
             //needs to provide the customerID
-            request.setAttribute("CRfilms", filmdao.currentlyRentedFilms(Cust.customerID));
+            request.setAttribute("CRfilms", filmdao.currentlyRentedFilms(Cust.customerID));     //code being done by lauren
             request.setAttribute("WLfilms", filmdao.customerWishListItems(Cust.customerID));
-            request.setAttribute("PRfilms", filmdao.previouslyRentedFilms(Cust.customerID));
+            request.setAttribute("PRfilms", filmdao.previouslyRentedFilms(Cust.customerID));    //need to create a whole new table for this, should see if people still want to do this or nah
         }
+        //deletes the item from the wishlist
         else if (action.equalsIgnoreCase("deleteWishItem"))
         {
-            
+            int film_id = Integer.parseInt(request.getParameter("film_id"));
+            filmdao.removeFromWishlist(Cust.customerID, film_id);
         }
+        //will return a film so it so no longer currently rented
         else if (action.equalsIgnoreCase("returnFilm"))
         {
             //code that Lauren is working on

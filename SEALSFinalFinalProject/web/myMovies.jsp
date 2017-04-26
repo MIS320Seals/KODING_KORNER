@@ -61,7 +61,7 @@
                             <td><c:out value="${film.rating}" /></td>
                             <!--<td><c:out value="${film.rental_duration}" /></td>-->
 
-                            <td><a href="FilmController?action=returnFilm&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>&rental_duration=<c:out value="${film.rental_duration}"/>">Add To Cart</a></td>
+                            <td><a href="LoginController?action=returnFilm&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>&rental_duration=<c:out value="${film.rental_duration}"/>">Return</a></td>
                             <!--<td><a href="cartController?action=addWishList&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>&rental_duration=<c:out value="${film.rental_duration}"/>">Add To Wish List</a></td>-->
 
                         </tr>
@@ -96,7 +96,7 @@
                             <!--<td><c:out value="${film.rental_duration}" /></td>-->
 
                             <!--<td><a href="cartController?action=addCart&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>&rental_duration=<c:out value="${film.rental_duration}"/>">Add To Cart</a></td>-->
-                            <td><a href="FilmController?action=deleteWishItem&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>&rental_duration=<c:out value="${film.rental_duration}"/>">Remove</a></td>
+                            <td><a href="LoginController?action=deleteWishItem&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>&rental_duration=<c:out value="${film.rental_duration}"/>">Remove</a></td>
 
                         </tr>
                     </c:forEach>
