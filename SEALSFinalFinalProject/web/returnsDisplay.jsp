@@ -56,9 +56,8 @@
                             <td><c:out value="${return.daysRented}" /></td>
                             <td><c:out value="${return.daysLeft}" /></td>
 
-                           <!-- <td><a href="cartController?action=removeCartItem&cart_id=<c:out value="${cart.cartID}"/>">Remove</a></td>
-                            <td><a href="cartController?action=addWishList&film_id=<c:out value="${cart.filmID}"/>&title=<c:out value="${cart.title}"/>&price=<c:out value="${cart.price}"/>&rental_duration=<c:out value="${cart.rentalDuration}"/>">Add To Wish List</a></td>
--->
+                           <td><a href="RentalController?action=returnItem&rentalID=<c:out value="${return.rentalID}"/>&daysLeft=<c:out value="${return.daysLeft}"/>&rentalRate=<c:out value="${return.rentalRate}"/>">Return</a></td>
+                           
                         </tr>
                     </c:forEach>
                 </tbody>

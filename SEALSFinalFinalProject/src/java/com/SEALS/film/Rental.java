@@ -25,7 +25,18 @@ public class Rental {
     private int rentalDuration;
     private int daysLeft;
     private int daysRented;
+    private double lateFee;
 
+    public double getLateFee() {
+        return lateFee;
+    }
+
+    public void setLateFee(double lateFee) {
+        this.lateFee = lateFee;
+    }
+    
+    
+    
     private RentalDAO dao = new RentalDAO();
 
     public int getDaysRented() {

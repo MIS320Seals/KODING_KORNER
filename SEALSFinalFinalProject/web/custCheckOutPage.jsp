@@ -19,6 +19,7 @@
             <ul> 
 
                 <li class = "active"><a href="custActionPage.jsp">Home</a></li>
+                <li> <a href="RentalController?action=displayReturns">Return Movie</a></li>
                 <li><a>My Movies</a>
                         <div class="dropdown-content">
                         <a href="RentalController?action=displayReturns">Return Movie</a>

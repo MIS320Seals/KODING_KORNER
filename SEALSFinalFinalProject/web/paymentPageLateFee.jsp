@@ -3,7 +3,8 @@
     Created on : Apr 18, 2017, 2:20:37 PM
     Author     : Lauren
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,8 @@
         <title>Payment Page</title>
     </head>
     <body>
-        <h4> Please enter valid card information </h4>
+         <h2  value="<c:out value="${rental.lateFee}" />"> You Have a late fee of </h2>
+        
         <form action="cartController" >
             <table border="0">
                 <tbody>
