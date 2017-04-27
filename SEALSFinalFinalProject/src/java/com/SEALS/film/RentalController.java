@@ -1,5 +1,6 @@
 package com.SEALS.film;
 
+import static com.SEALS.cart.cartController.validatePayment;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,6 +23,11 @@ public class RentalController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String PAYMENT_PAGE_LATE_FEE = "/paymentPageLateFee.jsp";
     private static final String PAYMENT_PAGE_LATE_FEE_REDO = "/paymentPageLateFeeRedo.jsp";
+        private static String PAYMENT_LATE_FEE = "/paymentPageLateFee.jsp";
+    private static String PAYMENT_LATE_FEE_REDO = "/paymentPageLateFeeRedo.jsp";
+    private static String CUST_CHECK_OUT_REDO = "/custCheckOutPageREDO.jsp";
+    private static String CUST_RECEIPT = "/custReceipt.jsp";
+    private static String RETURNS = "/returnsDisplay.jsp";
     //  private static String RESPONSE = "/response.jsp";
     RentalDAO dao;
 
@@ -40,6 +46,7 @@ public class RentalController extends HttpServlet {
         String forward = "/adminMovieUpdate.jsp";
         Rental rental = new Rental();
 
+        RentalDAO dao = new RentalDAO();
         String action = request.getParameter("action");
         List<Rental> rentals = new ArrayList<>();
         // String user = request.getParameter("user");
@@ -51,6 +58,7 @@ public class RentalController extends HttpServlet {
         } else if (action.equals("returnItem")) {
 
             int returnID = Integer.parseInt(request.getParameter("rentalID"));
+            rental.setRentalID(returnID);
             double price = Double.parseDouble(request.getParameter("rentalRate"));
             int daysLeft = Integer.parseInt(request.getParameter("daysLeft"));
             if (daysLeft < 0) {
@@ -64,15 +72,33 @@ public class RentalController extends HttpServlet {
                 request.setAttribute("rental", rental);
 
             } else {
-                //return the movie
+               dao.returnMovie(Integer.parseInt(request.getParameter("rentalID")));
+               request.setAttribute("returns", dao.getCurrentRentals());
+               forward = RETURNS;
             }
 
         }
-
+        else if (action.equals("paymentLateFeeValidation")){
+            
+            boolean isValid = false;
+            String ccnum = request.getParameter("username");
+            int rentalID = Integer.parseInt(request.getParameter("rentalID"));
+            isValid = validatePayment(ccnum);
+            if (isValid == true) {
+                forward = RETURNS;
+                
+                dao.returnMovie(rentalID);
+                request.setAttribute("returns", dao.getCurrentRentals());
+ 
+            } else {
+                forward = PAYMENT_LATE_FEE_REDO;
+            }
+        }
         //fowards it to the specific page
         RequestDispatcher view = request.getRequestDispatcher(forward);
 
         view.forward(request, response);
+    
     }
 
     /**
@@ -89,3 +115,5 @@ public class RentalController extends HttpServlet {
 
     }
 }
+    
+

@@ -38,12 +38,13 @@ public class cartController extends HttpServlet {
     private static String CUST_HOME = "/custActionPage.jsp";
     private static String PAYMENT = "/paymentPage.jsp";
     private static String REPAYMENT = "/paymentPageRedo.jsp";
-
     private static String CUST_CHECK_OUT = "/custCheckOutPage.jsp";
-    
+    private static String PAYMENT_LATE_FEE = "/paymentPageLateFee.jsp";
+    private static String PAYMENT_LATE_FEE_REDO = "/paymentPageLateFeeRedo.jsp";
     private static String CUST_CHECK_OUT_REDO = "/custCheckOutPageREDO.jsp";
-
     private static String CUST_RECEIPT = "/custReceipt.jsp";
+    private static String RETURNS = "/returnsDisplay.jsp";
+
 
     private cartDAO dao = new cartDAO();
 
@@ -157,7 +158,21 @@ public class cartController extends HttpServlet {
                 forward = REPAYMENT;
             }
         }
+        else if (action.equals("paymentLateFeeValidation")){
+            
+            boolean isValid = false;
+            String ccnum = request.getParameter("username");
+            isValid = validatePayment(ccnum);
+            if (isValid == true) {
+                forward = RETURNS;
+                
+ 
+            } else {
+                forward = PAYMENT_LATE_FEE_REDO;
+            }
+        }
 
+       
         RequestDispatcher view = request.getRequestDispatcher(forward);
 
         view.forward(request, response);

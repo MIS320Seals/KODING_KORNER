@@ -132,6 +132,10 @@ public class Rental {
     public void setStaffID(int staffID) {
         this.staffID = staffID;
     }
+
+    void returnMovie(int rentalID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     
