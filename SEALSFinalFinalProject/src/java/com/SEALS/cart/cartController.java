@@ -152,6 +152,14 @@ public class cartController extends HttpServlet {
             isValid = validatePayment(ccnum);
             if (isValid == true) {
                 List<Cart> carts = cart.ListCart(Cust.customerID);
+                int sum = 0;
+                for(int x = 0; x < carts.toArray().length; x++){
+                    sum += carts.get(x).getPrice();
+                }
+                
+                Cart cartSum = new Cart();
+                cartSum.setPrice(sum);
+                request.setAttribute("priceSum", cartSum);
                 
                 forward = CUST_RECEIPT;
                 cart.checkOut();

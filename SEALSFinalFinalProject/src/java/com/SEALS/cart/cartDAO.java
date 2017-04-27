@@ -182,33 +182,43 @@ public class cartDAO {
         return x;
     }
     
-    void checkOut() {
+    double checkOut() {
 
         List<Cart> carts = ListCart(Cust.customerID);
         
+        double total = 0;
         int count = 0;
         while (count < carts.size()) {
+            int i = getInventoryID(carts.get(count).getFilmID());
+            if(i != -1){
             try {
                 PreparedStatement preparedStatement = connection
                         .prepareStatement("insert into rental(inventory_id, customer_id, staff_id) values (?,?,?)");
-                int i = getInventoryID(carts.get(count).getFilmID());
+                
                 int s = getStoreID(i);
                 int staffID = getStaffID(s);
+                        
+                if(i != -1){
+                   
+                }
                 preparedStatement.setInt(1, i);
                 preparedStatement.setInt(2, Cust.customerID);
                 preparedStatement.setInt(3, staffID);
 
                 preparedStatement.executeUpdate();
                 count++;
+                total += carts.get(count).getPrice();
 
                 removeFromCart(i);
                 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            }
         }
 
-        
+                    return total;
+
 
     }
     

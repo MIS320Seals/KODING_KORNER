@@ -14,6 +14,13 @@
         <link rel="stylesheet" type="text/css" href="CSS/CSS.css">
     </head>
     <body>
+        <jsp:useBean id="cart" scope="session" class="com.SEALS.cart.Cart" />
+
+        <jsp:setProperty name="cartSum" property="price" />
+
+
+
+
         <%-- NAV BAR --%>
         <div class = "loginBar">
             <ul> 
@@ -59,13 +66,15 @@
                         <td><c:out value="${cart.dateAdded}" /></td>
                         <td><c:out value="${cart.rentalDuration}" /></td>
 
-                       
+
                     </tr>
                 </c:forEach>
             <html 
-            </tbody>
+                </tbody>
         </table>
 
+
+        <h1> Your Total Purchase is $<jsp:getProperty name="cartSum" property="price" /> </h1>
         <form action="cartController" >
             <input type="hidden" name="action" value="payment"/>
         </form>
