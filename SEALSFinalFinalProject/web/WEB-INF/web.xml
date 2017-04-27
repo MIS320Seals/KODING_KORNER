@@ -5,6 +5,12 @@
         <servlet-name>FilmController</servlet-name>
         <servlet-class>com.SEALS.film.FilmController</servlet-class>
     </servlet>
+
+<servlet>
+        <display-name>RentalController </display-name>
+        <servlet-name>RentalController</servlet-name>
+        <servlet-class>com.SEALS.film.RentalController</servlet-class>
+    </servlet>
     <servlet>
         <display-name>cartController</display-name>
         <servlet-name>cartController</servlet-name>
@@ -13,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>FilmController</servlet-name>
         <url-pattern>/FilmController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RentalController</servlet-name>
+        <url-pattern>/RentalController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -12,6 +12,8 @@ import com.SEALS.customer.Country;
 import com.SEALS.customer.Cust;
 import com.SEALS.customer.CustDAO;
 import com.SEALS.film.Film;
+import com.SEALS.film.FilmDAO;
+import com.SEALS.film.Rental;
 import com.SEALS.login.loginDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,6 +42,8 @@ public class LoginController extends HttpServlet
     private static String ADMIN_RELOGIN =  "/adminValidationPageError.jsp";
     private static String CUST_RELOGIN =  "/loginPageError.jsp";
     private static String CUST_REGISTER = "/custRegisterPage.jsp";
+    private static String MY_MOVIES = "/myMovies.jsp";
+    //Cust cust = new Cust();
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -85,12 +89,36 @@ public class LoginController extends HttpServlet
         String forward = "";
         
         CustDAO custdao = new CustDAO(); 
+        FilmDAO filmdao = new FilmDAO();
         String action = request.getParameter("action");
         if(action.equalsIgnoreCase("returnHome"))
         {
             List<Film> films = custdao.getStaffMovies();
             request.setAttribute("films", films);
             forward = CUST_HOME;
+        }
+        //fills out the three tables on the movies page
+        else if (action.equalsIgnoreCase("userFilms"))
+        {
+            //needs to provide the customerID
+            List<Film> currentlyRentedFilms = filmdao.currentlyRentedFilms(Cust.customerID);
+            request.setAttribute("CRfilms", currentlyRentedFilms);     //code being done by lauren
+            List<Film> wishListFilms = filmdao.customerWishListItems(Cust.customerID);
+            request.setAttribute("WLfilms", wishListFilms);
+            List<Rental> previouslyRentedFilms = filmdao.previouslyRentedFilms(Cust.customerID);
+            request.setAttribute("PRfilms", previouslyRentedFilms);    //need to create a whole new table for this, should see if people still want to do this or nah
+            forward = MY_MOVIES; 
+        }
+        //deletes the item from the wishlist
+        else if (action.equalsIgnoreCase("deleteWishItem"))
+        {
+            int film_id = Integer.parseInt(request.getParameter("film_id"));
+            filmdao.removeFromWishlist(Cust.customerID, film_id);
+        }
+        //will return a film so it so no longer currently rented
+        else if (action.equalsIgnoreCase("returnFilm"))
+        {
+            //code that Lauren is working on
         }
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
