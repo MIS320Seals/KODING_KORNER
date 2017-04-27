@@ -84,7 +84,6 @@
                             <td><c:out value="${film.release_year}" /></td>
                             <td><c:out value="${film.rating}" /></td>
                             <td><a href="LoginController?action=deleteWishItem&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>&rental_duration=<c:out value="${film.rental_duration}"/>">Remove</a></td>
-
                         </tr>
                     </c:forEach>
                 </tbody>

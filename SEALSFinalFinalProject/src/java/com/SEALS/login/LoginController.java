@@ -13,6 +13,7 @@ import com.SEALS.customer.Cust;
 import com.SEALS.customer.CustDAO;
 import com.SEALS.film.Film;
 import com.SEALS.film.FilmDAO;
+import com.SEALS.film.Rental;
 import com.SEALS.login.loginDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -100,9 +101,12 @@ public class LoginController extends HttpServlet
         else if (action.equalsIgnoreCase("userFilms"))
         {
             //needs to provide the customerID
-            request.setAttribute("CRfilms", filmdao.currentlyRentedFilms(Cust.customerID));     //code being done by lauren
-            request.setAttribute("WLfilms", filmdao.customerWishListItems(Cust.customerID));
-            request.setAttribute("PRfilms", filmdao.previouslyRentedFilms(Cust.customerID));    //need to create a whole new table for this, should see if people still want to do this or nah
+            List<Film> currentlyRentedFilms = filmdao.currentlyRentedFilms(Cust.customerID);
+            request.setAttribute("CRfilms", currentlyRentedFilms);     //code being done by lauren
+            List<Film> wishListFilms = filmdao.customerWishListItems(Cust.customerID);
+            request.setAttribute("WLfilms", wishListFilms);
+            List<Rental> previouslyRentedFilms = filmdao.previouslyRentedFilms(Cust.customerID);
+            request.setAttribute("PRfilms", previouslyRentedFilms);    //need to create a whole new table for this, should see if people still want to do this or nah
             forward = MY_MOVIES; 
         }
         //deletes the item from the wishlist
