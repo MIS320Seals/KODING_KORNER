@@ -182,11 +182,11 @@ public class cartDAO {
         return x;
     }
     
-    double checkOut() {
+    float checkOut() {
 
         List<Cart> carts = ListCart(Cust.customerID);
         
-        double total = 0;
+        float total = 0;
         int count = 0;
         while (count < carts.size()) {
             int i = getInventoryID(carts.get(count).getFilmID());

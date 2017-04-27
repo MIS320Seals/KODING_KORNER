@@ -162,7 +162,7 @@ public class cartController extends HttpServlet {
                 request.setAttribute("priceSum", cartSum);
                 
                 forward = CUST_RECEIPT;
-                cart.checkOut();
+                cartSum.setPrice(cart.checkOut());
  
             } else {
                 forward = REPAYMENT;
