@@ -18,21 +18,21 @@
         <div class = "loginBar">
             <ul> 
 
-                <li class = "active"><a href="custActionPage.jsp">Home</a></li>
-                <li> <a href="RentalController?action=displayReturns">Return Movie</a></li>
-                <li><a>My Movies</a>
-                        <div class="dropdown-content">
-                        <a href="RentalController?action=displayReturns">Return Movie</a>
-
-                <li><a href="LoginController?action=returnHome">Home</a></li>
+                <li class = "active"><a href="LoginController?action=returnHome">Home</a></li>
                 <li><a href="LoginController?action=userFilms">My Movies</a>
+                <li> <a href="RentalController?action=displayReturns">Return Movie</a></li>
+<!--                <li><a>My Movies</a>
+                        <div class="dropdown-content">
+                        <a href="RentalController?action=displayReturns">Return Movie</a>-->
+<!--           <li><a href="LoginController?action=returnHome">Home</a></li>
+               <li><a href="LoginController?action=userFilms">My Movies</a>
                                     <div class="dropdown-content">
 
                         <a href="#">Checked Out</a>
                         <a href="#">History</a>
                         <a href="cartController?action=displayCart">Cart</a>
                         <a href="CustController?action=TestAddToCart&customer_id=<c:out value="${custBean.customer_id}"/>">Test Checking Out</a>
-                    </div></li></li>
+                    </div></li></li>-->
                 <li><a href="about.jsp">About</a></li>
                 <li><a href="CustController?action=search">Search</a></li>
                 <li><a href="cartController?action=checkOutCart">Check Out</a></li>
