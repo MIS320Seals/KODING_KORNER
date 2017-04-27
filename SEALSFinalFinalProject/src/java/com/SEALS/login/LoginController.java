@@ -114,6 +114,9 @@ public class LoginController extends HttpServlet
         {
             int film_id = Integer.parseInt(request.getParameter("film_id"));
             filmdao.removeFromWishlist(Cust.customerID, film_id);
+            List<Film> wishListFilms = filmdao.customerWishListItems(Cust.customerID);
+            request.setAttribute("WLfilms", wishListFilms);
+            //forward = MY_MOVIES; 
         }
         //will return a film so it so no longer currently rented
         else if (action.equalsIgnoreCase("returnFilm"))
