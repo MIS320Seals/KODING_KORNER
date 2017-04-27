@@ -208,11 +208,8 @@ public class AdminController extends HttpServlet
             String postal_code = request.getParameter("postal_code");   //for address table
             //real problem is that country is null here
             int country_id = Integer.parseInt(request.getParameter("countries"));
-            java.sql.Date create_date = null;
-            try { create_date = (java.sql.Date) new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("create_date"));
-            } catch (ParseException e){
-                e.printStackTrace();
-            }
+            Date create_date = new java.sql.Date(System.currentTimeMillis());
+            //     create_date = (java.sql.Date) Date.parse(request.getParameter("create_date"));
             String phone = request.getParameter("phone");
             //need help with this
 //            if(custCheckBox.isChecked()){

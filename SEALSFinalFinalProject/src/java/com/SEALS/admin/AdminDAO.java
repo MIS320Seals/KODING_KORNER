@@ -326,10 +326,12 @@ public class AdminDAO {
         
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("call film_in_stock");
-            while (rs.next()) {
+            ResultSet rs = statement.executeQuery("Select film_id , last_update from inventory");
+            while (rs.next()){
+                
                 Film film = new Film();
                 film.setFilm_id(rs.getInt("film_id"));
+                film.getLast_update(rs.getDate("last_update"));
                 //film.setStore_id(rs.getInt("store_id"));
                 f.add(film);
             }
