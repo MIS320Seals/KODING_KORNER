@@ -40,23 +40,29 @@
             <table>
                 <thead>
                     <tr>
+                        <th>Rental ID</th>
                         <th>Title</th>
-                        <th>Description</th>
                         <th>Price</th>
-                        <th>Release Year</th>
-                        <th>Rating</th>
+                        <th>Date Added</th>
+                        <th>Rental Duration</th>
+                        <th>Days Rented</th>
+                        <th>Days Left on Rental</th>
                         <th colspan=2>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach end="300" items="${CRfilms}" var="film">
+                    <c:forEach end="300" items="${returns}" var="return">
                         <tr>
-                            <td><c:out value="${film.title}" /></td>
-                            <td><c:out value="${film.description}" /></td>
-                            <td><c:out value="${film.rental_rate}" /></td>
-                            <td><c:out value="${film.release_year}" /></td>
-                            <td><c:out value="${film.rating}" /></td>
-                            <td><a href="LoginController?action=returnFilm&film_id=<c:out value="${film.film_id}"/>&title=<c:out value="${film.title}"/>&price=<c:out value="${film.rental_rate}"/>&rental_duration=<c:out value="${film.rental_duration}"/>">Return</a></td>
+                            <td><c:out value="${return.rentalID}" /></td>
+                            <td><c:out value="${return.movieTitle}" /></td>
+                            <td><c:out value="${return.rentalRate}" /></td>
+                            <td><c:out value="${return.rentalDate}" /></td>
+                            <td><c:out value="${return.rentalDuration}" /></td>
+                            <td><c:out value="${return.daysRented}" /></td>
+                            <td><c:out value="${return.daysLeft}" /></td>
+
+                           <td><a href="RentalController?action=returnItem&rentalID=<c:out value="${return.rentalID}"/>&daysLeft=<c:out value="${return.daysLeft}"/>&rentalRate=<c:out value="${return.rentalRate}"/>">Return</a></td>
+                           
                         </tr>
                     </c:forEach>
                 </tbody>

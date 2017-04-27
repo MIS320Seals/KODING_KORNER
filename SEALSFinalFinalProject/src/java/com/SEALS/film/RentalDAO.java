@@ -30,7 +30,7 @@ public class RentalDAO {
 
 //    insert into statement / communication with database
     //make method to display rentals for each customer
-    List<Rental> getCurrentRentals() {
+    public List<Rental> getCurrentRentals() {
 
         List<Rental> rentals = new ArrayList<>();
 

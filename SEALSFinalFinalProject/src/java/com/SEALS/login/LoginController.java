@@ -14,6 +14,7 @@ import com.SEALS.customer.CustDAO;
 import com.SEALS.film.Film;
 import com.SEALS.film.FilmDAO;
 import com.SEALS.film.Rental;
+import com.SEALS.film.RentalDAO;
 import com.SEALS.login.loginDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -91,6 +92,7 @@ public class LoginController extends HttpServlet
         CustDAO custdao = new CustDAO(); 
         FilmDAO filmdao = new FilmDAO();
         String action = request.getParameter("action");
+        RentalDAO dao = new RentalDAO();
         if(action.equalsIgnoreCase("returnHome"))
         {
             List<Film> films = custdao.getStaffMovies();
@@ -101,8 +103,9 @@ public class LoginController extends HttpServlet
         else if (action.equalsIgnoreCase("userFilms"))
         {
             //needs to provide the customerID
-            List<Film> currentlyRentedFilms = filmdao.currentlyRentedFilms(Cust.customerID);
-            request.setAttribute("CRfilms", currentlyRentedFilms);     //code being done by lauren
+//            List<Film> currentlyRentedFilms = filmdao.currentlyRentedFilms(Cust.customerID);
+//            request.setAttribute("CRfilms", currentlyRentedFilms);     //code being done by lauren
+            request.setAttribute("returns", dao.getCurrentRentals());
             List<Film> wishListFilms = filmdao.customerWishListItems(Cust.customerID);
             request.setAttribute("WLfilms", wishListFilms);
             List<Rental> previouslyRentedFilms = filmdao.previouslyRentedFilms(Cust.customerID);
@@ -116,7 +119,7 @@ public class LoginController extends HttpServlet
             filmdao.removeFromWishlist(Cust.customerID, film_id);
             List<Film> wishListFilms = filmdao.customerWishListItems(Cust.customerID);
             request.setAttribute("WLfilms", wishListFilms);
-            //forward = MY_MOVIES; 
+            forward = MY_MOVIES; 
         }
         //will return a film so it so no longer currently rented
         else if (action.equalsIgnoreCase("returnFilm"))
