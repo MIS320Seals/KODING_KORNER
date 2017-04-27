@@ -45,20 +45,12 @@
                         <td><input type="password" name="password2" value="" /></td>
                     </tr>
                     <tr>
-                        <td>ID picture:</td>
-                        <td><input type="submit" value="Upload" name="uploadAdminPic" /></td>
-                    </tr>
-                    <tr>
                         <td bgcolor="#cc0000"><font color="white">Contact Information</font></td>
                         <td bgcolor="#cc0000"></td>
                     </tr>
                     <tr>
                         <td>Email:</td>
                         <td><input type="text" name="email" value="" /></td>
-                    </tr>
-                    <tr>
-                        <td>Primary Phone #:</td>
-                        <td><input type="text" name="phone" value="" /></td>
                     </tr>
                     <tr>
                         <td>Store ID number:</td>
