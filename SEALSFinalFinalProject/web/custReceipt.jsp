@@ -74,7 +74,8 @@
         </table>
 
 
-        <h1> Your Total Purchase is $<jsp:getProperty name="cartSum" property="price" /> </h1>
+        <h1>Notice: Some movies may not have been purchased due to lack of inventory. The movies listed above are what was purchased </h1>
+        <h1>Your Total Purchase is $<jsp:getProperty name="cartSum" property="price" /> </h1>
         <form action="cartController" >
             <input type="hidden" name="action" value="payment"/>
         </form>

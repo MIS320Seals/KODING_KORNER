@@ -331,7 +331,7 @@ public class AdminDAO {
                 
                 Film film = new Film();
                 film.setFilm_id(rs.getInt("film_id"));
-                film.getLast_update(rs.getDate("last_update"));
+                film.setLast_update(rs.getDate("last_update"));
                 //film.setStore_id(rs.getInt("store_id"));
                 f.add(film);
             }

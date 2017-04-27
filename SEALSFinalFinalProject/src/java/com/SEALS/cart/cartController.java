@@ -45,7 +45,6 @@ public class cartController extends HttpServlet {
     private static String CUST_RECEIPT = "/custReceipt.jsp";
     private static String RETURNS = "/returnsDisplay.jsp";
 
-
     private cartDAO dao = new cartDAO();
 
     /**
@@ -127,23 +126,21 @@ public class cartController extends HttpServlet {
         } else if (action.equals("payment")) {
             //do the checkout actions
             //PAYMENt
-            
+
             //check to see if they have more than 5 dvds already checked out
             //if 
             int rentalNum = dao.checkCheckedOut();
             int cartNum = dao.checkCartCount();
-                    
+
             int x = rentalNum + cartNum;
-            
-            if (x > 5){
-                  List<Cart> carts = cart.ListCart(Cust.customerID);
-          //  forward = CUST_CHECK_OUT;
-            request.setAttribute("carts", carts);
+
+            if (x > 5) {
+                List<Cart> carts = cart.ListCart(Cust.customerID);
+                //  forward = CUST_CHECK_OUT;
+                request.setAttribute("carts", carts);
                 forward = CUST_CHECK_OUT_REDO;
-            }
-            
-            else {
-                forward = PAYMENT; 
+            } else {
+                forward = PAYMENT;
             }
 
         } else if (action.equals("paymentValidation")) {
@@ -151,38 +148,31 @@ public class cartController extends HttpServlet {
             String ccnum = request.getParameter("username");
             isValid = validatePayment(ccnum);
             if (isValid == true) {
+
                 List<Cart> carts = cart.ListCart(Cust.customerID);
-                int sum = 0;
-                for(int x = 0; x < carts.toArray().length; x++){
-                    sum += carts.get(x).getPrice();
-                }
-                
+                request.setAttribute("carts", carts);
                 Cart cartSum = new Cart();
-                cartSum.setPrice(sum);
-                request.setAttribute("priceSum", cartSum);
-                
+                cartSum.setPrice(cart.checkOut());
+                request.setAttribute("cartSum", cartSum);
+
                 forward = CUST_RECEIPT;
-                cart.checkOut();
- 
+
             } else {
                 forward = REPAYMENT;
             }
-        }
-        else if (action.equals("paymentLateFeeValidation")){
-            
+        } else if (action.equals("paymentLateFeeValidation")) {
+
             boolean isValid = false;
             String ccnum = request.getParameter("username");
             isValid = validatePayment(ccnum);
             if (isValid == true) {
                 forward = RETURNS;
-                
- 
+
             } else {
                 forward = PAYMENT_LATE_FEE_REDO;
             }
         }
 
-       
         RequestDispatcher view = request.getRequestDispatcher(forward);
 
         view.forward(request, response);
@@ -205,15 +195,14 @@ public class cartController extends HttpServlet {
         boolean isValid = false;
         //length = checkLength(CCNumber);
 
-       // checkStartNumbers(CCNumber);
-
+        // checkStartNumbers(CCNumber);
         even = sumDoubleSecondDigits(CCNumber);
 
         odd = sumOddDigits(CCNumber);
 
         int totalSum = even + odd;
         //checkValidity(totalSum);
-       // int yes = 0;
+        // int yes = 0;
         //This checks if the credit card number given fits all the criteria
         if (checkValidity(totalSum) == true && checkStartNumbers(CCNumber) == 0) {
             isValid = true;
@@ -239,13 +228,13 @@ public class cartController extends HttpServlet {
         int no = 0;
         long whatItWas = 0;
         while (CCNumber > 0) {
-            
+
             if (CCNumber == 37 || CCNumber == 4 || CCNumber == 5 || CCNumber == 6) {
                 yes = 0;
                 whatItWas = CCNumber;
             } else {
-                if(whatItWas != 37){
-                yes = -1;
+                if (whatItWas != 37) {
+                    yes = -1;
                 }
             }
             CCNumber = CCNumber / 10;
@@ -293,11 +282,8 @@ public class cartController extends HttpServlet {
             return false;
         }
     }
-    
-    
-    
-    //}
 
+    //}
     // }
     /**
      * Handles the HTTP <code>POST</code> method.

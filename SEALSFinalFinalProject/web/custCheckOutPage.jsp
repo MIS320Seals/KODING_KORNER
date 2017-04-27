@@ -18,7 +18,7 @@
         <div class = "loginBar">
             <ul> 
 
-                <li class = "active"><a href="LoginController?action=returnHome">Home</a></li>
+                <li><a href="LoginController?action=returnHome">Home</a></li>
                 <li><a href="LoginController?action=userFilms">My Movies</a>
                 <li> <a href="RentalController?action=displayReturns">Return Movie</a></li>
 <!--                <li><a>My Movies</a>
@@ -35,7 +35,7 @@
                     </div></li></li>-->
                 <li><a href="about.jsp">About</a></li>
                 <li><a href="CustController?action=search">Search</a></li>
-                <li><a href="cartController?action=checkOutCart">Check Out</a></li>
+                <li class = "active"><a href="cartController?action=checkOutCart">Check Out</a></li>
                 <li><a href="loginPage.jsp">Log-out</a></li>
             </ul>
         </div>
