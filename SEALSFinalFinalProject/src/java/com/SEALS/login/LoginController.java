@@ -37,7 +37,7 @@ public class LoginController extends HttpServlet
 {
     
     private static final long serialVersionUID = 1L;
-    private static String ADMIN_HOME = "/adminActionPage.jsp";
+    private static String ADMIN_HOME = "/AdminController?action=home";
     private static String CUST_HOME =  "/custActionPage.jsp";
     private static String ADMIN_RELOGIN =  "/adminValidationPageError.jsp";
     private static String CUST_RELOGIN =  "/loginPageError.jsp";
@@ -203,5 +203,4 @@ public class LoginController extends HttpServlet
     {
         return "Short description";
     }// </editor-fold>
-
 }
