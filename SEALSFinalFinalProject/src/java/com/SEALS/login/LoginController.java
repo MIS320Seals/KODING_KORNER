@@ -41,6 +41,7 @@ public class LoginController extends HttpServlet
     private static String ADMIN_RELOGIN =  "/adminValidationPageError.jsp";
     private static String CUST_RELOGIN =  "/loginPageError.jsp";
     private static String CUST_REGISTER = "/custRegisterPage.jsp";
+    private static String MY_MOVIES = "/myMovies.jsp";
     //Cust cust = new Cust();
     
     /**
@@ -102,6 +103,7 @@ public class LoginController extends HttpServlet
             request.setAttribute("CRfilms", filmdao.currentlyRentedFilms(Cust.customerID));     //code being done by lauren
             request.setAttribute("WLfilms", filmdao.customerWishListItems(Cust.customerID));
             request.setAttribute("PRfilms", filmdao.previouslyRentedFilms(Cust.customerID));    //need to create a whole new table for this, should see if people still want to do this or nah
+            forward = MY_MOVIES; 
         }
         //deletes the item from the wishlist
         else if (action.equalsIgnoreCase("deleteWishItem"))
