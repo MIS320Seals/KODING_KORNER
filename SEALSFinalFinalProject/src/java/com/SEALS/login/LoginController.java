@@ -117,8 +117,11 @@ public class LoginController extends HttpServlet
         {
             int film_id = Integer.parseInt(request.getParameter("film_id"));
             filmdao.removeFromWishlist(Cust.customerID, film_id);
+            request.setAttribute("returns", dao.getCurrentRentals());
             List<Film> wishListFilms = filmdao.customerWishListItems(Cust.customerID);
             request.setAttribute("WLfilms", wishListFilms);
+            List<Rental> previouslyRentedFilms = filmdao.previouslyRentedFilms(Cust.customerID);
+            request.setAttribute("PRfilms", previouslyRentedFilms);    //need to create a whole new table for this, should see if people still want to do this or nah
             forward = MY_MOVIES; 
         }
         //will return a film so it so no longer currently rented
