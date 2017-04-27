@@ -101,12 +101,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach end="300" items="${PRfilms}" var="film">
+                    <c:forEach end="300" items="${PRfilms}" var="rental">
                         <tr>
-                            <td><c:out value="${rental.rental_date}" /></td>
-                            <td><c:out value="${rental.title}" /></td>
-                            <td><c:out value="${rental.rental_rate}" /></td>
-                            <td><c:out value="${rental.DaysRented}" /></td>
+                            <td><c:out value="${rental.rentalDate}" /></td>
+                            <td><c:out value="${rental.movieTitle}" /></td>
+                            <td><c:out value="${rental.rentalRate}" /></td>
+                            <td><c:out value="${rental.daysRented}" /></td>
                         </tr>
                     </c:forEach>
                 </tbody>

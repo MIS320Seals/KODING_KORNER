@@ -151,6 +151,8 @@ public class cartController extends HttpServlet {
             String ccnum = request.getParameter("username");
             isValid = validatePayment(ccnum);
             if (isValid == true) {
+                List<Cart> carts = cart.ListCart(Cust.customerID);
+                
                 forward = CUST_RECEIPT;
                 cart.checkOut();
  
