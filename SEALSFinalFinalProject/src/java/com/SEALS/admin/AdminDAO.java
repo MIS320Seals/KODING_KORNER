@@ -1,14 +1,16 @@
 package com.SEALS.admin;
 
 import com.SEALS.film.Film;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.sql.Date;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -263,4 +265,80 @@ public class AdminDAO {
         }
         return s;
     }
+    
+//     public List<Film> getNotCheckedOut() {
+//        List<Film> f = new ArrayList<Film>();
+//        Date localDate;
+//        localDate = new Date();
+//        try {
+//            Statement statement = connection.createStatement();
+//            ResultSet rs = statement.executeQuery("SELECT * FROM sakila.inventory");
+//            while (rs.next()) {
+//
+//                Film film = new Film();
+//                film.setLast_update(rs.getDate("last_update"));
+//
+//                if(film.getLast_update().after((Date)localDate)){
+//
+//                }
+//
+//
+//                f.add(film);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return f;
+//    }
+    
+     public int currentInventory(int p_film_id, int p_store_id, int p_film_count) throws SQLException{
+      String query = "{call film_in_stock(?,?,?)";
+          
+          CallableStatement callableStatement = connection.prepareCall(query);
+          callableStatement.setInt(1, p_film_id);
+          callableStatement.setInt(2, p_store_id);
+          callableStatement.registerOutParameter(3, java.sql.Types.INTEGER);
+
+          callableStatement.executeUpdate();
+          
+          
+          return callableStatement.getInt(3);
+          
+      }
+     
+     public int currentCheckedOut(int p_film_id, int p_store_id, int p_film_count) throws SQLException{
+      String query = "{call film_not_in_stock(?,?,?)";
+          
+          CallableStatement callableStatement = connection.prepareCall(query);
+          callableStatement.setInt(1, p_film_id);
+          callableStatement.setInt(2, p_store_id);
+          callableStatement.registerOutParameter(3, java.sql.Types.INTEGER);
+
+          callableStatement.executeUpdate();
+          
+          
+          return callableStatement.getInt(3);
+          
+      }
+     
+     public List<Film> getFilmsInStock(){
+        List<Film> f = new ArrayList<Film>();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("call film_in_stock");
+            while (rs.next()) {
+                Film film = new Film();
+                film.setFilm_id(rs.getInt("film_id"));
+                //film.setStore_id(rs.getInt("store_id"));
+                f.add(film);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        
+        return f;
+    }
+    
 }

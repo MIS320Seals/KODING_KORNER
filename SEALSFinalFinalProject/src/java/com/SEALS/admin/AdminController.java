@@ -49,6 +49,7 @@ public class AdminController extends HttpServlet
         if (request.getParameter("action") != null)
         {
             action = request.getParameter("action");
+            
         }
         //   String key = request.getParameter("passKey");
         if (action.equalsIgnoreCase("Add New Staff Member"))
@@ -116,7 +117,13 @@ public class AdminController extends HttpServlet
         } else if (action.equals("addemp"))
         {
             forward = "/adminRegisterPage.jsp";
-        } else
+        } else if (action.equals("home")){
+            forward = "adminActionPage.jsp";
+            request.setAttribute("inStock", dao.getFilmsInStock());
+            // change to outstock
+            request.setAttribute("outStock", dao.getFilmsInStock());
+        }
+            else
         {
             forward = "/adminCustomers.jsp";
             request.setAttribute("c", dao.getAllCustomerInfo());
