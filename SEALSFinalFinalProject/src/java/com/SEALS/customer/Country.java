@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package com.SEALS.customer;
-import java.util.Date;
+//import java.util.Date;
+import java.sql.Date;
 /**
  *
  * @author ering

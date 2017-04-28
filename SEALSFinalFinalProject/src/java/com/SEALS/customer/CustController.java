@@ -7,15 +7,20 @@ package com.SEALS.customer;
 
 import com.SEALS.film.Film;
 import com.SEALS.film.FilmDAO;
+import com.SEALS.film.Rental;
+import com.SEALS.film.RentalDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
+import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
+import java.util.Calendar;
+//import java.sql.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -146,8 +151,6 @@ public class CustController extends HttpServlet {
         //registers the customer in both the customer table AND address table
         else if (action.equalsIgnoreCase("custRegister"))
         {
-            forward = CUST_HOME;
-            
             //sets initial needed values
             Cust cust = new Cust();
             Address custAddress = new Address();
@@ -164,6 +167,7 @@ public class CustController extends HttpServlet {
             String first_name = request.getParameter("first_name");
             String last_name = request.getParameter("last_name");
             String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
             //String address_id = null;
             String address = request.getParameter("address");               //for the address table
             String address2 = request.getParameter("address2");             //for address table
@@ -172,12 +176,24 @@ public class CustController extends HttpServlet {
             String postal_code = request.getParameter("postal_code");       //for address table
             //real problem is that country is null here
             int country_id = Integer.parseInt(request.getParameter("countries"));
-            Date create_date = null;
-            try { create_date = (java.sql.Date) new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("create_date"));
-            } catch (ParseException e){
-                e.printStackTrace();
+//            Date create_date = null;
+//            try { create_date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("create_date"));
+//            } catch (ParseException e){
+//                e.printStackTrace();
+//            }
+
+            //java.sql.Date create_date;
+            //create_date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+            //String phone = request.getParameter("phone");
+            
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date parsed = null;
+            try {
+                parsed = format.parse(request.getParameter("create_date"));
+            } catch (ParseException ex) {
+                Logger.getLogger(CustController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String phone = request.getParameter("phone");
+            java.sql.Date create_date = new java.sql.Date(parsed.getTime());
             //need help with this
 //            if(custCheckBox.isChecked()){
 //            } else {
@@ -225,6 +241,12 @@ public class CustController extends HttpServlet {
             cust.setUsername(username);
             cust.setPassword(password);
             custdao.addCust(cust);
+            
+            //after adding it in sends to the hompage correctly
+            RentalDAO dao = new RentalDAO();
+            List<Film> films = custdao.getStaffMovies();
+            request.setAttribute("films", films);
+            forward = CUST_HOME;
         }
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);

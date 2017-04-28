@@ -1,6 +1,7 @@
 package com.SEALS.customer;
 
 import java.sql.Date;
+//import java.util.Date;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

@@ -58,7 +58,7 @@ public class AdminDAO {
             preparedStatement.setBoolean(7, admin.isActive());
             preparedStatement.setString(8, admin.getUsername());
             preparedStatement.setString(9, admin.getPassword());
-            preparedStatement.setDate(10, new java.sql.Date(admin.getLast_update().getTime()));
+            preparedStatement.setDate(10, admin.getLast_update());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -95,7 +95,7 @@ public class AdminDAO {
             preparedStatement.setBoolean(7, admin.isActive());
             preparedStatement.setString(8, admin.getUsername());
             preparedStatement.setString(9, admin.getPassword());
-            preparedStatement.setDate(10, new java.sql.Date(admin.getLast_update().getTime()));
+            preparedStatement.setDate(10, admin.getLast_update());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
