@@ -422,4 +422,77 @@ public class AdminDAO
         return f;
     }
 
+    public List<Film> getTop10RentedMovies()
+    {
+        List<Film> f = new ArrayList<Film>();
+
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery
+            ("select count(i.film_id), f.title, f.description, f.rating " +
+             "from (sakila.rental r  " +
+             "    join sakila.inventory i " +
+             "        on r.inventory_id = i.inventory_id " +
+             "    join sakila.film f " +
+             "        on i.film_id = f.film_id) " +
+             "group by i.film_id " +
+             "order by count(i.film_id) desc " +
+             "LIMIT 10");
+            
+            Film film;
+            while (rs.next())
+            {
+                film = new Film();
+                    film.setFilm_id(rs.getInt("count(i.film_id)"));
+                    film.setTitle(rs.getString("title"));
+                    film.setDescription(rs.getString("description"));
+                    film.setRating(rs.getString("rating"));
+                    f.add(film);
+            }
+        } catch (SQLException e)
+        {
+            e.getStackTrace();
+        }
+
+        return f;
+    }
+            
+    public List<Film> getBottom10RentedMovies()
+    {
+        List<Film> f = new ArrayList<Film>();
+
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery
+            ("select count(i.film_id), f.title, f.description, f.rating " +
+             "from (sakila.rental r  " +
+             "    join sakila.inventory i " +
+             "        on r.inventory_id = i.inventory_id " +
+             "    join sakila.film f " +
+             "        on i.film_id = f.film_id) " +
+             "group by i.film_id " +
+             "order by count(i.film_id) " +
+             "LIMIT 10");
+            
+            Film film;
+            while (rs.next())
+            {
+                film = new Film();
+                    film.setFilm_id(rs.getInt("count(i.film_id)"));
+                    film.setTitle(rs.getString("title"));
+                    film.setDescription(rs.getString("description"));
+                    film.setRating(rs.getString("rating"));
+                    f.add(film);
+            }
+        } catch (SQLException e)
+        {
+            e.getStackTrace();
+        }
+
+        return f;
+    }
+    
+    
 }

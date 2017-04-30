@@ -5,9 +5,8 @@ package com.SEALS.login;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import com.SEALS.admin.Admin;
+import com.SEALS.admin.AdminDAO;
 import com.SEALS.customer.Country;
 import com.SEALS.customer.Cust;
 import com.SEALS.customer.CustDAO;
@@ -36,16 +35,16 @@ import javax.servlet.http.HttpServletResponse;
 //})
 public class LoginController extends HttpServlet
 {
-    
+
     private static final long serialVersionUID = 1L;
     private static String ADMIN_HOME = "/adminActionPage.jsp";
-    private static String CUST_HOME =  "/custActionPage.jsp";
-    private static String ADMIN_RELOGIN =  "/adminValidationPageError.jsp";
-    private static String CUST_RELOGIN =  "/loginPageError.jsp";
+    private static String CUST_HOME = "/custActionPage.jsp";
+    private static String ADMIN_RELOGIN = "/adminValidationPageError.jsp";
+    private static String CUST_RELOGIN = "/loginPageError.jsp";
     private static String CUST_REGISTER = "/custRegisterPage.jsp";
     private static String MY_MOVIES = "/myMovies.jsp";
     //Cust cust = new Cust();
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -88,18 +87,17 @@ public class LoginController extends HttpServlet
             throws ServletException, IOException
     {
         String forward = "";
-        
-        CustDAO custdao = new CustDAO(); 
+
+        CustDAO custdao = new CustDAO();
         FilmDAO filmdao = new FilmDAO();
         String action = request.getParameter("action");
         RentalDAO dao = new RentalDAO();
-        if(action.equalsIgnoreCase("returnHome"))
+        if (action.equalsIgnoreCase("returnHome"))
         {
             List<Film> films = custdao.getStaffMovies();
             request.setAttribute("films", films);
             forward = CUST_HOME;
-        }
-        //fills out the three tables on the movies page
+        } //fills out the three tables on the movies page
         else if (action.equalsIgnoreCase("userFilms"))
         {
             //needs to provide the customerID
@@ -110,9 +108,8 @@ public class LoginController extends HttpServlet
             request.setAttribute("WLfilms", wishListFilms);
             List<Rental> previouslyRentedFilms = filmdao.previouslyRentedFilms(Cust.customerID);
             request.setAttribute("PRfilms", previouslyRentedFilms);    //need to create a whole new table for this, should see if people still want to do this or nah
-            forward = MY_MOVIES; 
-        }
-        //deletes the item from the wishlist
+            forward = MY_MOVIES;
+        } //deletes the item from the wishlist
         else if (action.equalsIgnoreCase("deleteWishItem"))
         {
             int film_id = Integer.parseInt(request.getParameter("film_id"));
@@ -122,9 +119,8 @@ public class LoginController extends HttpServlet
             request.setAttribute("WLfilms", wishListFilms);
             List<Rental> previouslyRentedFilms = filmdao.previouslyRentedFilms(Cust.customerID);
             request.setAttribute("PRfilms", previouslyRentedFilms);    //need to create a whole new table for this, should see if people still want to do this or nah
-            forward = MY_MOVIES; 
-        }
-        //will return a film so it so no longer currently rented
+            forward = MY_MOVIES;
+        } //will return a film so it so no longer currently rented
         else if (action.equalsIgnoreCase("returnFilm"))
         {
             //code that Lauren is working on
@@ -151,8 +147,8 @@ public class LoginController extends HttpServlet
         Cust customer = new Cust();
 
         loginDAO dao = new loginDAO();
-        CustDAO custdao = new CustDAO(); 
-
+        CustDAO custdao = new CustDAO();
+        AdminDAO aDAO = new AdminDAO();
         // String action = request.getParameter("action");
         // String passKey = request.getParameter("passKey");
         // String forward="";
@@ -165,33 +161,37 @@ public class LoginController extends HttpServlet
             String password = request.getParameter("password");
 
             int x = dao.confirmAdminLogin(username, password);
-            if(x != -1 ){
+            if (x != -1)
+            {
                 admin = dao.getAdminLoginWID(x);
                 request.setAttribute("adminBean", admin);
+                request.setAttribute("notRented", aDAO.getInventoryNotRentedForAYear());
+                request.setAttribute("topMovies", aDAO.getTop10RentedMovies());
+                request.setAttribute("botMovies", aDAO.getBottom10RentedMovies());
                 forward = ADMIN_HOME; //have to add LoginController=? for the home action 
+            } else
+            {
+                forward = ADMIN_RELOGIN;//check customer
             }
-            else{
-                forward= ADMIN_RELOGIN;//check customer
-            }
-        }
-        else if(action.equals("custLogin")){
+        } else if (action.equals("custLogin"))
+        {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
 
             int x = dao.confirmCustomerLogin(username, password);
-            if(x != -1 ){
+            if (x != -1)
+            {
                 customer = dao.getCustomerWID(x);
                 request.setAttribute("custBean", customer);
                 List<Film> films = custdao.getStaffMovies();
                 request.setAttribute("films", films);
                 forward = CUST_HOME;
                 Cust.customerID = customer.getCustomer_id();
-            }
-            else{
+            } else
+            {
                 forward = CUST_RELOGIN;//check customer
             }
-        }
-        else if(action.equalsIgnoreCase("returnHome"))
+        } else if (action.equalsIgnoreCase("returnHome"))
         {
             List<Film> films = custdao.getStaffMovies();
             request.setAttribute("films", films);

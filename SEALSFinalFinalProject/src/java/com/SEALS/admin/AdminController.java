@@ -123,9 +123,9 @@ public class AdminController extends HttpServlet
         } else if (action.equals("home")){
             forward = "adminActionPage.jsp";
             request.setAttribute("inStock", dao.getFilmsInStock());
-            // change to outstock
-           // request.setAttribute("outStock", dao.getFilmsInStock());
            request.setAttribute("notRented", dao.getInventoryNotRentedForAYear());
+           request.setAttribute("topMovies", dao.getTop10RentedMovies());
+           request.setAttribute("botMovies", dao.getBottom10RentedMovies());
         }
             else
         {
