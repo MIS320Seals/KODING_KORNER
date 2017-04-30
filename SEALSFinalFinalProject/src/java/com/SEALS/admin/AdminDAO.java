@@ -393,8 +393,9 @@ public class AdminDAO
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery
-            ("Select i.film_id , f.title, f.description, f.rating, i.last_update from sakila.inventory as i"
-                    + "join sakila.film as f ");
+            ("SELECT i.fil_id, i.last_update, f.title, f.description, f.rating " +
+            "FROM sakila.inventory i join sakila.film f " +
+            "on i.film_id = f.film_id");
             Date yearAgo;
             yearAgo = new Date(LocalDateTime.now().getYear() - 1,
                     LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
