@@ -211,6 +211,27 @@ public class cartDAO {
 
                         removeCart(carts.get(count).getCartID());
                         count++;
+                        
+                        
+                        
+                        
+        try {
+            
+            int filmid = carts.get(count).getFilmID();
+            PreparedStatement preparedStatement2
+                    = connection.prepareStatement("Update inventory set last_update = CURRENT_TIMESTAMP where film_id = ?");
+
+            preparedStatement2.setInt(1, filmid);
+
+            preparedStatement2.executeUpdate();
+          
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+                        
+                        
+                        
+                        
 
                     } catch (SQLException e) {
                         e.printStackTrace();

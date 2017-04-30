@@ -72,10 +72,35 @@ public class RentalDAO {
             statement.executeUpdate(" Update rental \n"
                     + "set return_date = CURRENT_TIMESTAMP\n"
                     + "where rental_id = " + rentalID);
-            
+           
+        
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+    }
+
+    private int getTheFilmID(int rentalID) {
+
+        int filmid = -1;
+         try {
+            
+           
+            PreparedStatement preparedStatement2
+                    = connection.prepareStatement("select film_id from rental where rental_id=?");
+
+            preparedStatement2.setInt(1, rentalID);
+
+            ResultSet rs = preparedStatement2.executeQuery();
+            
+            if(rs.next()){
+                filmid= rs.getInt("film_id");
+            }
+          
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+         return filmid;
 
     }
 
