@@ -143,12 +143,12 @@ public class cartDAO {
         }
         return x;
     }
-    
+
     int getStoreID(int inventoryID) {
         int x = -1;
         try {
-            PreparedStatement preparedStatement = 
-                    connection.prepareStatement("select store_id from inventory where inventory_id = ? ");
+            PreparedStatement preparedStatement
+                    = connection.prepareStatement("select store_id from inventory where inventory_id = ? ");
 
             preparedStatement.setInt(1, inventoryID);
 
@@ -166,8 +166,8 @@ public class cartDAO {
     int getStaffID(int storeID) {
         int x = -1;
         try {
-            PreparedStatement preparedStatement = 
-                    connection.prepareStatement("select manager_staff_id from store where store_id =?");
+            PreparedStatement preparedStatement
+                    = connection.prepareStatement("select manager_staff_id from store where store_id =?");
 
             preparedStatement.setInt(1, storeID);
 
@@ -181,104 +181,104 @@ public class cartDAO {
         }
         return x;
     }
-    
+
     float checkOut() {
 
         List<Cart> carts = ListCart(Cust.customerID);
-        
+
+
         float total = 0;
         int count = 0;
-        while (count < carts.size()) {
-            int i = getInventoryID(carts.get(count).getFilmID());
-            if(i != -1){
-            try {
-                PreparedStatement preparedStatement = connection
-                        .prepareStatement("insert into rental(inventory_id, customer_id, staff_id) values (?,?,?)");
-                
-                int s = getStoreID(i);
-                int staffID = getStaffID(s);
-                        
-                if(i != -1){
-                   
+
+
+
+            while (count < carts.size()) {
+                int i = getInventoryID(carts.get(count).getFilmID());
+                if (i != -1) {
+                    try {
+                        PreparedStatement preparedStatement = connection
+                                .prepareStatement("insert into rental(inventory_id, customer_id, staff_id) values (?,?,?)");
+
+                        int s = getStoreID(i);
+                        int staffID = getStaffID(s);
+
+                        preparedStatement.setInt(1, i);
+                        preparedStatement.setInt(2, Cust.customerID);
+                        preparedStatement.setInt(3, staffID);
+
+                        preparedStatement.executeUpdate();
+                        total += carts.get(count).getPrice();
+
+                        removeCart(carts.get(count).getCartID());
+                        count++;
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
-                preparedStatement.setInt(1, i);
-                preparedStatement.setInt(2, Cust.customerID);
-                preparedStatement.setInt(3, staffID);
-
-                preparedStatement.executeUpdate();
-                count++;
-                total += carts.get(count).getPrice();
-
-                removeFromCart(i);
-                
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            }
-        }
-
-                    return total;
-
-
-    }
-    
-    void removeFromCart(int inID){
-      
-            try {
-                PreparedStatement preparedStatement = connection
-                        .prepareStatement("delete from cart where customer_id =?");
-              
-              //  preparedStatement.setInt(1, inID);
-                preparedStatement.setInt(1, Cust.customerID);
-     
-
-                preparedStatement.executeUpdate();
-                
-
+                else{
                
-                
-            } catch (SQLException e) {
-                e.printStackTrace();
+                    removeCart(carts.get(count).getCartID());
+                    count++;
+                }
             }
         
+
+        return total;
+
     }
-    
-    public int checkCheckedOut()
-    {
+
+    void removeFromCart(int inID) {
+
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("delete from cart where customer_id =?");
+
+            //  preparedStatement.setInt(1, inID);
+            preparedStatement.setInt(1, Cust.customerID);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public int checkCheckedOut() {
         int x = 0;
         try {
-             PreparedStatement preparedStatement = connection
-                        .prepareStatement("select count(*) as total from sakila.rental where "
-                    + "return_date is null AND customer_id=?");
-            
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("select count(*) as total from sakila.rental where "
+                            + "return_date is null AND customer_id=?");
+
             preparedStatement.setInt(1, Cust.customerID);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 x = rs.getInt("total");
-            } 
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return x; 
+        return x;
     }
-    
-    public int checkCartCount()
-    {
+
+    public int checkCartCount() {
         int x = 0;
         try {
-             PreparedStatement preparedStatement = connection
-                        .prepareStatement("select count(*) as total from sakila.cart where "
-                    + "customer_id=?");
-            
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("select count(*) as total from sakila.cart where "
+                            + "customer_id=?");
+
             preparedStatement.setInt(1, Cust.customerID);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 x = rs.getInt("total");
-            } 
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return x; 
+        return x;
     }
 
 }

@@ -43,8 +43,8 @@ public class CustDAO {
             preparedStatement.setString(5, cust.getEmail());
             preparedStatement.setInt(6, cust.getAddress_id());
             preparedStatement.setBoolean(7, cust.isActive());
-            preparedStatement.setDate(8, new java.sql.Date(cust.getCreate_date().getTime()));
-            preparedStatement.setDate(9, new java.sql.Date(cust.getLast_update().getTime()));
+            preparedStatement.setDate(8, cust.getCreate_date()); //new java.sql.Date(System.currentTimeMillis()));     //new java.sql.Date(cust.getCreate_date().getTime()));
+            preparedStatement.setDate(9, cust.getLast_update()); //new java.sql.Date(System.currentTimeMillis()));     //new java.sql.Date(cust.getLast_update().getTime()));
             preparedStatement.setString(10, cust.getUsername());
             preparedStatement.setString(11, cust.getPassword());
             preparedStatement.executeUpdate();
@@ -69,7 +69,7 @@ public class CustDAO {
             ps.setString(7, custAdd.getPhone());
             //I would like to drop this column from the table??
             //ps.setInt(7, custAdd.getLocation());
-            ps.setDate(8, new java.sql.Date(custAdd.getLast_update().getTime()));
+            ps.setDate(8, custAdd.getLast_update());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -86,7 +86,7 @@ public class CustDAO {
             ps.setInt(1, custCity.getCityID());
             ps.setString(2, custCity.getCity());
             ps.setInt(3, custCity.getCountry_id());
-            ps.setDate(4, new java.sql.Date(custCity.getLast_update().getTime()));
+            ps.setDate(4, custCity.getLast_update());
             ps.executeUpdate();
             
         } catch (SQLException e) {
@@ -194,8 +194,8 @@ public class CustDAO {
             preparedStatement.setString(5, cust.getEmail());
             preparedStatement.setInt(6, cust.getAddress_id());
             preparedStatement.setBoolean(7, cust.isActive());
-            preparedStatement.setDate(10, new java.sql.Date(cust.getCreate_date().getTime()));
-            preparedStatement.setDate(10, new java.sql.Date(cust.getLast_update().getTime()));
+            preparedStatement.setDate(10, cust.getCreate_date());
+            preparedStatement.setDate(10, cust.getLast_update());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

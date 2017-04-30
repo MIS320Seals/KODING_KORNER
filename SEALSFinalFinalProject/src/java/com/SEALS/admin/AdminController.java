@@ -6,9 +6,12 @@ import com.SEALS.customer.Country;
 import com.SEALS.customer.CustDAO;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -121,7 +124,8 @@ public class AdminController extends HttpServlet
             forward = "adminActionPage.jsp";
             request.setAttribute("inStock", dao.getFilmsInStock());
             // change to outstock
-            request.setAttribute("outStock", dao.getFilmsInStock());
+           // request.setAttribute("outStock", dao.getFilmsInStock());
+           request.setAttribute("notRented", dao.getInventoryNotRentedForAYear());
         }
             else
         {
@@ -208,11 +212,17 @@ public class AdminController extends HttpServlet
             String postal_code = request.getParameter("postal_code");   //for address table
             //real problem is that country is null here
             int country_id = Integer.parseInt(request.getParameter("countries"));
-            java.sql.Date create_date = null;
-            try { create_date = (java.sql.Date) new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("create_date"));
-            } catch (ParseException e){
-                e.printStackTrace();
+            //Date create_date = new java.sql.Date(System.currentTimeMillis());
+            //     create_date = (java.sql.Date) Date.parse(request.getParameter("create_date"));
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date parsed = null;
+            try {
+                parsed = format.parse(request.getParameter("create_date"));
+            } catch (ParseException ex) {
+                Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            java.sql.Date create_date = new java.sql.Date(parsed.getTime());
+            
             String phone = request.getParameter("phone");
             //need help with this
 //            if(custCheckBox.isChecked()){

@@ -1,6 +1,7 @@
 package com.SEALS.film;
 
 import static com.SEALS.cart.cartController.validatePayment;
+import com.SEALS.customer.Cust;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,6 +29,7 @@ public class RentalController extends HttpServlet {
     private static String CUST_CHECK_OUT_REDO = "/custCheckOutPageREDO.jsp";
     private static String CUST_RECEIPT = "/custReceipt.jsp";
     private static String RETURNS = "/returnsDisplay.jsp";
+    private static String MY_MOVIES = "/myMovies.jsp";
     //  private static String RESPONSE = "/response.jsp";
     RentalDAO dao;
 
@@ -73,8 +75,15 @@ public class RentalController extends HttpServlet {
 
             } else {
                dao.returnMovie(Integer.parseInt(request.getParameter("rentalID")));
+               //request.setAttribute("returns", dao.getCurrentRentals());
+               //forward = RETURNS;
+               FilmDAO filmdao = new FilmDAO();
                request.setAttribute("returns", dao.getCurrentRentals());
-               forward = RETURNS;
+               List<Film> wishListFilms = filmdao.customerWishListItems(Cust.customerID);
+               request.setAttribute("WLfilms", wishListFilms);
+               List<Rental> previouslyRentedFilms = filmdao.previouslyRentedFilms(Cust.customerID);
+               request.setAttribute("PRfilms", previouslyRentedFilms);    //need to create a whole new table for this, should see if people still want to do this or nah
+               forward = MY_MOVIES;
             }
 
         }

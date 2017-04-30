@@ -6,7 +6,7 @@
 package com.SEALS.customer;
 
 import java.sql.Date;
-
+//1import java.util.Date;
 /**
  *
  * @author ering

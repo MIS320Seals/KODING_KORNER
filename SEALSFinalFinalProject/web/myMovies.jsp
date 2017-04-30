@@ -27,7 +27,7 @@
                     </div></li>
                 <li><a href="about.jsp">About</a></li>
                 <li><a href="CustController?action=search">Search</a></li>
-                <li><a href="custCheckOutPage.jsp">Check Out</a></li>
+                <li><a href="cartController?action=checkOutCart">Check Out</a></li>
                 <li><a href="loginPage.jsp">${custbean.email} Log-out</a></li>
             </ul>
         </div>
