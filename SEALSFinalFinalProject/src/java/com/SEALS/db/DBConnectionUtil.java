@@ -22,7 +22,7 @@ public class DBConnectionUtil {
         else {
             try {
                 String driver = "com.mysql.jdbc.Driver";
-                String url = "jdbc:mysql://localhost:3306/mydatabase";
+                String url = "jdbc:mysql://localhost:3306/mydatabase?zeroDateTimeBehavior=convertToNull";
                 String user = "root";
                 String password = "nbuser";
                 Class.forName(driver);
