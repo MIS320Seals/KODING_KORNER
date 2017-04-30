@@ -27,24 +27,28 @@
         </ul>
         <br>
         
-        <h2 style="margin-left: 5%;">Sales by Genre</h2>
+        <h2 style="margin-left: 5%;">Not Rented in a year</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Film ID</th>
-<!--                        <th>Sales</th>-->
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Rating</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${inStock}" var="f">
+                    <c:forEach  items="${notRented}" var="film">
                         <tr>
-                            <td><c:out value="${f.film_id}" /></td>
-                            <!-- <td><c:out value="${s.revenue}" /></td> -->
+                            <td><c:out value="${film.film_id}" /></td>
+                            <td><c:out value="${film.title}" /></td>
+                            <td><c:out value="${film.description}" /></td>
+                            <td><c:out value="${film.rating}" /></td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
-        </div>
+       
         <br>
         
     </body>

@@ -124,7 +124,8 @@ public class AdminController extends HttpServlet
             forward = "adminActionPage.jsp";
             request.setAttribute("inStock", dao.getFilmsInStock());
             // change to outstock
-            request.setAttribute("outStock", dao.getFilmsInStock());
+           // request.setAttribute("outStock", dao.getFilmsInStock());
+           request.setAttribute("notRented", dao.getInventoryNotRentedForAYear());
         }
             else
         {
