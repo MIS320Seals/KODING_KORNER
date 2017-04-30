@@ -195,10 +195,10 @@ public class FilmDAO {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("select r.inventory_id, r.rental_id, r.rental_date, f.title, f.rental_rate, f.rental_duration,\n"
                     + " DATEDIFF(CURRENT_TIMESTAMP, rental_date) as DaysRented\n"
-                    + "from rental as r\n"
-                    + "join inventory as i\n"
+                    + "from sakila.rental as r\n"
+                    + "join sakila.inventory as i\n"
                     + "on r.inventory_id = i.inventory_id\n"
-                    + "join film as f\n"
+                    + "join sakila.film as f\n"
                     + "on f.film_id = i.film_id\n"
                     + "where customer_id =" + Cust.customerID);
             while (rs.next()) {
@@ -261,7 +261,7 @@ public class FilmDAO {
 
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("delete from wishlist where customer_id =? AND film_id=?");
+                    .prepareStatement("delete from sakila.wishlist where customer_id =? AND film_id=?");
             preparedStatement.setInt(1, customer_id);
             preparedStatement.setInt(2, film_id);
             preparedStatement.executeUpdate();
