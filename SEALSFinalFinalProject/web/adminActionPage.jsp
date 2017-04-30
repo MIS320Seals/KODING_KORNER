@@ -14,7 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home</title>
         <link rel="stylesheet" type="text/css" href="CSS/CSS.css">
-        </script>
+       
     </head>
     <body>
         <ul>
@@ -27,7 +27,7 @@
         </ul>
         <br>
         
-        <h2 style="margin-left: 5%;">Not Rented in a year</h2>
+        <h2>Not Rented in a year</h2>
             <table>
                 <thead>
                     <tr>
@@ -49,7 +49,7 @@
                 </tbody>
             </table>
        
-        <br>
+     
         
     </body>
 </html>

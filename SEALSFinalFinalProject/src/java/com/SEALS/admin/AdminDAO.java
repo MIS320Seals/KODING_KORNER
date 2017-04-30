@@ -52,7 +52,7 @@ public class AdminDAO
                             + "active,"
                             + "username,"
                             + "password,"
-                            + "last_update) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                            + "last_update) values (?, ?, ?, 2, ?, ?, ?, ?, ?, ?)");
 
             preparedStatement.setInt(1, admin.getStaff_id());
             preparedStatement.setString(2, admin.getFirst_name());
@@ -393,9 +393,9 @@ public class AdminDAO
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery
-            ("SELECT i.fil_id, i.last_update, f.title, f.description, f.rating " +
+            ("SELECT  distinct(i.film_id), i.last_update, f.title, f.description, f.rating " +
             "FROM sakila.inventory i join sakila.film f " +
-            "on i.film_id = f.film_id");
+            "on i.film_id = f.film_id ");
             Date yearAgo;
             yearAgo = new Date(LocalDateTime.now().getYear() - 1,
                     LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
