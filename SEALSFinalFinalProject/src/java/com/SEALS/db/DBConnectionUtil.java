@@ -21,10 +21,8 @@ public class DBConnectionUtil {
             return connection;
         else {
             try {
-            	Properties prop = new Properties();
-
                 String driver = "com.mysql.jdbc.Driver";
-                String url = "jdbc:mysql://localhost:3306/sakila?zeroDateTimeBehavior=convertToNull";
+                String url = "jdbc:mysql://localhost:3306/mydatabase";
                 String user = "root";
                 String password = "nbuser";
                 Class.forName(driver);
