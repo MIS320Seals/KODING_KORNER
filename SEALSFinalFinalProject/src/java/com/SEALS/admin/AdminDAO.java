@@ -52,7 +52,7 @@ public class AdminDAO
                             + "active,"
                             + "username,"
                             + "password,"
-                            + "last_update) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                            + "last_update) values (?, ?, ?, 2, ?, ?, ?, ?, ?, ?)");
 
             preparedStatement.setInt(1, admin.getStaff_id());
             preparedStatement.setString(2, admin.getFirst_name());
@@ -393,9 +393,9 @@ public class AdminDAO
         {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery
-            ("SELECT i.fil_id, i.last_update, f.title, f.description, f.rating " +
+            ("SELECT  distinct(i.film_id), i.last_update, f.title, f.description, f.rating " +
             "FROM sakila.inventory i join sakila.film f " +
-            "on i.film_id = f.film_id");
+            "on i.film_id = f.film_id ");
             Date yearAgo;
             yearAgo = new Date(LocalDateTime.now().getYear() - 1,
                     LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
@@ -422,4 +422,77 @@ public class AdminDAO
         return f;
     }
 
+    public List<Film> getTop10RentedMovies()
+    {
+        List<Film> f = new ArrayList<Film>();
+
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery
+            ("select count(i.film_id), f.title, f.description, f.rating " +
+             "from (sakila.rental r  " +
+             "    join sakila.inventory i " +
+             "        on r.inventory_id = i.inventory_id " +
+             "    join sakila.film f " +
+             "        on i.film_id = f.film_id) " +
+             "group by i.film_id " +
+             "order by count(i.film_id) desc " +
+             "LIMIT 10");
+            
+            Film film;
+            while (rs.next())
+            {
+                film = new Film();
+                    film.setFilm_id(rs.getInt("count(i.film_id)"));
+                    film.setTitle(rs.getString("title"));
+                    film.setDescription(rs.getString("description"));
+                    film.setRating(rs.getString("rating"));
+                    f.add(film);
+            }
+        } catch (SQLException e)
+        {
+            e.getStackTrace();
+        }
+
+        return f;
+    }
+            
+    public List<Film> getBottom10RentedMovies()
+    {
+        List<Film> f = new ArrayList<Film>();
+
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery
+            ("select count(i.film_id), f.title, f.description, f.rating " +
+             "from (sakila.rental r  " +
+             "    join sakila.inventory i " +
+             "        on r.inventory_id = i.inventory_id " +
+             "    join sakila.film f " +
+             "        on i.film_id = f.film_id) " +
+             "group by i.film_id " +
+             "order by count(i.film_id) " +
+             "LIMIT 10");
+            
+            Film film;
+            while (rs.next())
+            {
+                film = new Film();
+                    film.setFilm_id(rs.getInt("count(i.film_id)"));
+                    film.setTitle(rs.getString("title"));
+                    film.setDescription(rs.getString("description"));
+                    film.setRating(rs.getString("rating"));
+                    f.add(film);
+            }
+        } catch (SQLException e)
+        {
+            e.getStackTrace();
+        }
+
+        return f;
+    }
+    
+    
 }

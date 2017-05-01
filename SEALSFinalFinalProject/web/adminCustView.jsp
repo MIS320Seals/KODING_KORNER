@@ -27,35 +27,35 @@
                     </tr>
                     <tr>
                         <td>Name:</td>
-                        <td><input type="text" name="name" value="${cust.name}" /></td>
+                        <td><input type="text" name="name" value="${cust.name}" readonly /></td>
                     </tr>
                     <tr>
                         <td>Street Address:</td>
-                        <td><input type="text" name="address" value="${cust.address}" /></td>
+                        <td><input type="text" name="address" value="${cust.address}" readonly/></td>
                     </tr>
                     <tr>
                         <td>Zip Code:</td>
-                        <td><input type="text" name="zip" value="${cust.zip}" /></td>
+                        <td><input type="text" name="zip" value="${cust.zip}" readonly /></td>
                     </tr>
                     <tr>
                         <td>Phone:</td>
-                        <td><input type="text" name="phone" value="${cust.phoneNumber}" /></td>
+                        <td><input type="text" name="phone" value="${cust.phoneNumber}" readonly/></td>
                     </tr>
                     <tr>
                         <td>City:</td>
-                        <td><input type="text" name="city" value="${cust.city}" /></td>
+                        <td><input type="text" name="city" value="${cust.city}" readonly /></td>
                     </tr>
                     <tr>
                         <td>Country:</td>
-                        <td><input type="text" name="country" value="${cust.country}" /></td>
+                        <td><input type="text" name="country" value="${cust.country}" readonly /></td>
                     </tr>
                     <tr>
                         <td>Notes:</td>
-                        <td><input type="text" name="notes" value="${cust.notes}" /></td>
+                        <td><input type="text" name="notes" value="${cust.notes}" readonly/></td>
                     </tr>
                     <tr>
                         <td>Store:</td>
-                        <td><input type="text" name="storeId" value="${cust.storeId}" /></td>
+                        <td><input type="text" name="storeId" value="${cust.storeId}" readonly/></td>
                     </tr>
                     <tr>
                         <td></td>

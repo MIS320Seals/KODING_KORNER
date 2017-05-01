@@ -51,7 +51,6 @@
                     </c:forEach>
                 </tbody>
             </table>
-            <p><a href="FilmController?action=insert">Add Film</a></p>
         </div>
     </body>
 </html>

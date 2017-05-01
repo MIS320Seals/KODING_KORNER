@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Payment Page</title>
+        <link rel="stylesheet" type="text/css" href="CSS/CSS.css">
     </head>
     <body>
         <jsp:useBean id="rental" scope="session" class="com.SEALS.film.Rental" />

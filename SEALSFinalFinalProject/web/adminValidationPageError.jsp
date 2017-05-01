@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Validation Page</title>
-        <link rel="stylesheet" type="text/css" href="CSS/CSS.css">
+        <link rel="stylesheet" type="text/css" href="CSS/loginCSS.css">
     </head>
     <body>
         <h1>Admin Login</h1>

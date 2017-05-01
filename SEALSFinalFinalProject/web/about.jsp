@@ -20,7 +20,7 @@
                 <li><a href="LoginController?action=userFilms">My Movies</a></li>
                 <li class = "active"><a href="about.jsp">About</a></li>
                 <li><a href="CustController?action=search">Search</a></li>
-                <li><a href="custCheckOutPage.jsp">Check Out</a></li>
+                <li><a href="cartController?action=checkOutCart">Check Out</a></li>
                 <li><a href="loginPage.jsp">Log-out</a></li>
             </ul>
         </div>
