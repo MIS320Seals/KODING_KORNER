@@ -152,7 +152,9 @@ public class cartController extends HttpServlet {
                 List<Cart> carts = cart.ListCart(Cust.customerID);
                 request.setAttribute("carts", carts);
                 Cart cartSum = new Cart();
-                cartSum.setPrice(cart.checkOut());
+                
+                float sum = cart.checkOut();
+                cartSum.setPrice(sum);
                 request.setAttribute("cartSum", cartSum);
 
                 forward = CUST_RECEIPT;

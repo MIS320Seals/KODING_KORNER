@@ -211,7 +211,7 @@ public class cartDAO {
                         total += carts.get(count).getPrice();
 
                         removeCart(carts.get(count).getCartID());
-                        count++;
+                        
                         
                         
                         
@@ -229,7 +229,7 @@ public class cartDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-                        
+           count++;             
                         
                         
                         
