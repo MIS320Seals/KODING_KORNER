@@ -52,7 +52,7 @@ public class AdminDAO
                             + "active,"
                             + "username,"
                             + "password,"
-                            + "last_update) values (?, ?, ?, 2, ?, ?, ?, ?, ?, ?)");
+                            + "last_update) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             preparedStatement.setInt(1, admin.getStaff_id());
             preparedStatement.setString(2, admin.getFirst_name());

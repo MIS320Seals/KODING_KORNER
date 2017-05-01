@@ -53,6 +53,10 @@
                         <td><input type="text" name="email" value="" /></td>
                     </tr>
                     <tr>
+                        <td>Phone:</td>
+                        <td><input type="text" name="phone" value="" /></td>
+                    </tr>
+                    <tr>
                         <td>Store ID number:</td>
                         <!--i want this to be a drop down box with the potential store ids, the customer shouldn't really know this-->
                         <td><select name="store_id">

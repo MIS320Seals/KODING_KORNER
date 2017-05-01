@@ -30,6 +30,7 @@ public class AdminController extends HttpServlet
     private static String REGISTER = "/adminRegisterPage.jsp";
     private static String RESPONSE = "/response.jsp";
     private static String ACTIONPAGE = "/adminActionPage.jsp";
+    private static String EMPLOYEES = "/adminEmployees.jsp";
     private AdminDAO dao;
 
     /**
@@ -113,10 +114,8 @@ public class AdminController extends HttpServlet
 
         } else if (action.equals("emplist"))
         {
-
-            forward = "/adminEmployees.jsp";
+            forward = EMPLOYEES;
             request.setAttribute("emps", dao.getAllAdmins());
-
         } else if (action.equals("addemp"))
         {
             forward = "/adminRegisterPage.jsp";
@@ -163,29 +162,9 @@ public class AdminController extends HttpServlet
             //heres where you would actually need to validate that key
             forward = REGISTER;
         } 
-//        else if (action.equals("adminRegister"))
-//        {
-//            newAdmin.setFirst_name(request.getParameter("first_name"));
-//            newAdmin.setLast_name(request.getParameter("last_name"));
-//            newAdmin.setAddress_id(Integer.parseInt(request.getParameter("address_id")));
-//            newAdmin.setEmail(request.getParameter("email"));
-//            newAdmin.setStore_id(Integer.parseInt(request.getParameter("store_id")));
-//            //newAdmin.setActive(Boolean.parseBool(request.getParameter("Active")));
-//            String active = request.getParameter("Active");
-//            newAdmin.setUsername(request.getParameter("username"));
-//            newAdmin.setPassword(request.getParameter("password"));
-//            try
-//            {
-//                Date last_update = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("last_update"));
-//                newAdmin.setLast_update(new java.sql.Date(last_update.getTime()));
-//            } catch (ParseException e)
-//            {
-//                e.printStackTrace();
-//            }
-//        }
         else if (action.equalsIgnoreCase("adminRegister"))
         {
-            forward = ACTIONPAGE;
+            //forward = ACTIONPAGE;
             CustDAO custdao = new CustDAO();
             
             Admin admin = new Admin();
@@ -269,6 +248,9 @@ public class AdminController extends HttpServlet
             admin.setPassword(password);
             admin.setLast_update(create_date);
             dao.addAdmin(admin);
+            
+            forward = EMPLOYEES; 
+            request.setAttribute("emps", dao.getAllAdmins());
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
