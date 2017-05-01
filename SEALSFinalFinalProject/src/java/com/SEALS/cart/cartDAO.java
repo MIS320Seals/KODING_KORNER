@@ -44,7 +44,7 @@ public class cartDAO {
 
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("insert into cart(customer_id, film_id, title, price, rental_duration) values (?,?,?,?,?)");
+                    .prepareStatement("insert into sakila.cart(customer_id, film_id, title, price, rental_duration) values (?,?,?,?,?)");
 
             preparedStatement.setInt(1, Cust.customerID);
             preparedStatement.setInt(2, film_id);
@@ -63,7 +63,7 @@ public class cartDAO {
 
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("insert into wishlist(customer_id, film_id, title, price, rental_duration) values (?,?,?,?,?)");
+                    .prepareStatement("insert into sakila.wishlist(customer_id, film_id, title, price, rental_duration) values (?,?,?,?,?)");
 
             preparedStatement.setInt(1, Cust.customerID);
             preparedStatement.setInt(2, film_id);
@@ -83,7 +83,7 @@ public class cartDAO {
         List<Cart> carts = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("select * from cart where customer_id=?");
+                    .prepareStatement("select * from sakila.cart where customer_id=?");
 
             preparedStatement.setInt(1, Cust.customerID);
 
@@ -91,6 +91,7 @@ public class cartDAO {
 
             while (rs.next()) {
                 Cart cart = new Cart();
+                
                 cart.setTitle(rs.getString("title"));
                 cart.setFilmID(rs.getInt("film_id"));
                 cart.setPrice(rs.getFloat("price"));
@@ -112,7 +113,7 @@ public class cartDAO {
 
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("delete from cart where cart_id=?");
+                    .prepareStatement("delete from sakila.cart where cart_id=?");
 
             preparedStatement.setInt(1, cartID);
 
@@ -127,8 +128,8 @@ public class cartDAO {
         int x = -1;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("Select Distinct I.inventory_id \n"
-                    + "From inventory as I\n"
-                    + "Join rental as R \n"
+                    + "From sakila.inventory as I\n"
+                    + "Join sakila.rental as R \n"
                     + "where I.film_id = ? and R.return_date is not null\n");
 
             preparedStatement.setInt(1, filmID);
@@ -148,7 +149,7 @@ public class cartDAO {
         int x = -1;
         try {
             PreparedStatement preparedStatement
-                    = connection.prepareStatement("select store_id from inventory where inventory_id = ? ");
+                    = connection.prepareStatement("select store_id from sakila.inventory where inventory_id = ? ");
 
             preparedStatement.setInt(1, inventoryID);
 
@@ -167,7 +168,7 @@ public class cartDAO {
         int x = -1;
         try {
             PreparedStatement preparedStatement
-                    = connection.prepareStatement("select manager_staff_id from store where store_id =?");
+                    = connection.prepareStatement("select manager_staff_id from sakila.store where store_id =?");
 
             preparedStatement.setInt(1, storeID);
 
@@ -197,7 +198,7 @@ public class cartDAO {
                 if (i != -1) {
                     try {
                         PreparedStatement preparedStatement = connection
-                                .prepareStatement("insert into rental(inventory_id, customer_id, staff_id) values (?,?,?)");
+                                .prepareStatement("insert into sakila.rental(inventory_id, customer_id, staff_id) values (?,?,?)");
 
                         int s = getStoreID(i);
                         int staffID = getStaffID(s);
@@ -253,7 +254,7 @@ public class cartDAO {
 
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("delete from cart where customer_id =?");
+                    .prepareStatement("delete from sakila.cart where customer_id =?");
 
             //  preparedStatement.setInt(1, inID);
             preparedStatement.setInt(1, Cust.customerID);

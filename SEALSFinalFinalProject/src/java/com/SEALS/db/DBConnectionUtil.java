@@ -23,6 +23,7 @@ public class DBConnectionUtil {
             try {
                 String driver = "com.mysql.jdbc.Driver";
                 String url = "jdbc:mysql://localhost:3306/sakila?zeroDateTimeBehavior=convertToNull";
+
                 String user = "root";
                 String password = "nbuser";
                 Class.forName(driver);
